@@ -42,9 +42,23 @@ public class MenuItem extends BaseEntity {
     @Builder.Default
     private Boolean isAvailable = true;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 30)
+    @Builder.Default
+    private MenuItemStatus status = MenuItemStatus.ACTIVE;
+
     @Column(name = "category_id", nullable = false)
     private UUID categoryId;
 
     @Column(name = "restaurant_id", nullable = false)
     private UUID restaurantId;
+
+    public enum MenuItemStatus {
+        /** Fully live — visible to customers */
+        ACTIVE,
+        /** Uploaded by restaurant, waiting for admin to create 3D model */
+        PENDING_3D_MODEL,
+        /** Disabled by admin or restaurant admin */
+        DISABLED
+    }
 }

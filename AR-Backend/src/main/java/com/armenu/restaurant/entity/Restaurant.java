@@ -34,4 +34,8 @@ public class Restaurant extends BaseEntity {
     // The user (owner) ID who owns this restaurant
     @Column(name = "owner_id", nullable = false)
     private java.util.UUID ownerId;
+
+    @Column(name = "is_active", nullable = false)
+    @Builder.Default
+    private Boolean isActive = true;
 }
