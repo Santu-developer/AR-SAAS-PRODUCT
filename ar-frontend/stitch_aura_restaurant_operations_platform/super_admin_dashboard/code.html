@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether AR - Super Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-elevated": "#0A0A0A",
+                        "on-primary": "#2f3131",
+                        "surface-bright": "#3a3939",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container": "#201f1f",
+                        "on-tertiary": "#2f3131",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "surface-container-highest": "#353434",
+                        "on-secondary": "#002f66",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "primary": "#ffffff",
+                        "inverse-on-surface": "#313030",
+                        "secondary-container": "#0372e4",
+                        "primary-fixed": "#e2e2e2",
+                        "on-secondary-fixed": "#001b3f",
+                        "background": "#141313",
+                        "tertiary-fixed": "#e2e2e2",
+                        "accent-gold": "#D4AF37",
+                        "canvas-black": "#050505",
+                        "on-primary-container": "#636565",
+                        "on-error": "#690005",
+                        "surface-container-lowest": "#0e0e0e",
+                        "primary-container": "#e2e2e2",
+                        "on-surface-variant": "#c4c7c8",
+                        "tertiary-container": "#e2e2e2",
+                        "secondary": "#abc7ff",
+                        "secondary-fixed": "#d7e2ff",
+                        "surface-dim": "#141313",
+                        "surface-tint": "#c6c6c7",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "outline": "#8e9192",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-background": "#e5e2e1",
+                        "on-primary-fixed": "#1a1c1c",
+                        "on-surface": "#e5e2e1",
+                        "outline-variant": "#444748",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#141313",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "inverse-primary": "#5d5f5f",
+                        "on-tertiary-container": "#636565",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-primary-fixed-variant": "#454747",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#fefcff",
+                        "surface-variant": "#353434",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px"
+                    },
+                    fontFamily: {
+                        "label-mono": ["JetBrains Mono"],
+                        "body-md": ["Geist"],
+                        "display-2xl": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-lg": ["Geist"]
+                    },
+                    fontSize: {
+                        "label-mono": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "display-2xl": ["72px", { lineHeight: "80px", letterSpacing: "-0.04em", fontWeight: "700" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.canvas-black');
+            color: theme('colors.on-surface');
+            font-family: theme('fontFamily.body-md');
+        }
+        
+        .glass-panel {
+            background: theme('colors.glass-fill');
+            border: 1px solid theme('colors.border-subtle');
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Basic entrance animation */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+        
+        /* Staggered delays */
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-canvas-black text-on-surface font-body-md text-body-md">
+<!-- SideNavBar -->
+<nav class="hidden md:flex w-[240px] h-screen sticky top-0 left-0 flex-col p-stack-md bg-canvas-black border-r border-border-subtle bg-glass-fill backdrop-blur-xl shrink-0 z-40">
+<div class="mb-stack-lg flex items-center gap-3 px-4">
+<div class="w-8 h-8 rounded-full overflow-hidden shrink-0 border border-border-subtle">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR8X69GHe6yrhJso4Nbmh_zC-vwjgD700fa5UNvKS7x7Jvk4lQ_dDrSJf3o7I22niQHlec2_Iv1AuO2fI5HwQsgR1LGGgZLd7g-Lecp9hQyoPBktB1yYDypFrNI6lWTMN_O2B1PHErJWLoXD7fcDlyXan-pDQwaODR9-nFEmdTgKYugIKrc7DDQXhPG_7v6cKUDSnKYVIXDOXFOGbs5zCNDTIkjbtIPPVTbM43fFaPqFC96Q4DVGUsQ-B2u5hqy3jcQqoMvhxX-8u6"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter text-xl leading-none">Aether AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Super Admin</p>
+</div>
+</div>
+<ul class="flex flex-col gap-2 flex-grow">
+<!-- Active Tab -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300 transform scale-[0.98]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] rounded-lg duration-300" href="#">
+<span class="material-symbols-outlined">storefront</span>
+                    Restaurants
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] rounded-lg duration-300" href="#">
+<span class="material-symbols-outlined">payments</span>
+                    Plans
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] rounded-lg duration-300" href="#">
+<span class="material-symbols-outlined">view_in_ar</span>
+                    3D Assets
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] rounded-lg duration-300" href="#">
+<span class="material-symbols-outlined">insights</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] rounded-lg duration-300" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="mt-auto pt-stack-md border-t border-border-subtle">
+<ul class="flex flex-col gap-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] rounded-lg duration-300" href="#">
+<span class="material-symbols-outlined">help</span>
+                        Support
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] rounded-lg duration-300" href="#">
+<span class="material-symbols-outlined">logout</span>
+                        Sign Out
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- TopAppBar -->
+<header class="h-16 sticky top-0 z-50 w-full bg-canvas-black border-b border-border-subtle bg-glass-fill backdrop-blur-md flex justify-between items-center px-gutter max-w-container-max mx-auto">
+<!-- Mobile Brand (Hidden on Desktop) -->
+<div class="md:hidden flex items-center gap-2">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</h1>
+</div>
+<!-- Global Search -->
+<div class="hidden md:flex items-center flex-1 max-w-md ml-4">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="w-full bg-transparent border-b border-border-subtle text-primary py-2 pl-10 pr-4 focus:outline-none focus:border-primary transition-colors font-body-md placeholder-on-surface-variant" placeholder="Search restaurants, models, or plans..." type="text"/>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-4 ml-auto">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 w-10 h-10 flex items-center justify-center rounded-full hover:bg-glass-fill">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 w-10 h-10 flex items-center justify-center rounded-full hover:bg-glass-fill" id="themeToggle">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="md:hidden w-8 h-8 rounded-full overflow-hidden border border-border-subtle ml-2">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB07f832O1gKb5elUebGXb1RR9RIdctH2gmwoj-dYh33y_iayJCw7ZY3A4b85jl2ISER4d0TPbd83EIQVZywV3CgZWYaVp3RnptRAk44VVagmlyZPh7VbfOqu53qDEhdJgHi61vUPlYM2AYDjYw7AJzJzzlzrhlCyxP_izcm4PLi5qe9rmvtjvdjgP0_L2meEXE5dVizJQlBVvhcY0FWe4AQs2Ca0p3YzharV1ymX3BGiyZ8mL0ipfC6WobJxpuAniXuMJj64knLNPk"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-gutter md:p-stack-lg max-w-container-max mx-auto w-full">
+<!-- Hero Section -->
+<section class="mb-stack-lg animate-fade-up">
+<h2 class="font-headline-lg text-headline-lg md:font-display-2xl md:text-display-2xl text-primary mb-2">Good morning, Admin</h2>
+<p class="text-on-surface-variant max-w-2xl">Platform health is nominal. All systems operating at optimal capacity. Review the latest culinary AR deployments below.</p>
+</section>
+<!-- KPI Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-stack-lg">
+<!-- Card 1 -->
+<div class="glass-panel p-6 rounded-xl glow-effect animate-fade-up delay-100 flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Total Restaurants</span>
+<span class="material-symbols-outlined text-outline">storefront</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-headline-lg text-headline-lg text-primary">1,248</span>
+<span class="font-label-mono text-label-mono text-[#4ade80] bg-[#4ade80]/10 px-2 py-1 rounded">+12%</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel p-6 rounded-xl glow-effect animate-fade-up delay-200 flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Active Subscriptions</span>
+<span class="material-symbols-outlined text-outline">verified_user</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-headline-lg text-headline-lg text-primary">1,190</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">95% Retention</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel p-6 rounded-xl glow-effect animate-fade-up delay-300 flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform duration-300 relative overflow-hidden">
+<div class="flex justify-between items-start relative z-10">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Total Revenue</span>
+<span class="material-symbols-outlined text-outline">payments</span>
+</div>
+<div class="flex items-end justify-between relative z-10">
+<span class="font-headline-lg text-headline-lg text-primary">$482k</span>
+</div>
+<!-- Mock Sparkline -->
+<div class="absolute bottom-0 left-0 w-full h-1/2 opacity-20 pointer-events-none">
+<svg class="w-full h-full stroke-primary fill-transparent stroke-2" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,30 L10,25 L20,28 L30,15 L40,20 L50,5 L60,10 L70,2 L80,15 L90,10 L100,0" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-panel p-6 rounded-xl glow-effect animate-fade-up delay-400 flex flex-col justify-between h-32 hover:scale-[1.02] transition-transform duration-300 border-accent-gold/30">
+<div class="flex justify-between items-start">
+<span class="font-label-mono text-label-mono text-on-surface-variant">Pending 3D Requests</span>
+<span class="material-symbols-outlined text-accent-gold">view_in_ar</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-headline-lg text-headline-lg text-primary">42</span>
+<span class="font-label-mono text-label-mono text-surface-elevated bg-accent-gold px-2 py-1 rounded font-bold">Action Needed</span>
+</div>
+</div>
+</section>
+<!-- Middle Section -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Revenue Chart (Large) -->
+<div class="glass-panel p-6 rounded-xl lg:col-span-2 animate-fade-up delay-200 glow-effect min-h-[400px] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Revenue Overview</h3>
+<select class="bg-transparent border border-border-subtle rounded px-3 py-1 font-label-mono text-label-mono text-on-surface-variant focus:outline-none">
+<option>This Year</option>
+<option>Last Year</option>
+</select>
+</div>
+<div class="flex-1 relative w-full h-full min-h-[300px]">
+<canvas id="revenueChart"></canvas>
+</div>
+</div>
+<!-- 3D Request Status (Small) -->
+<div class="glass-panel p-6 rounded-xl animate-fade-up delay-300 glow-effect flex flex-col">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-6">3D Request Status</h3>
+<div class="flex-1 relative w-full flex justify-center items-center min-h-[200px]">
+<canvas id="statusChart"></canvas>
+</div>
+<div class="mt-6 flex flex-col gap-3 font-label-mono text-label-mono">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-accent-gold"></span> <span class="text-on-surface-variant">Pending</span></div>
+<span class="text-primary">42</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary"></span> <span class="text-on-surface-variant">In Progress</span></div>
+<span class="text-primary">128</span>
+</div>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-outline"></span> <span class="text-on-surface-variant">Completed</span></div>
+<span class="text-primary">850</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Section: Recent Activity -->
+<section class="animate-fade-up delay-400">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-6">Recent Activity</h3>
+<div class="glass-panel rounded-xl overflow-hidden">
+<div class="divide-y divide-border-subtle">
+<!-- Activity Item 1 -->
+<div class="p-4 flex items-center gap-4 hover:bg-glass-fill transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline">storefront</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-primary truncate">New Restaurant Signup: <span class="font-medium">Le Bernardin</span></p>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Premium Plan • 2 mins ago</p>
+</div>
+<button class="hidden sm:block px-4 py-2 text-label-mono font-label-mono border border-border-subtle rounded hover:bg-surface-container transition-colors">View</button>
+</div>
+<!-- Activity Item 2 -->
+<div class="p-4 flex items-center gap-4 hover:bg-glass-fill transition-colors">
+<div class="w-10 h-10 rounded-full bg-accent-gold/10 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-accent-gold">view_in_ar</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-primary truncate">3D Model Approved: <span class="font-medium">Wagyu Tomahawk</span> for STK</p>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">QA Passed • 15 mins ago</p>
+</div>
+<button class="hidden sm:block px-4 py-2 text-label-mono font-label-mono border border-border-subtle rounded hover:bg-surface-container transition-colors">View</button>
+</div>
+<!-- Activity Item 3 -->
+<div class="p-4 flex items-center gap-4 hover:bg-glass-fill transition-colors">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-outline">autorenew</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-primary truncate">Subscription Renewal: <span class="font-medium">Noma</span></p>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Annual Pro • 1 hour ago</p>
+</div>
+<button class="hidden sm:block px-4 py-2 text-label-mono font-label-mono border border-border-subtle rounded hover:bg-surface-container transition-colors">View</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Initialization Scripts -->
+<script>
+        // Simple Theme Toggle Logic (Visual only for prototype)
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            // In a real implementation with light mode tokens, we'd toggle 'dark' class.
+            // For now, it just demonstrates the interaction.
+            html.classList.toggle('dark-theme-active'); // Dummy class to trigger redraw/flash
+            setTimeout(() => html.classList.toggle('dark-theme-active'), 100);
+        });
+
+        // Initialize Charts once DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart Defaults for dark theme
+            Chart.defaults.color = '#8e9192';
+            Chart.defaults.font.family = 'Geist, sans-serif';
+
+            // Revenue Line Chart
+            const ctxRev = document.getElementById('revenueChart').getContext('2d');
+            
+            // Create a gradient for the line chart fill
+            let gradientRev = ctxRev.createLinearGradient(0, 0, 0, 400);
+            gradientRev.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
+            gradientRev.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+            new Chart(ctxRev, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [120, 190, 150, 250, 220, 300, 280, 350, 320, 400, 380, 482],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        backgroundColor: gradientRev,
+                        fill: true,
+                        tension: 0.4, // Smooth curve
+                        pointRadius: 0,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#141313',
+                            titleColor: '#ffffff',
+                            bodyColor: '#c4c7c8',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false, drawBorder: false }
+                        },
+                        y: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)', drawBorder: false },
+                            ticks: {
+                                callback: function(value) { return '$' + value + 'k'; }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    }
+                }
+            });
+
+            // Status Donut Chart
+            const ctxStatus = document.getElementById('statusChart').getContext('2d');
+            new Chart(ctxStatus, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Pending', 'In Progress', 'Completed'],
+                    datasets: [{
+                        data: [42, 128, 850],
+                        backgroundColor: [
+                            '#D4AF37', // accent-gold
+                            '#ffffff', // primary
+                            '#353434'  // surface-variant
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#141313',
+                            titleColor: '#ffffff',
+                            bodyColor: '#c4c7c8',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1,
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

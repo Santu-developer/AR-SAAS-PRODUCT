@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Book a Demo | CULINARIUM AR</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#c4c7c8",
+                    "accent-gold": "#D4AF37",
+                    "border-subtle": "rgba(255, 255, 255, 0.08)",
+                    "secondary-fixed-dim": "#abc7ff",
+                    "on-error": "#690005",
+                    "surface-variant": "#353434",
+                    "on-secondary-fixed": "#001b3f",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-bright": "#3a3939",
+                    "glass-fill": "rgba(255, 255, 255, 0.03)",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "surface-dim": "#141313",
+                    "primary-fixed": "#e2e2e2",
+                    "on-surface": "#e5e2e1",
+                    "background": "#141313",
+                    "tertiary": "#ffffff",
+                    "on-primary-container": "#636565",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-secondary-fixed-variant": "#00458f",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "surface-container-highest": "#353434",
+                    "on-background": "#e5e2e1",
+                    "error-container": "#93000a",
+                    "tertiary-fixed": "#e2e2e2",
+                    "surface-tint": "#c6c6c7",
+                    "surface-elevated": "#0A0A0A",
+                    "inverse-primary": "#5d5f5f",
+                    "on-secondary": "#002f66",
+                    "primary-container": "#e2e2e2",
+                    "secondary-container": "#0372e4",
+                    "secondary": "#abc7ff",
+                    "on-primary-fixed-variant": "#454747",
+                    "tertiary-container": "#e2e2e2",
+                    "canvas-black": "#050505",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary-fixed": "#d7e2ff",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary": "#2f3131",
+                    "surface": "#141313",
+                    "on-tertiary-container": "#636565",
+                    "outline": "#8e9192",
+                    "on-primary": "#2f3131",
+                    "surface-container": "#201f1f",
+                    "primary-fixed-dim": "#c6c6c7",
+                    "on-primary-fixed": "#1a1c1c",
+                    "on-secondary-container": "#fefcff",
+                    "inverse-surface": "#e5e2e1",
+                    "primary": "#ffffff",
+                    "outline-variant": "#444748",
+                    "surface-container-high": "#2a2a2a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-sm": "8px",
+                    "container-max": "1440px",
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "stack-lg": "32px"
+            },
+            "fontFamily": {
+                    "label-mono": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-lg-mobile": [
+                            "Geist"
+                    ],
+                    "headline-lg": [
+                            "Geist"
+                    ],
+                    "display-2xl": [
+                            "Geist"
+                    ],
+                    "body-md": [
+                            "Geist"
+                    ]
+            },
+            "fontSize": {
+                    "label-mono": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-2xl": [
+                            "72px",
+                            {
+                                    "lineHeight": "80px",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom Input Styling (Minimalist Bottom Border) */
+        .input-ghost {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid theme('colors.border-subtle');
+            padding: 12px 0;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-family: theme('fontFamily.body-md');
+            font-size: theme('fontSize.body-md')[0];
+            color: theme('colors.primary');
+        }
+        .input-ghost:focus {
+            outline: none;
+            border-bottom-color: theme('colors.primary');
+            box-shadow: 0 1px 0 0 theme('colors.primary');
+        }
+        .input-ghost::placeholder {
+            color: theme('colors.on-surface-variant');
+        }
+
+        /* Step Transitions */
+        .form-step {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .form-step.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ambient Glow */
+        .ambient-glow {
+            position: absolute;
+            width: 40vw;
+            height: 40vw;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(20, 19, 19, 0) 70%);
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 50%;
+            top: 10%;
+            right: -10%;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+<div class="ambient-glow"></div>
+<!-- TopAppBar -->
+<header class="bg-glass-fill backdrop-blur-xl fixed top-0 w-full border-b border-border-subtle z-50">
+<div class="flex justify-between items-center px-gutter h-20 w-full max-w-container-max mx-auto">
+<!-- Brand -->
+<a class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold tracking-tighter text-primary flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+                CULINARIUM AR
+            </a>
+<!-- Nav Links (Hidden on Mobile) -->
+<nav class="hidden md:flex items-center gap-8 font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-95 duration-300" href="#">Experience</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-95 duration-300" href="#">Solutions</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-95 duration-300" href="#">Partners</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors hover:scale-95 duration-300" href="#">Pricing</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<a class="hidden md:block font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Login</a>
+<!-- Hidden Book Demo as we are ON the book demo page, keeping layout balanced with login -->
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow pt-20 flex flex-col md:flex-row relative z-10 w-full max-w-container-max mx-auto">
+<!-- Left Side: Form Canvas -->
+<section class="w-full md:w-1/2 p-margin-mobile md:p-gutter lg:p-16 flex flex-col justify-center min-h-[calc(100vh-80px)]">
+<div class="max-w-md w-full mx-auto md:mx-0">
+<!-- Headers -->
+<div class="mb-stack-lg">
+<h1 class="font-display-2xl text-display-2xl text-primary tracking-tighter mb-4">Experience the Future</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Schedule a personalized walkthrough of the Aether AR platform with our culinary technology experts.
+                    </p>
+</div>
+<!-- Progress Indicators -->
+<div class="flex items-center gap-4 mb-stack-lg border-b border-border-subtle pb-4">
+<div class="step-indicator flex items-center gap-2 text-accent-gold font-label-mono text-label-mono uppercase" data-step="1">
+<span class="w-6 h-6 rounded-full border border-accent-gold flex items-center justify-center bg-accent-gold text-canvas-black">1</span>
+<span>Contact</span>
+</div>
+<div class="w-8 h-px bg-border-subtle"></div>
+<div class="step-indicator flex items-center gap-2 text-on-surface-variant font-label-mono text-label-mono uppercase transition-colors" data-step="2">
+<span class="w-6 h-6 rounded-full border border-border-subtle flex items-center justify-center transition-colors">2</span>
+<span class="hidden sm:inline">Details</span>
+</div>
+<div class="w-8 h-px bg-border-subtle"></div>
+<div class="step-indicator flex items-center gap-2 text-on-surface-variant font-label-mono text-label-mono uppercase transition-colors" data-step="3">
+<span class="w-6 h-6 rounded-full border border-border-subtle flex items-center justify-center transition-colors">3</span>
+<span class="hidden sm:inline">Schedule</span>
+</div>
+</div>
+<!-- Form Area -->
+<div class="bg-glass-fill backdrop-blur-md border border-border-subtle rounded-xl p-6 md:p-8 relative overflow-hidden">
+<!-- Step 1: Contact -->
+<div class="form-step active" id="step-1">
+<div class="space-y-stack-md mb-stack-lg">
+<div>
+<input class="input-ghost" placeholder="Full Name" required="" type="text"/>
+</div>
+<div>
+<input class="input-ghost" placeholder="Work Email" required="" type="email"/>
+</div>
+<div>
+<input class="input-ghost" placeholder="Role / Title" required="" type="text"/>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-8 py-3 rounded-DEFAULT font-label-mono text-label-mono uppercase hover:scale-95 transition-transform duration-300 flex items-center gap-2" onclick="nextStep(2)">
+                                Next <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Step 2: Restaurant Details -->
+<div class="form-step" id="step-2">
+<div class="space-y-stack-md mb-stack-lg">
+<div>
+<input class="input-ghost" placeholder="Restaurant / Group Name" type="text"/>
+</div>
+<div>
+<input 1"="" class="input-ghost min=" placeholder="Number of Locations" type="number"/>
+</div>
+<div>
+<select class="input-ghost appearance-none bg-transparent cursor-pointer">
+<option class="text-on-surface-variant bg-surface" disabled="" selected="" value="">Cuisine Type</option>
+<option class="bg-surface text-primary" value="fine-dining">Fine Dining</option>
+<option class="bg-surface text-primary" value="contemporary">Contemporary</option>
+<option class="bg-surface text-primary" value="omakase">Omakase / Sushi</option>
+<option class="bg-surface text-primary" value="other">Other</option>
+</select>
+</div>
+</div>
+<div class="flex justify-between">
+<button class="border border-border-subtle text-on-surface px-6 py-3 rounded-DEFAULT font-label-mono text-label-mono uppercase hover:bg-glass-fill transition-colors duration-300" onclick="prevStep(1)">
+                                Back
+                            </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-DEFAULT font-label-mono text-label-mono uppercase hover:scale-95 transition-transform duration-300 flex items-center gap-2" onclick="nextStep(3)">
+                                Next <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Step 3: Schedule -->
+<div class="form-step" id="step-3">
+<div class="mb-stack-lg">
+<p class="font-body-md text-on-surface-variant mb-4">Select an available date for your exclusive preview.</p>
+<!-- Dummy Calendar Grid -->
+<div class="grid grid-cols-7 gap-2 mb-4 font-label-mono text-label-mono text-center text-on-surface-variant">
+<div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+<div class="py-2 opacity-30 cursor-not-allowed">28</div>
+<div class="py-2 opacity-30 cursor-not-allowed">29</div>
+<div class="py-2 opacity-30 cursor-not-allowed">30</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">1</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">2</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">3</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">4</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">5</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">6</div>
+<div class="py-2 bg-accent-gold text-canvas-black rounded border border-accent-gold cursor-pointer font-bold">7</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">8</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">9</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">10</div>
+<div class="py-2 hover:bg-glass-fill rounded border border-transparent hover:border-border-subtle cursor-pointer transition-colors">11</div>
+</div>
+<!-- Time Slots -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="whitespace-nowrap px-4 py-2 border border-border-subtle rounded-DEFAULT font-label-mono text-label-mono hover:border-primary transition-colors">09:00 AM</button>
+<button class="whitespace-nowrap px-4 py-2 border border-accent-gold text-accent-gold rounded-DEFAULT font-label-mono text-label-mono bg-glass-fill">11:30 AM</button>
+<button class="whitespace-nowrap px-4 py-2 border border-border-subtle rounded-DEFAULT font-label-mono text-label-mono hover:border-primary transition-colors">02:00 PM</button>
+</div>
+</div>
+<div class="flex justify-between mt-stack-md">
+<button class="border border-border-subtle text-on-surface px-6 py-3 rounded-DEFAULT font-label-mono text-label-mono uppercase hover:bg-glass-fill transition-colors duration-300" onclick="prevStep(2)">
+                                Back
+                            </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-DEFAULT font-label-mono text-label-mono uppercase hover:scale-95 transition-transform duration-300 flex items-center gap-2">
+                                Confirm <span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Side: Atmospheric Visual -->
+<section class="hidden md:block w-1/2 relative bg-surface-container-low border-l border-border-subtle overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-30" data-alt="A highly sophisticated 3D wireframe render of a gourmet dish, glowing with soft, precise white and subtle gold light against a pitch-black background. The aesthetic is extremely minimalist, cinematic, and tech-forward, representing spatial computing and high-end gastronomy intersecting. The lighting highlights intricate digital geometry floating slightly above a dark, reflective surface."></div>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-transparent to-transparent"></div>
+<!-- Overlay Graphic Element -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] border border-border-subtle rounded-full flex items-center justify-center opacity-20">
+<div class="w-[60%] h-[60%] border border-border-subtle rounded-full animate-[spin_60s_linear_infinite]"></div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-canvas-black border-t border-border-subtle w-full py-stack-lg z-50">
+<div class="flex flex-col md:flex-row justify-between items-center px-gutter w-full max-w-container-max mx-auto gap-4">
+<div class="font-headline-lg text-headline-lg text-primary">
+                CULINARIUM AR
+            </div>
+<nav class="flex flex-wrap justify-center gap-4 md:gap-6 font-label-mono text-label-mono uppercase">
+<a class="text-on-surface-variant hover:text-accent-gold transition-colors duration-200" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-accent-gold transition-colors duration-200" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-accent-gold transition-colors duration-200" href="#">Cookie Settings</a>
+<a class="text-on-surface-variant hover:text-accent-gold transition-colors duration-200" href="#">Contact Support</a>
+</nav>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase">
+                © 2024 Culinarium AR. All rights reserved.
+            </div>
+</div>
+</footer>
+<!-- Interactive Logic -->
+<script>
+        function nextStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+            updateIndicators(step);
+        }
+
+        function prevStep(step) {
+            document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+            updateIndicators(step);
+        }
+
+        function updateIndicators(currentStep) {
+            document.querySelectorAll('.step-indicator').forEach(el => {
+                const stepNum = parseInt(el.getAttribute('data-step'));
+                const icon = el.querySelector('span:first-child');
+                
+                if (stepNum === currentStep) {
+                    el.classList.add('text-accent-gold');
+                    el.classList.remove('text-on-surface-variant');
+                    icon.classList.add('border-accent-gold', 'bg-accent-gold', 'text-canvas-black');
+                    icon.classList.remove('border-border-subtle', 'bg-transparent', 'text-current');
+                } else if (stepNum < currentStep) {
+                    // Completed steps
+                    el.classList.add('text-primary');
+                    el.classList.remove('text-accent-gold', 'text-on-surface-variant');
+                    icon.classList.add('border-primary');
+                    icon.classList.remove('border-accent-gold', 'bg-accent-gold', 'text-canvas-black', 'border-border-subtle');
+                } else {
+                    // Future steps
+                    el.classList.add('text-on-surface-variant');
+                    el.classList.remove('text-accent-gold', 'text-primary');
+                    icon.classList.add('border-border-subtle');
+                    icon.classList.remove('border-accent-gold', 'bg-accent-gold', 'text-canvas-black', 'border-primary');
+                }
+            });
+        }
+    </script>
+</body></html>

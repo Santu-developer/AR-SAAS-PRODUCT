@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether AR - Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#444748",
+                        "secondary-container": "#0372e4",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-surface-variant": "#c4c7c8",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-surface": "#e5e2e1",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#1a1c1c",
+                        "tertiary-container": "#e2e2e2",
+                        "tertiary": "#ffffff",
+                        "on-secondary": "#002f66",
+                        "accent-gold": "#D4AF37",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-background": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "primary-container": "#e2e2e2",
+                        "primary-fixed": "#e2e2e2",
+                        "on-tertiary-container": "#636565",
+                        "surface-container": "#201f1f",
+                        "surface-container-high": "#2a2a2a",
+                        "surface": "#141313",
+                        "canvas-black": "#050505",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "on-tertiary": "#2f3131",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#454747",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "inverse-primary": "#5d5f5f",
+                        "surface-bright": "#3a3939",
+                        "surface-variant": "#353434",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary-container": "#636565",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#c6c6c7",
+                        "surface-container-highest": "#353434",
+                        "outline": "#8e9192",
+                        "on-secondary-container": "#fefcff",
+                        "primary": "#ffffff",
+                        "surface-dim": "#141313",
+                        "surface-elevated": "#0A0A0A",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "surface-container-low": "#1c1b1b",
+                        "secondary": "#abc7ff",
+                        "background": "#141313",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary": "#2f3131",
+                        "on-secondary-fixed": "#001b3f"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "container-max": "1440px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px"
+                    },
+                    fontFamily: {
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "display-2xl": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    fontSize: {
+                        "label-mono": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "display-2xl": ["72px", { lineHeight: "80px", letterSpacing: "-0.04em", fontWeight: "700" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        body { background-color: #050505; color: #e5e2e1; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); }
+        .glow-effect { position: relative; }
+        .glow-effect::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%); pointer-events: none; }
+        
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #353434; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444748; }
+
+        /* Chart mock styles */
+        .bar-chart-bar { background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.2) 100%); border-radius: 2px 2px 0 0; }
+        .bar-chart-bar-accent { background: linear-gradient(180deg, #D4AF37 0%, rgba(212,175,55,0.2) 100%); border-radius: 2px 2px 0 0; }
+        
+        /* Interactive scale */
+        .hover-scale { transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .hover-scale:hover { transform: scale(0.98); }
+    </style>
+</head>
+<body class="font-body-md text-body-md h-screen flex overflow-hidden selection:bg-primary selection:text-canvas-black">
+<!-- SideNavBar (WEB) -->
+<nav class="hidden md:flex flex-col w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl p-stack-md z-40 bg-canvas-black shrink-0">
+<div class="mb-stack-lg px-4 pt-2">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Aether AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Super Admin</p>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">storefront</span>
+<span>Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">payments</span>
+<span>Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">view_in_ar</span>
+<span>3D Assets</span>
+</a>
+<!-- Active Tab: Analytics -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300" href="#" style="transform: scale(0.98);">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 400, 'FILL' 1;">insights</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-4 border-t border-border-subtle flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- TopAppBar (WEB & MOBILE) -->
+<header class="h-16 sticky top-0 z-50 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md bg-canvas-black/80 flex justify-between items-center px-gutter max-w-container-max mx-auto w-full shrink-0">
+<div class="flex items-center gap-4">
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="md:hidden font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</h2>
+<!-- Contextual Page Title for Desktop -->
+<div class="hidden md:flex items-center gap-2">
+<span class="text-on-surface-variant">L'Ambroisie Paris</span>
+<span class="text-on-surface-variant">/</span>
+<span class="text-primary font-medium">Performance Analytics</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Date Range Picker Mock -->
+<button class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-DEFAULT border border-border-subtle text-label-mono font-label-mono text-on-surface-variant hover:text-primary hover:border-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[16px]">calendar_month</span>
+                    Last 30 Days
+                    <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-border-subtle">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkwIhQaj8Tb1_I81hLNKYSxY8UvWeVQgBSQA3ruFXRU5ZDovk1f-G5GLZygl4v6NePSEjjVgcNx6jVzs-kNkq6Fiib6cf0D2QiFYhPtuxPRu7QHnO0J10byDpo6u_xQMFO3fiDTEKLxGGXEODxEeB47gCZNDsJNkZO7jFTRtSj0saOXoTKGo7Jp2p6ZcwvsVBFsQ6RZcycArNdfyE2T24LdbMTNaaF-rTMNcyW_8ScJUhxyJYkOOT23ZlumOLPT6HExaTU0qGuAjS-"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-gutter">
+<div class="max-w-container-max mx-auto space-y-stack-lg pb-24 md:pb-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary mb-2">Analytics Overview</h2>
+<p class="text-on-surface-variant text-body-md">Real-time performance metrics and AR engagement data.</p>
+</div>
+<button class="bg-primary text-canvas-black px-4 py-2 rounded-lg font-medium hover-scale inline-flex items-center justify-center gap-2 max-w-max">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Export Report
+                    </button>
+</div>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="glass-panel p-stack-md rounded-xl hover-scale glow-effect">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Total Revenue</span>
+<span class="material-symbols-outlined text-outline-variant">payments</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="font-headline-lg text-headline-lg text-primary">$142,500</span>
+<span class="text-accent-gold font-label-mono text-label-mono mb-1 flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12.4%
+                            </span>
+</div>
+<!-- Sparkline mock -->
+<div class="h-8 mt-4 flex items-end gap-1 opacity-50">
+<div class="w-full bg-border-subtle h-[20%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[30%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[25%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[50%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[40%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[70%] rounded-t-sm"></div>
+<div class="w-full bg-primary h-[85%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="glass-panel p-stack-md rounded-xl hover-scale glow-effect">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Avg Order Value</span>
+<span class="material-symbols-outlined text-outline-variant">receipt_long</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="font-headline-lg text-headline-lg text-primary">$185.50</span>
+<span class="text-accent-gold font-label-mono text-label-mono mb-1 flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +5.2%
+                            </span>
+</div>
+<!-- Sparkline mock -->
+<div class="h-8 mt-4 flex items-end gap-1 opacity-50">
+<div class="w-full bg-border-subtle h-[40%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[45%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[42%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[50%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[55%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[60%] rounded-t-sm"></div>
+<div class="w-full bg-primary h-[65%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="glass-panel p-stack-md rounded-xl hover-scale glow-effect relative overflow-hidden">
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-secondary-container/10 via-transparent to-transparent"></div>
+<div class="flex justify-between items-start mb-4 relative">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">AR Engagement</span>
+<span class="material-symbols-outlined text-secondary-container">view_in_ar</span>
+</div>
+<div class="flex items-end gap-3 relative">
+<span class="font-headline-lg text-headline-lg text-primary">68.2%</span>
+<span class="text-secondary-container font-label-mono text-label-mono mb-1 flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +18.7%
+                            </span>
+</div>
+<!-- Sparkline mock -->
+<div class="h-8 mt-4 flex items-end gap-1 opacity-50 relative">
+<div class="w-full bg-border-subtle h-[20%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[35%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[50%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[65%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[80%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[90%] rounded-t-sm"></div>
+<div class="w-full bg-secondary-container h-[100%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="glass-panel p-stack-md rounded-xl hover-scale glow-effect">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Conversion Rate</span>
+<span class="material-symbols-outlined text-outline-variant">shopping_cart_checkout</span>
+</div>
+<div class="flex items-end gap-3">
+<span class="font-headline-lg text-headline-lg text-primary">24.5%</span>
+<span class="text-accent-gold font-label-mono text-label-mono mb-1 flex items-center">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +2.1%
+                            </span>
+</div>
+<!-- Sparkline mock -->
+<div class="h-8 mt-4 flex items-end gap-1 opacity-50">
+<div class="w-full bg-border-subtle h-[50%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[48%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[52%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[55%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[50%] rounded-t-sm"></div>
+<div class="w-full bg-border-subtle h-[58%] rounded-t-sm"></div>
+<div class="w-full bg-primary h-[60%] rounded-t-sm"></div>
+</div>
+</div>
+</div>
+<!-- Main Chart & Popular Items Bento -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+<!-- Main Chart: Revenue vs AR Views -->
+<div class="lg:col-span-2 glass-panel p-stack-md rounded-xl flex flex-col min-h-[400px]">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="text-primary font-medium mb-1">Revenue vs AR Interactions</h3>
+<p class="text-on-surface-variant font-label-mono text-label-mono">Correlation over last 30 days</p>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 font-label-mono text-label-mono text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-primary"></div> Revenue</span>
+<span class="flex items-center gap-1 font-label-mono text-label-mono text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-secondary-container"></div> AR Views</span>
+</div>
+</div>
+<!-- Chart Mockup (CSS Based) -->
+<div class="flex-1 border-b border-l border-border-subtle relative flex items-end justify-between px-2 pt-8 pb-0 gap-2 mt-4">
+<!-- Y-axis labels -->
+<div class="absolute -left-8 bottom-0 top-0 flex flex-col justify-between font-label-mono text-[10px] text-outline-variant py-2">
+<span>15k</span>
+<span>10k</span>
+<span>5k</span>
+<span>0</span>
+</div>
+<!-- Grid lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="w-full border-t border-border-subtle/50 h-0"></div>
+<div class="w-full border-t border-border-subtle/50 h-0"></div>
+<div class="w-full border-t border-border-subtle/50 h-0"></div>
+<div class="w-full border-t border-border-subtle/50 h-0"></div>
+</div>
+<!-- Bars -->
+<div class="w-full flex justify-center items-end gap-1 h-full z-10 group relative">
+<div class="w-3 bg-primary/80 h-[30%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+<div class="w-3 bg-secondary-container/60 h-[45%] rounded-t-sm group-hover:bg-secondary-container transition-colors"></div>
+</div>
+<div class="w-full flex justify-center items-end gap-1 h-full z-10 group">
+<div class="w-3 bg-primary/80 h-[40%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+<div class="w-3 bg-secondary-container/60 h-[50%] rounded-t-sm group-hover:bg-secondary-container transition-colors"></div>
+</div>
+<div class="w-full flex justify-center items-end gap-1 h-full z-10 group">
+<div class="w-3 bg-primary/80 h-[35%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+<div class="w-3 bg-secondary-container/60 h-[40%] rounded-t-sm group-hover:bg-secondary-container transition-colors"></div>
+</div>
+<div class="w-full flex justify-center items-end gap-1 h-full z-10 group">
+<div class="w-3 bg-primary/80 h-[55%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+<div class="w-3 bg-secondary-container/60 h-[70%] rounded-t-sm group-hover:bg-secondary-container transition-colors"></div>
+</div>
+<div class="w-full flex justify-center items-end gap-1 h-full z-10 group">
+<div class="w-3 bg-primary/80 h-[65%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+<div class="w-3 bg-secondary-container/60 h-[80%] rounded-t-sm group-hover:bg-secondary-container transition-colors"></div>
+</div>
+<div class="w-full flex justify-center items-end gap-1 h-full z-10 group">
+<div class="w-3 bg-primary/80 h-[80%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+<div class="w-3 bg-secondary-container/60 h-[95%] rounded-t-sm group-hover:bg-secondary-container transition-colors"></div>
+</div>
+<div class="w-full flex justify-center items-end gap-1 h-full z-10 group">
+<div class="w-3 bg-primary/80 h-[75%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+<div class="w-3 bg-secondary-container/60 h-[85%] rounded-t-sm group-hover:bg-secondary-container transition-colors"></div>
+</div>
+</div>
+<!-- X-axis labels -->
+<div class="flex justify-between px-2 mt-2 font-label-mono text-[10px] text-outline-variant">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+<!-- Popular Items List -->
+<div class="glass-panel p-stack-md rounded-xl flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-primary font-medium">Top AR Converters</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">more_horiz</span></button>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Item 1 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-glass-fill transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded bg-surface-container overflow-hidden shrink-0 border border-border-subtle relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<img alt="Truffle Wagyu Steak" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkEXvLIcT81ZftzgtADrcQavvJY0qeJZ01MA5LdACFRdtBg99DwaMf_yAeqyGESgEWHWwWuSZZa2fua4wNvRdekcGVf0y7Eq2oW44Ptj6_c_cWV9SkPWaJlnlpjWpqbCZpRzZ2sV57SrsmAbvUr0j2hXg_oe9rbcVvq3yHFROuYzBDixXYeBhgbgt6Q2CNfxPbvsaMcpYn0VOCJiIGg4Wlwom6Ezz5Zana1wrjRXlUYYGI8OXYSN0w1k7wMbWFbWRYhLonqaaPqBzS"/>
+<span class="absolute bottom-1 left-1 z-20 text-[10px] font-bold text-primary">1</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-primary font-medium truncate text-sm">Truffle Wagyu A5</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-mono text-[10px] text-secondary-container flex items-center"><span class="material-symbols-outlined text-[12px] mr-0.5">visibility</span> 4.2k</span>
+<span class="font-label-mono text-[10px] text-accent-gold flex items-center"><span class="material-symbols-outlined text-[12px] mr-0.5">shopping_cart</span> 84%</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-glass-fill transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded bg-surface-container overflow-hidden shrink-0 border border-border-subtle relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<img alt="Gold Leaf Dessert" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB99LicPDmvNSK6cajQjU36LDrHaBPehWegCMCB9Hfcaw_R7aK2vBy1DHK3oGByLJgMd6-JB2lkQwuUum6xiEg8KIQ51iRg6AnMJ-DjZmjAml-VdtkSdQuRgcEBubNQ01r7JA7Nq6V3SJh9T37lgArRS21QwlNahJ87Fx_vgDukiy2oaZ_WV0zb8Bc-MfhiVaEEWPZuMZkKIekKV2pJi9GyNk8naLJ-Y57dGS-BoVoGaq9mfy10s7RqavaOGBtnYjhC--rqg8nmGzox"/>
+<span class="absolute bottom-1 left-1 z-20 text-[10px] font-bold text-primary">2</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-primary font-medium truncate text-sm">Opera Cake w/ Gold</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-mono text-[10px] text-secondary-container flex items-center"><span class="material-symbols-outlined text-[12px] mr-0.5">visibility</span> 3.8k</span>
+<span class="font-label-mono text-[10px] text-accent-gold flex items-center"><span class="material-symbols-outlined text-[12px] mr-0.5">shopping_cart</span> 76%</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-glass-fill transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded bg-surface-container overflow-hidden shrink-0 border border-border-subtle relative">
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
+<img alt="Lobster Thermidor" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHj8c62UQSbqqv09tD0Uhtvxpp4pmwBo2ZrYmHGLrr948FKdYnXv5aoQqi0T0mmvo6eI8JIk4H0l6Dev43Bi9nwGiFKmXCGlWX4dfDuXdzuglvX8eC-Vy3gdNA9vuL3XGDla16tIJJv_iePNFwzVinATifDhNOWljCK6PVVbps5AKQGOwTl16uKTekss59Lbw53rUTKvCpdzhhARypaWwJwGiw3RoiiJjqOk4BCLig1juBzXrPLlbUkMezXYxfxdxl7cUHgFtpuJO8"/>
+<span class="absolute bottom-1 left-1 z-20 text-[10px] font-bold text-primary">3</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-primary font-medium truncate text-sm">Lobster Thermidor</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-mono text-[10px] text-secondary-container flex items-center"><span class="material-symbols-outlined text-[12px] mr-0.5">visibility</span> 2.9k</span>
+<span class="font-label-mono text-[10px] text-accent-gold flex items-center"><span class="material-symbols-outlined text-[12px] mr-0.5">shopping_cart</span> 68%</span>
+</div>
+</div>
+</div>
+<button class="mt-auto w-full py-2 text-center text-on-surface-variant text-sm hover:text-primary transition-colors border border-border-subtle rounded-lg font-medium">View All Assets</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

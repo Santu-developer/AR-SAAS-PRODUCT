@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Booking Confirmed - CULINARIUM AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-elevated": "#0A0A0A",
+                      "accent-gold": "#D4AF37",
+                      "tertiary-fixed": "#e2e2e2",
+                      "inverse-surface": "#e5e2e1",
+                      "surface-container-low": "#1c1b1b",
+                      "surface": "#141313",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "on-surface": "#e5e2e1",
+                      "primary-fixed": "#e2e2e2",
+                      "on-tertiary-container": "#636565",
+                      "on-secondary": "#002f66",
+                      "primary": "#ffffff",
+                      "surface-container-high": "#2a2a2a",
+                      "tertiary-container": "#e2e2e2",
+                      "on-primary-container": "#636565",
+                      "surface-dim": "#141313",
+                      "on-secondary-container": "#fefcff",
+                      "secondary": "#abc7ff",
+                      "surface-variant": "#353434",
+                      "on-primary": "#2f3131",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "surface-container-highest": "#353434",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-error-container": "#ffdad6",
+                      "primary-container": "#e2e2e2",
+                      "surface-bright": "#3a3939",
+                      "on-primary-fixed-variant": "#454747",
+                      "outline-variant": "#444748",
+                      "on-tertiary": "#2f3131",
+                      "on-primary-fixed": "#1a1c1c",
+                      "on-background": "#e5e2e1",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "inverse-primary": "#5d5f5f",
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "secondary-container": "#0372e4",
+                      "surface-container": "#201f1f",
+                      "tertiary": "#ffffff",
+                      "inverse-on-surface": "#313030",
+                      "background": "#141313",
+                      "surface-tint": "#c6c6c7",
+                      "secondary-fixed": "#d7e2ff",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "on-surface-variant": "#c4c7c8",
+                      "outline": "#8e9192",
+                      "error": "#ffb4ab",
+                      "on-secondary-fixed": "#001b3f",
+                      "canvas-black": "#050505"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "gutter": "24px",
+                      "container-max": "1440px",
+                      "margin-mobile": "20px",
+                      "stack-sm": "8px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          }
+        }
+    </script>
+<style>body {
+    background-color: #050505;
+    color: #e5e2e1;
+    font-family: "Geist", sans-serif;
+    overflow-x: hidden
+    }
+.bg-cinematic {
+    background-image: linear-gradient(to bottom, rgba(5, 5, 5, 0.4), rgba(5, 5, 5, 0.9)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuCfq_i-mgIFGVa1aLhXIVVH53LHSsV_Hhib2OD7PWkVM4yzbVkz-e8uuugSQTkRqt-qgCd8AAO7vHWy_No3nj8rIMMdTNdn6HQ3TcEpv6yjPB6IFRSPevHCxMe4AJzHGovCcSDxPmm2Mveam_YoUzGcMUb8Upn9J6ADv7nYOaFJ8hfnXWYJeC28dXkIHNsiLStvsvoaV-y3tmvp8N0qnh0aNWh0pNwTem2yN3Vt907WAeAkECrr9VnlPKdWc74uta8X-SvTwYNATZSp);
+    background-size: cover;
+    background-position: center
+    }
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.02)
+    }
+.glow-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(5, 5, 5, 0) 70%);
+    pointer-events: none;
+    z-index: -1
+    }
+.btn-hover-effect {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+    }
+.btn-hover-effect:hover {
+    transform: scale(0.98)
+    }</style>
+</head>
+<body class="min-h-screen flex flex-col bg-cinematic bg-canvas-black relative selection:bg-accent-gold selection:text-canvas-black" data-alt="A cinematic, ultra-high definition dark atmospheric background featuring subtle, out-of-focus volumetric lighting that suggests a premium, elite dining environment. The overall mood is mysterious yet inviting, utilizing deep shadows and soft highlights in a monochromatic palette with faint golden undertones. The setting is abstract enough not to distract, perfectly serving as a backdrop for high-end digital interfaces.">
+<!-- TopAppBar Suppressed due to Transactional/Success Intent -->
+<main class="flex-grow flex items-center justify-center p-gutter relative z-10">
+<div class="glow-effect"></div>
+<div class="glass-card rounded-xl max-w-md w-full p-stack-lg flex flex-col items-center text-center animate-fade-in-up">
+<div class="w-16 h-16 rounded-full bg-surface-elevated border border-border-subtle flex items-center justify-center mb-stack-md shadow-[0_0_20px_rgba(212,175,55,0.1)]">
+<span class="material-symbols-outlined text-accent-gold text-4xl" style="font-variation-settings: 'FILL' 1;">
+                    check_circle
+                </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-stack-sm tracking-tight">Booking Confirmed</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-lg max-w-[280px]">
+                Our culinary technology expert will reach out shortly.
+            </p>
+<div class="w-full bg-surface-elevated/50 border border-border-subtle rounded-lg p-stack-md mb-stack-lg text-left">
+<div class="flex items-center gap-3 mb-3 pb-3 border-b border-border-subtle">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">calendar_today</span>
+<div>
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase">Date</p>
+<p class="font-body-md text-body-md text-primary">October 24, 2024</p>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-3 pb-3 border-b border-border-subtle">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">schedule</span>
+<div>
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase">Time</p>
+<p class="font-body-md text-body-md text-primary">2:00 PM EST</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent-gold text-xl">mail</span>
+<div>
+<p class="font-label-mono text-label-mono text-accent-gold uppercase">Status</p>
+<p class="font-body-md text-body-md text-primary">Calendar Invite Sent</p>
+</div>
+</div>
+</div>
+<div class="w-full flex flex-col gap-4">
+<a class="w-full bg-primary text-canvas-black font-body-md text-body-md font-semibold py-3 px-6 rounded DEFAULT flex items-center justify-center gap-2 btn-hover-effect" href="/">
+                    Return to Home
+                </a>
+<a class="w-full bg-transparent border border-border-subtle text-primary font-body-md text-body-md py-3 px-6 rounded DEFAULT flex items-center justify-center gap-2 btn-hover-effect hover:bg-glass-fill transition-colors" href="#">
+<span class="material-symbols-outlined text-lg">event_note</span>
+                    Add to Google Calendar
+                </a>
+</div>
+</div>
+</main>
+<!-- Footer Suppressed on splash/success screens to maintain focus on the confirmation message and CTAs -->
+<style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</body></html>

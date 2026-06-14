@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Portal Settings - Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#fefcff",
+                      "on-primary-container": "#636565",
+                      "on-error-container": "#ffdad6",
+                      "inverse-on-surface": "#313030",
+                      "outline": "#8e9192",
+                      "surface-tint": "#c6c6c7",
+                      "surface-container-highest": "#353434",
+                      "secondary": "#abc7ff",
+                      "background": "#141313",
+                      "surface-container-low": "#1c1b1b",
+                      "primary": "#ffffff",
+                      "surface-elevated": "#0A0A0A",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "surface-dim": "#141313",
+                      "on-primary": "#2f3131",
+                      "inverse-surface": "#e5e2e1",
+                      "on-secondary-fixed": "#001b3f",
+                      "primary-fixed": "#e2e2e2",
+                      "on-tertiary-container": "#636565",
+                      "canvas-black": "#050505",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "on-error": "#690005",
+                      "on-tertiary": "#2f3131",
+                      "surface-container": "#201f1f",
+                      "surface-container-high": "#2a2a2a",
+                      "surface": "#141313",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "inverse-primary": "#5d5f5f",
+                      "surface-variant": "#353434",
+                      "surface-bright": "#3a3939",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-primary-fixed-variant": "#454747",
+                      "tertiary-fixed": "#e2e2e2",
+                      "error": "#ffb4ab",
+                      "tertiary": "#ffffff",
+                      "tertiary-container": "#e2e2e2",
+                      "on-primary-fixed": "#1a1c1c",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "on-background": "#e5e2e1",
+                      "accent-gold": "#D4AF37",
+                      "on-secondary": "#002f66",
+                      "error-container": "#93000a",
+                      "primary-container": "#e2e2e2",
+                      "outline-variant": "#444748",
+                      "on-surface-variant": "#c4c7c8",
+                      "on-surface": "#e5e2e1",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary-container": "#0372e4",
+                      "secondary-fixed": "#d7e2ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "32px",
+                      "margin-mobile": "20px",
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Smooth transitions for interactive elements */
+        .interactive {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .interactive:hover {
+            transform: scale(0.98);
+        }
+        
+        /* Glass panel util */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Input styling */
+        .premium-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            transition: border-color 0.3s ease;
+        }
+        .premium-input:focus {
+            outline: none;
+            border-bottom-color: #D4AF37; /* accent-gold */
+            box-shadow: none;
+        }
+        .premium-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Custom Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #D4AF37;
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: #D4AF37;
+        }
+    </style>
+</head>
+<body class="bg-canvas-black text-on-surface font-body-md text-body-md antialiased min-h-screen flex overflow-hidden">
+<!-- Top Navigation Container (Mobile & Web) -->
+<div class="fixed top-0 left-0 w-full z-50 md:hidden bg-canvas-black border-b border-border-subtle bg-glass-fill backdrop-blur-md h-16 flex justify-between items-center px-gutter">
+<div class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tighter">Aether AR</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">contrast</span>
+<img alt="Super Admin Profile" class="w-8 h-8 rounded-full object-cover" data-alt="A close-up portrait of a professional chef in a dark, high-end kitchen setting. The lighting is moody and cinematic, highlighting their focused expression. The background is slightly blurred, emphasizing the subject. Colors are muted with strong contrasts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY3SYs83qioDjzYOgGP6Ah1X0CKD7sGglnoENjm0nIdqMEQwPTT-nYtngxyKXcqCN5eiSNnz-RGOofg6sQ9XfYLdFqzImF5cxt9JK_iVrGITf5cqYbkPYOJCalMPgTFJrmrCn-1ZUGF-KBHAPPaUQF1tlzNrXXsk83b6ZKJamVXwss06IkOzfmaTYL7HW7sqBbcCEU_RGBcarSu_fQrFHWkwCGY7v1JjUpjCmNXiJo5ZE8W7el7PAazUGcUPWS7CaBIaDi9rBzRPQK"/>
+</div>
+</div>
+<!-- SideNavBar (Admin) - Hidden on Mobile -->
+<nav class="hidden md:flex w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex-col p-stack-md shrink-0">
+<div class="mb-stack-lg px-4 pt-4">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Aether AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1 opacity-70">Super Admin</p>
+</div>
+<div class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">storefront</span>
+<span>Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">payments</span>
+<span>Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">view_in_ar</span>
+<span>3D Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">insights</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 400, 'FILL' 1;">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto space-y-2 pt-stack-md border-t border-border-subtle">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 h-screen overflow-y-auto relative pt-16 md:pt-0">
+<!-- Top App Bar (Web) -->
+<header class="hidden md:flex h-16 sticky top-0 z-40 w-full justify-end items-center px-gutter border-b border-border-subtle bg-canvas-black/80 backdrop-blur-md">
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors interactive">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors interactive">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="flex items-center gap-3 border-l border-border-subtle pl-6">
+<img alt="Super Admin Profile" class="w-8 h-8 rounded-full object-cover border border-border-subtle" data-alt="A close-up portrait of a professional chef in a dark, high-end kitchen setting. The lighting is moody and cinematic, highlighting their focused expression. The background is slightly blurred, emphasizing the subject. Colors are muted with strong contrasts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdUFbecev8jQ5jAb7Wcgvrk7iE4pzTguA17THBVBkSNUI6JBAZPzW1JwZxBhaehuL62zYsh-52njTdL60vokTYxE8_bNuixBuQx1gVN4o-GQjp7WSLzylQPtHnr_p38Fd-Hss9EsiQKhMSai1PTrbDN90l9uRwszMGe_veyJE8zKw5zW6Oj4WKtcJ5LlZV0lbgIfYnJDy-8jVhC3kGxpBomXHIKYrG0St5i0SpVGj8B5VR9SeB1ZXFAU6w31q5pz7xLGQJOedd6crE"/>
+</div>
+</div>
+</header>
+<div class="max-w-5xl mx-auto px-margin-mobile md:px-gutter py-stack-lg w-full">
+<header class="mb-stack-lg">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Restaurant Settings</h2>
+<p class="text-on-surface-variant mt-2 max-w-2xl">Manage your establishment's profile, operational parameters, and security preferences for the Aether AR ecosystem.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+<!-- Settings Navigation (Vertical Tabs) -->
+<aside class="md:col-span-3 sticky top-24 space-y-2">
+<button class="w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 bg-surface-container-highest text-primary border border-border-subtle shadow-[0_0_15px_rgba(212,175,55,0.05)] transition-all">
+<span class="material-symbols-outlined text-accent-gold" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="font-bold">Profile</span>
+</button>
+<button class="w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-all">
+<span class="material-symbols-outlined">tune</span>
+<span>Operations</span>
+</button>
+<button class="w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications_active</span>
+<span>Notifications</span>
+</button>
+<button class="w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-all">
+<span class="material-symbols-outlined">shield</span>
+<span>Security</span>
+</button>
+</aside>
+<!-- Settings Content Area -->
+<div class="md:col-span-9 space-y-stack-lg pb-stack-lg">
+<!-- Restaurant Profile Section -->
+<section class="glass-panel rounded-xl p-6 md:p-8 relative overflow-hidden group">
+<!-- Subtle background glow -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-accent-gold/5 rounded-full blur-[80px] pointer-events-none transition-opacity duration-500 opacity-50 group-hover:opacity-100"></div>
+<div class="flex items-center justify-between mb-stack-md border-b border-border-subtle pb-4">
+<h3 class="text-lg font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-gold">restaurant</span>
+                                Restaurant Profile
+                            </h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+<!-- Logo Upload -->
+<div class="md:col-span-2 flex items-start gap-6">
+<div class="w-24 h-24 rounded-lg bg-surface-container border border-border-subtle flex items-center justify-center overflow-hidden relative group cursor-pointer">
+<img alt="Restaurant Logo" class="w-full h-full object-cover" data-alt="A high-end, minimalist restaurant logo featuring a stylized geometric abstract shape resembling a plate and leaf in gold line art on a stark black background. The design is sleek, modern, and communicates fine dining and precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqs9Wjuktlffn0qTVgd76GunQkQ8VoLC-LdXdA9oqUYIKqWX0H65GDSol9QaXQHEG44Hes0eLj_4k2NCnQhHjgFHXfeYSnNduf0sG3AFRTDn0pPJ96jxHWJH3vO2-BoQDpT3Hpah688BfFj259NcdEIv663hEH7qJn-tpXx_9CdmHMPgtBlOiov6nJpCvlLmGksPrBzRqhlDMcCXvAYCdn-93SpIYx_QiirStVhz5uiHoe0HaHTLjt4451DJpb2mSt6CRyWzuyv1w5"/>
+<div class="absolute inset-0 bg-canvas-black/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-primary">
+<span class="material-symbols-outlined mb-1">upload</span>
+<span class="font-label-mono text-[10px]">REPLACE</span>
+</div>
+</div>
+<div class="space-y-1">
+<p class="font-bold text-primary">Brand Logo</p>
+<p class="text-sm text-on-surface-variant">Recommended size: 512x512px. Formats: PNG, SVG (Transparent background preferred).</p>
+<button class="mt-2 px-4 py-1.5 border border-border-subtle rounded-lg text-sm hover:bg-glass-fill hover:text-primary transition-colors">Upload New</button>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Establishment Name</label>
+<input class="w-full premium-input py-2 text-base" placeholder="Enter restaurant name" type="text" value="L'Aura Gastronomie"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Cuisine Type</label>
+<select class="w-full premium-input py-2 text-base appearance-none bg-transparent cursor-pointer">
+<option class="bg-surface-container text-primary" value="french">Contemporary French</option>
+<option class="bg-surface-container text-primary" value="japanese">Japanese Fusion</option>
+<option class="bg-surface-container text-primary" value="molecular">Molecular Gastronomy</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Contact Email</label>
+<input class="w-full premium-input py-2 text-base" placeholder="contact@restaurant.com" type="email" value="admin@lauragastro.com"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Primary Phone</label>
+<input class="w-full premium-input py-2 text-base" placeholder="+1 (555) 000-0000" type="tel" value="+1 (555) 019-2834"/>
+</div>
+<div class="md:col-span-2 space-y-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Physical Address</label>
+<input class="w-full premium-input py-2 text-base" placeholder="Full street address" type="text" value="1240 Market St, San Francisco, CA 94102"/>
+</div>
+</div>
+<div class="mt-8 flex justify-end">
+<button class="bg-primary text-canvas-black font-bold px-6 py-2.5 rounded-lg interactive hover:bg-white/90">Save Profile</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple script to handle visual tab switching (demo purposes)
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('aside button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Reset all
+                    tabs.forEach(t => {
+                        t.className = 'w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-all';
+                        const icon = t.querySelector('.material-symbols-outlined');
+                        icon.classList.remove('text-accent-gold');
+                        icon.style.fontVariationSettings = "'FILL' 0";
+                        t.querySelector('span:not(.material-symbols-outlined)').classList.remove('font-bold');
+                    });
+                    
+                    // Set active
+                    tab.className = 'w-full text-left px-4 py-3 rounded-lg flex items-center gap-3 bg-surface-container-highest text-primary border border-border-subtle shadow-[0_0_15px_rgba(212,175,55,0.05)] transition-all';
+                    const activeIcon = tab.querySelector('.material-symbols-outlined');
+                    activeIcon.classList.add('text-accent-gold');
+                    activeIcon.style.fontVariationSettings = "'FILL' 1";
+                    tab.querySelector('span:not(.material-symbols-outlined)').classList.add('font-bold');
+                });
+            });
+        });
+    </script>
+</body></html>

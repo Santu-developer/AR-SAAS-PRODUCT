@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether AR - Super Admin Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "background": "#141313",
+                      "on-primary-container": "#636565",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "tertiary-container": "#e2e2e2",
+                      "canvas-black": "#050505",
+                      "on-tertiary": "#2f3131",
+                      "on-secondary-container": "#fefcff",
+                      "tertiary-fixed": "#e2e2e2",
+                      "surface-tint": "#c6c6c7",
+                      "surface": "#141313",
+                      "on-primary-fixed-variant": "#454747",
+                      "error-container": "#93000a",
+                      "on-surface-variant": "#c4c7c8",
+                      "surface-bright": "#3a3939",
+                      "surface-container-high": "#2a2a2a",
+                      "on-error": "#690005",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "surface-container-highest": "#353434",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "primary-container": "#e2e2e2",
+                      "outline-variant": "#444748",
+                      "surface-container": "#201f1f",
+                      "on-primary": "#2f3131",
+                      "on-surface": "#e5e2e1",
+                      "on-tertiary-container": "#636565",
+                      "primary": "#ffffff",
+                      "surface-container-low": "#1c1b1b",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "secondary": "#abc7ff",
+                      "outline": "#8e9192",
+                      "inverse-primary": "#5d5f5f",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary-container": "#0372e4",
+                      "error": "#ffb4ab",
+                      "accent-gold": "#D4AF37",
+                      "surface-variant": "#353434",
+                      "secondary-fixed": "#d7e2ff",
+                      "primary-fixed": "#e2e2e2",
+                      "on-primary-fixed": "#1a1c1c",
+                      "inverse-on-surface": "#313030",
+                      "tertiary": "#ffffff",
+                      "surface-dim": "#141313",
+                      "on-secondary": "#002f66",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface-elevated": "#0A0A0A",
+                      "on-secondary-fixed": "#001b3f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "container-max": "1440px",
+                      "margin-mobile": "20px",
+                      "stack-sm": "8px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.canvas-black');
+            color: theme('colors.on-surface');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar for sleekness */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant');
+            border-radius: theme('borderRadius.full');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+
+        /* Toggle Switch Styling */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.primary');
+        }
+        .toggle-checkbox:checked + .toggle-label:after {
+            transform: translateX(100%);
+            border-color: theme('colors.primary');
+        }
+        
+        /* Input Focus Glow */
+        input:focus {
+            box-shadow: 0 1px 0 0 theme('colors.primary');
+            border-bottom-color: theme('colors.primary') !important;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar for Mobile (Hidden on Desktop) -->
+<header class="md:hidden h-16 sticky top-0 z-50 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md flex justify-between items-center px-gutter mx-auto">
+<div class="hidden font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</div>
+<div class="flex items-center text-primary font-bold">
+<span class="material-symbols-outlined mr-2">settings</span>
+            Settings
+        </div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer" style="font-variation-settings: 'FILL' 0;">contrast</span>
+<img alt="Super Admin Profile" class="w-8 h-8 rounded-full border border-border-subtle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBavWGYL-4OnXquvlXWLRwruXcSdvytCE49MtZrpSzknOS2FeYVy4snKCYYzvJwP6YPPagGGEy2TK7UY_oDfKi1KuPut3zVXbQSpG_AvMqdM7ObO8wyhfqg4hY5WEl9c2k1uFeCoplMyLUcqwf65GGut2Xn6aRbla-SYuSx77KoDie919x3y8lwMfVuGoqvnC4WIrsX70LzAD9d51mJsoO46058wZEm2R-D0AsRaboY5tOJsoNsrTgS61hJ6BWW9uH0zbwBLKWqkbdy"/>
+</div>
+</header>
+<!-- SideNavBar (Hidden on Mobile) -->
+<nav class="hidden md:flex w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex-col p-stack-md z-40 bg-canvas-black">
+<div class="mb-stack-lg px-4 pt-2 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-canvas-black font-bold">A</div>
+<div>
+<div class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter text-xl">Aether AR</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant">Super Admin</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">storefront</span>
+                        Restaurants
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">payments</span>
+                        Plans
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">view_in_ar</span>
+                        3D Assets
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">insights</span>
+                        Analytics
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 1;">settings</span>
+                        Settings
+                    </a>
+</li>
+</ul>
+</div>
+<div class="pt-stack-md border-t border-border-subtle mt-auto">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">help</span>
+                        Support
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-error hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">logout</span>
+                        Sign Out
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col min-h-screen relative w-full md:w-[calc(100%-240px)]">
+<!-- Desktop Header Area -->
+<div class="hidden md:flex items-center justify-between px-gutter py-stack-md max-w-container-max mx-auto w-full sticky top-0 z-30 bg-canvas-black/80 backdrop-blur-md border-b border-border-subtle">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Settings</h1>
+<p class="text-on-surface-variant mt-1 text-sm">Manage global platform configurations and security policies.</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full bg-glass-fill border border-border-subtle flex items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="Super Admin Profile" class="w-10 h-10 rounded-full border border-border-subtle hover:border-primary transition-colors cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDitlaK93YiCB-WrSw3TNQVfWCUTgAAekqTobJMvEFzT93UFXL1EbaDrmPBBAxymG0FV0HCRgsVR7eqv_uVyrmfzb1C_MUfbR_vDc7UVTX8j4coDkxwkw_3_hST6ZH5jw7I6jDpyqZzCQrvVqf1uEd4896xh5-222HF0Iqezwr6kM1T0vTK4x7hK9yGz73JcXFOztxYIVG9IAVd9-6lsLf2ihoca--tWE7hcp6cAscWjrsppPGxPcjVRAoqCEPAVzTG20_5vPHrgwNu"/>
+</div>
+</div>
+<!-- Settings Content Grid -->
+<div class="flex-1 px-gutter py-stack-lg max-w-container-max mx-auto w-full">
+<div class="flex flex-col lg:flex-row gap-stack-lg">
+<!-- Settings Sub-Navigation -->
+<aside class="w-full lg:w-64 shrink-0">
+<nav class="space-y-1 sticky top-32">
+<a class="block px-4 py-2 text-primary font-bold border-l-2 border-primary bg-glass-fill rounded-r-lg transition-colors" href="#general">General Platform</a>
+<a class="block px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-glass-fill rounded-r-lg border-l-2 border-transparent hover:border-border-subtle transition-colors" href="#branding">Branding &amp; Appearance</a>
+<a class="block px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-glass-fill rounded-r-lg border-l-2 border-transparent hover:border-border-subtle transition-colors" href="#security">Security &amp; Access</a>
+<a class="block px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-glass-fill rounded-r-lg border-l-2 border-transparent hover:border-border-subtle transition-colors" href="#api">API &amp; Integrations</a>
+<a class="block px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-glass-fill rounded-r-lg border-l-2 border-transparent hover:border-border-subtle transition-colors" href="#maintenance">System Maintenance</a>
+</nav>
+</aside>
+<!-- Settings Panels -->
+<div class="flex-1 space-y-stack-lg pb-32">
+<!-- General Settings -->
+<section class="scroll-mt-32" id="general">
+<div class="mb-stack-md">
+<h2 class="text-xl font-bold text-primary">General Platform Settings</h2>
+<p class="text-sm text-on-surface-variant mt-1">Core details representing the Aether AR SaaS platform.</p>
+</div>
+<div class="bg-glass-fill border border-border-subtle rounded-xl p-stack-md glow-effect">
+<div class="space-y-stack-md">
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-2">Platform Name</label>
+<input class="w-full bg-transparent border-0 border-b border-border-subtle text-primary px-0 py-2 focus:ring-0 focus:border-primary transition-colors text-sm" type="text" value="Aether AR"/>
+</div>
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-2">Support Email</label>
+<input class="w-full bg-transparent border-0 border-b border-border-subtle text-primary px-0 py-2 focus:ring-0 focus:border-primary transition-colors text-sm" type="email" value="support@aether-ar.com"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-2">Global Time Zone</label>
+<select class="w-full bg-surface-container border border-border-subtle rounded-lg text-primary px-3 py-2 text-sm focus:ring-1 focus:ring-primary focus:border-primary appearance-none">
+<option>UTC (Coordinated Universal Time)</option>
+<option selected="">America/New_York (EST/EDT)</option>
+<option>Europe/London (GMT/BST)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-2">Default Language</label>
+<div class="flex items-center gap-4 bg-surface-container border border-border-subtle rounded-lg p-1">
+<button class="flex-1 py-1.5 px-3 rounded-md bg-surface-bright text-primary text-sm font-medium shadow-sm transition-all">English</button>
+<button class="flex-1 py-1.5 px-3 rounded-md text-on-surface-variant hover:text-primary text-sm font-medium transition-all">Español</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-stack-md pt-stack-md border-t border-border-subtle flex justify-end">
+<button class="bg-primary text-canvas-black px-6 py-2 rounded-lg font-medium hover:scale-[0.98] transition-transform duration-300 text-sm">Save Changes</button>
+</div>
+</div>
+</section>
+<!-- Branding -->
+<section class="scroll-mt-32" id="branding">
+<div class="mb-stack-md">
+<h2 class="text-xl font-bold text-primary">Branding &amp; Appearance</h2>
+<p class="text-sm text-on-surface-variant mt-1">Configure global aesthetics and default viewer modes.</p>
+</div>
+<div class="bg-glass-fill border border-border-subtle rounded-xl p-stack-md">
+<div class="space-y-stack-md">
+<div>
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-4">Platform Logo</label>
+<div class="flex items-center gap-6">
+<div class="w-24 h-24 rounded-lg border border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors cursor-pointer bg-surface-container-low">
+<span class="material-symbols-outlined mb-1">upload</span>
+<span class="text-xs">Upload Dark</span>
+</div>
+<div class="w-24 h-24 rounded-lg border border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-colors cursor-pointer bg-surface-container">
+<span class="material-symbols-outlined mb-1">upload</span>
+<span class="text-xs">Upload Light</span>
+</div>
+<div class="flex-1 ml-4 text-sm text-on-surface-variant">
+<p>Recommended size: 512x512px. SVG or high-res PNG. Transparent background preferred.</p>
+</div>
+</div>
+</div>
+<div class="border-t border-border-subtle pt-stack-md">
+<label class="block font-label-mono text-label-mono text-on-surface-variant mb-4">Primary Brand Color</label>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary border-2 border-border-subtle cursor-pointer ring-2 ring-offset-2 ring-offset-canvas-black ring-primary"></div>
+<div class="w-10 h-10 rounded-full bg-accent-gold border border-border-subtle cursor-pointer opacity-50 hover:opacity-100 transition-opacity"></div>
+<div class="w-10 h-10 rounded-full bg-secondary border border-border-subtle cursor-pointer opacity-50 hover:opacity-100 transition-opacity"></div>
+<div class="w-10 h-10 rounded-full flex items-center justify-center border border-dashed border-outline-variant cursor-pointer hover:border-primary text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+</div>
+<input class="ml-auto w-24 bg-transparent border-0 border-b border-border-subtle text-primary px-0 py-1 text-center font-label-mono text-sm focus:ring-0" type="text" value="#FFFFFF"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Security -->
+<section class="scroll-mt-32" id="security">
+<div class="mb-stack-md">
+<h2 class="text-xl font-bold text-primary">Security &amp; Access</h2>
+<p class="text-sm text-on-surface-variant mt-1">Manage authentication policies and administrative access.</p>
+</div>
+<div class="bg-glass-fill border border-border-subtle rounded-xl p-stack-md">
+<div class="space-y-stack-md flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-border-subtle pb-4">
+<div>
+<div class="text-primary font-medium text-sm">Require Two-Factor Authentication (2FA)</div>
+<div class="text-xs text-on-surface-variant mt-1">Enforce 2FA for all Super Admin and Restaurant Manager accounts.</div>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-200 ease-in-out" id="2fa-toggle" name="toggle" style="right: 0; border-color: #ffffff;" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-5 rounded-full bg-primary cursor-pointer" for="2fa-toggle"></label>
+</div>
+</div>
+<div class="flex items-center justify-between border-b border-border-subtle pb-4">
+<div>
+<div class="text-primary font-medium text-sm">Session Timeout</div>
+<div class="text-xs text-on-surface-variant mt-1">Automatically log out idle administrative sessions.</div>
+</div>
+<select class="bg-surface-container border border-border-subtle rounded-lg text-primary px-3 py-1.5 text-sm focus:ring-1 focus:ring-primary focus:border-primary appearance-none w-32">
+<option>15 Minutes</option>
+<option selected="">30 Minutes</option>
+<option>1 Hour</option>
+<option>4 Hours</option>
+</select>
+</div>
+<div>
+<div class="text-primary font-medium text-sm mb-2">Admin IP Whitelisting</div>
+<div class="text-xs text-on-surface-variant mb-3">Restrict Super Admin dashboard access to specific IP ranges. Leave blank to allow all.</div>
+<div class="bg-surface-container-low border border-border-subtle rounded-lg p-3 space-y-2">
+<div class="flex items-center gap-2">
+<span class="font-label-mono text-label-mono text-primary bg-surface-bright px-2 py-1 rounded">192.168.1.1/24</span>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-mono text-label-mono text-primary bg-surface-bright px-2 py-1 rounded">10.0.0.0/8</span>
+<button class="text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="flex gap-2 mt-2">
+<input class="flex-1 bg-transparent border-0 border-b border-border-subtle text-primary px-0 py-1 focus:ring-0 focus:border-primary transition-colors text-sm font-label-mono" placeholder="Add IP or CIDR block..." type="text"/>
+<button class="text-primary hover:bg-glass-fill px-3 py-1 rounded-md text-sm border border-border-subtle transition-colors">Add</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

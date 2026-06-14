@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>3D Model Request - Technical Specs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined', sans-serif;
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#d7e2ff",
+                        "secondary-container": "#0372e4",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "surface-elevated": "#0A0A0A",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-highest": "#353434",
+                        "on-primary-container": "#636565",
+                        "primary": "#ffffff",
+                        "canvas-black": "#050505",
+                        "primary-fixed": "#e2e2e2",
+                        "on-surface-variant": "#c4c7c8",
+                        "on-primary-fixed": "#1a1c1c",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-container": "#201f1f",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-variant": "#353434",
+                        "on-primary": "#2f3131",
+                        "inverse-primary": "#5d5f5f",
+                        "on-tertiary": "#2f3131",
+                        "outline-variant": "#444748",
+                        "surface-dim": "#141313",
+                        "background": "#141313",
+                        "accent-gold": "#D4AF37",
+                        "outline": "#8e9192",
+                        "on-tertiary-container": "#636565",
+                        "tertiary-container": "#e2e2e2",
+                        "on-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "surface-tint": "#c6c6c7",
+                        "on-background": "#e5e2e1",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#3a3939",
+                        "secondary": "#abc7ff",
+                        "surface-container-lowest": "#0e0e0e",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "on-secondary-fixed": "#001b3f",
+                        "primary-container": "#e2e2e2",
+                        "on-error": "#690005",
+                        "tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#454747",
+                        "on-secondary": "#002f66",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "surface": "#141313",
+                        "on-secondary-container": "#fefcff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Geist"],
+                        "display-2xl": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-2xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-canvas-black text-on-surface font-body-md min-h-screen flex selection:bg-accent-gold/30 selection:text-primary overflow-x-hidden">
+<!-- Global Nav Overlay Effect -->
+<div class="fixed inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-surface-elevated/20 via-canvas-black/0 to-canvas-black/0 z-0"></div>
+<!-- SideNavBar (Simulated suppression logic, but user requested layout to include it, though this is a linear task. Resolving conflict: Since it's a specific user request for layout demonstration, we'll keep it but typically this would be hidden in a real linear flow.) -->
+<nav class="w-[240px] h-full fixed left-0 top-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex flex-col py-stack-lg px-stack-md z-40 hidden md:flex">
+<div class="flex items-center gap-3 mb-10 px-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-subtle flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary text-sm">restaurant</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg tracking-tighter text-primary text-lg leading-none">Culinary AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant text-[10px] uppercase mt-1">Elite Tier</p>
+</div>
+</div>
+<ul class="flex-1 space-y-2">
+<li><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined">dashboard</span> Dashboard</a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined">restaurant_menu</span> Menu Catalog</a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary font-bold border-r-2 border-primary bg-glass-fill scale-[0.98] transition-transform duration-300" href="#"><span class="material-symbols-outlined">view_in_ar</span> 3D Requests</a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined">insights</span> Analytics</a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined">settings</span> Settings</a></li>
+</ul>
+<div class="mt-auto pt-6 border-t border-border-subtle">
+<button class="w-full bg-primary text-canvas-black font-semibold py-2 px-4 rounded-lg hover:scale-[0.98] transition-transform duration-200 mb-6">Request New Model</button>
+<ul class="space-y-2">
+<li><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined">help</span> Help Center</a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#"><span class="material-symbols-outlined">logout</span> Log Out</a></li>
+</ul>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-[240px] p-gutter md:p-10 relative z-10 w-full max-w-container-max mx-auto">
+<!-- Header & Stepper -->
+<header class="mb-stack-lg max-w-4xl mx-auto">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg md:text-display-2xl md:font-display-2xl text-primary tracking-tight">Technical Specs</h2>
+<p class="text-on-surface-variant mt-2 max-w-xl">Finalize the material properties and interactive behaviors for your high-fidelity AR model. Precision here ensures a flawless tabletop experience.</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 text-sm border border-border-subtle px-4 py-2 rounded-lg bg-glass-fill">
+<span class="material-symbols-outlined text-sm">close</span> Cancel Request
+                </button>
+</div>
+<!-- Linear Stepper -->
+<div class="flex items-center w-full relative before:absolute before:top-1/2 before:-translate-y-1/2 before:h-[1px] before:w-full before:bg-border-subtle before:z-0">
+<div class="flex-1 flex justify-center relative z-10">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container border border-accent-gold flex items-center justify-center text-accent-gold">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Details</span>
+</div>
+</div>
+<div class="flex-1 flex justify-center relative z-10">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container border border-accent-gold flex items-center justify-center text-accent-gold">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'wght' 600;">check</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase">Visuals</span>
+</div>
+</div>
+<div class="flex-1 flex justify-center relative z-10">
+<div class="flex flex-col items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-elevated border-2 border-primary flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+<span class="font-label-mono text-label-mono text-primary">3</span>
+</div>
+<span class="font-label-mono text-label-mono text-primary uppercase font-bold">Specs</span>
+</div>
+</div>
+</div>
+</header>
+<div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-stack-lg">
+<!-- Main Form Canvas -->
+<div class="lg:col-span-2 space-y-stack-lg">
+<!-- Scale & Dimensions -->
+<section class="bg-glass-fill border border-border-subtle p-stack-md md:p-stack-lg rounded-xl relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-elevated/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">straighten</span>
+<h3 class="text-xl font-semibold text-primary tracking-tight">Scale &amp; Dimensions</h3>
+</div>
+<div class="grid grid-cols-3 gap-stack-md">
+<div class="relative">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-2 block">Height</label>
+<div class="relative flex items-center">
+<input class="w-full bg-transparent border-b border-border-subtle focus:border-primary text-primary px-0 py-2 focus:ring-0 transition-colors placeholder:text-surface-variant" placeholder="0.0" type="number"/>
+<span class="absolute right-0 text-on-surface-variant text-sm pointer-events-none">cm</span>
+</div>
+</div>
+<div class="relative">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-2 block">Width</label>
+<div class="relative flex items-center">
+<input class="w-full bg-transparent border-b border-border-subtle focus:border-primary text-primary px-0 py-2 focus:ring-0 transition-colors placeholder:text-surface-variant" placeholder="0.0" type="number"/>
+<span class="absolute right-0 text-on-surface-variant text-sm pointer-events-none">cm</span>
+</div>
+</div>
+<div class="relative">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-2 block">Depth</label>
+<div class="relative flex items-center">
+<input class="w-full bg-transparent border-b border-border-subtle focus:border-primary text-primary px-0 py-2 focus:ring-0 transition-colors placeholder:text-surface-variant" placeholder="0.0" type="number"/>
+<span class="absolute right-0 text-on-surface-variant text-sm pointer-events-none">cm</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Material Properties -->
+<section class="bg-glass-fill border border-border-subtle p-stack-md md:p-stack-lg rounded-xl relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-elevated/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">texture</span>
+<h3 class="text-xl font-semibold text-primary tracking-tight">Material Properties</h3>
+</div>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase block">Reflectivity</label>
+<span class="font-label-mono text-label-mono text-primary">Matte to Glossy</span>
+</div>
+<input class="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-accent-gold" max="100" min="0" type="range" value="30"/>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase block">Transparency</label>
+<span class="font-label-mono text-label-mono text-primary">Solid to Clear</span>
+</div>
+<input class="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-accent-gold" max="100" min="0" type="range" value="0"/>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase block">Texture Detail</label>
+<span class="font-label-mono text-label-mono text-primary">Smooth to Coarse</span>
+</div>
+<input class="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-accent-gold" max="100" min="0" type="range" value="75"/>
+</div>
+</div>
+</section>
+<!-- Interactive Features -->
+<section class="bg-glass-fill border border-border-subtle p-stack-md md:p-stack-lg rounded-xl relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-elevated/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<h3 class="text-xl font-semibold text-primary tracking-tight">Interactive Features</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex items-start gap-4 p-4 rounded-lg border border-border-subtle bg-surface-container-lowest/50 cursor-pointer hover:bg-surface-container-high transition-colors">
+<input class="mt-1 w-4 h-4 rounded border-outline bg-transparent text-accent-gold focus:ring-accent-gold focus:ring-offset-0" type="checkbox"/>
+<div>
+<span class="block text-primary font-medium mb-1">Steam Animation</span>
+<span class="text-sm text-on-surface-variant">Subtle procedural steam effect for hot dishes.</span>
+</div>
+</label>
+<label class="flex items-start gap-4 p-4 rounded-lg border border-border-subtle bg-surface-container-lowest/50 cursor-pointer hover:bg-surface-container-high transition-colors">
+<input class="mt-1 w-4 h-4 rounded border-outline bg-transparent text-accent-gold focus:ring-accent-gold focus:ring-offset-0" type="checkbox"/>
+<div>
+<span class="block text-primary font-medium mb-1">Sparkle/Garnish Glow</span>
+<span class="text-sm text-on-surface-variant">Highlight specific garnishes or premium ingredients.</span>
+</div>
+</label>
+<label class="flex items-start gap-4 p-4 rounded-lg border border-border-subtle bg-surface-container-lowest/50 cursor-pointer hover:bg-surface-container-high transition-colors">
+<input class="mt-1 w-4 h-4 rounded border-outline bg-transparent text-accent-gold focus:ring-accent-gold focus:ring-offset-0" type="checkbox"/>
+<div>
+<span class="block text-primary font-medium mb-1">Slicing Interaction</span>
+<span class="text-sm text-on-surface-variant">Allow users to 'cut' the item to see the interior.</span>
+</div>
+</label>
+</div>
+</section>
+</div>
+<!-- Sidebar Context -->
+<div class="lg:col-span-1 space-y-stack-md">
+<aside class="bg-surface-elevated border border-border-subtle rounded-xl p-6 sticky top-24">
+<div class="flex items-center gap-2 mb-4 text-accent-gold">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">info</span>
+<h4 class="font-label-mono text-label-mono uppercase font-bold tracking-wider">Spec Guidelines</h4>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 leading-relaxed">
+                        Physical dimensions dictate the AR scale anchor. Inaccurate measurements will result in the model appearing disproportionate relative to real-world objects like plates or utensils on the dining table.
+                    </p>
+<div class="space-y-4">
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<span class="material-symbols-outlined text-primary mb-2">ar_on_you</span>
+<h5 class="text-primary font-medium text-sm mb-1">Spatial Anchoring</h5>
+<p class="text-xs text-on-surface-variant">Dimensions are mapped 1:1 in spatial computing environments.</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-lg border border-border-subtle">
+<span class="material-symbols-outlined text-primary mb-2">light_mode</span>
+<h5 class="text-primary font-medium text-sm mb-1">Material Impact</h5>
+<p class="text-xs text-on-surface-variant">Glossy surfaces reflect virtual environmental light, crucial for realism.</p>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-8 pt-6 border-t border-border-subtle flex flex-col gap-3">
+<button class="w-full bg-primary text-canvas-black font-semibold py-3 px-4 rounded-lg hover:scale-[0.98] transition-transform duration-200 flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            Submit for Review <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="w-full bg-transparent border border-border-subtle text-primary font-medium py-3 px-4 rounded-lg hover:bg-surface-container-high transition-colors duration-200">
+                            Back to Visuals
+                        </button>
+</div>
+</aside>
+</div>
+</div>
+</main>
+</body></html>

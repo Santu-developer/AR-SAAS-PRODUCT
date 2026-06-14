@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Success - Restaurante Elite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "canvas-black": "#050505",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "outline": "#8e9192",
+                        "primary": "#ffffff",
+                        "primary-container": "#e2e2e2",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary": "#2f3131",
+                        "on-secondary-fixed": "#001b3f",
+                        "on-primary": "#2f3131",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-background": "#e5e2e1",
+                        "tertiary-fixed": "#e2e2e2",
+                        "tertiary": "#ffffff",
+                        "error-container": "#93000a",
+                        "surface-variant": "#353434",
+                        "on-primary-fixed-variant": "#454747",
+                        "surface-container": "#201f1f",
+                        "outline-variant": "#444748",
+                        "on-error": "#690005",
+                        "surface-tint": "#c6c6c7",
+                        "on-secondary": "#002f66",
+                        "inverse-surface": "#e5e2e1",
+                        "background": "#141313",
+                        "inverse-primary": "#5d5f5f",
+                        "secondary-container": "#0372e4",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-dim": "#141313",
+                        "surface-bright": "#3a3939",
+                        "on-error-container": "#ffdad6",
+                        "accent-gold": "#D4AF37",
+                        "surface-container-highest": "#353434",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-surface": "#e5e2e1",
+                        "on-surface-variant": "#c4c7c8",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-container": "#636565",
+                        "on-tertiary-container": "#636565",
+                        "error": "#ffb4ab",
+                        "secondary": "#abc7ff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "inverse-on-surface": "#313030",
+                        "on-secondary-container": "#fefcff",
+                        "tertiary-container": "#e2e2e2",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface": "#141313",
+                        "surface-elevated": "#0A0A0A",
+                        "on-tertiary-fixed-variant": "#454747"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "container-max": "1440px",
+                        "margin-mobile": "20px"
+                    },
+                    fontFamily: {
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "display-2xl": ["Geist"],
+                        "body-md": ["Geist"]
+                    },
+                    animation: {
+                        'draw-check': 'drawCheck 0.8s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'shimmer-line': 'shimmer 2s linear infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite alternate ease-in-out',
+                    },
+                    keyframes: {
+                        drawCheck: {
+                            '0%': { strokeDasharray: '100', strokeDashoffset: '100', opacity: '0' },
+                            '10%': { opacity: '1' },
+                            '100%': { strokeDasharray: '100', strokeDashoffset: '0', opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '200% 0' },
+                            '100%': { backgroundPosition: '-200% 0' }
+                        },
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 10px rgba(212,175,55,0.2)' },
+                            '100%': { boxShadow: '0 0 25px rgba(212,175,55,0.5)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            color: #e5e2e1;
+            overflow-x: hidden;
+            min-height: max(884px, 100dvh);
+        }
+        
+        .glow-bg {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, rgba(5,5,5,0) 70%);
+            z-index: -1;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Success Ring & Checkmark */
+        .success-ring {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            animation: drawRing 1s ease-out forwards;
+        }
+        @keyframes drawRing {
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Shimmer gradient for active timeline line */
+        .shimmer-bg {
+            background: linear-gradient(180deg, #D4AF37 0%, rgba(212,175,55,0.2) 50%, #D4AF37 100%);
+            background-size: 100% 200%;
+        }
+
+        /* Particles container */
+        #confetti-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #D4AF37;
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        /* Staggered animations */
+        .stagger-1 { animation-delay: 0.8s; opacity: 0; }
+        .stagger-2 { animation-delay: 1.0s; opacity: 0; }
+        .stagger-3 { animation-delay: 1.2s; opacity: 0; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .animate-fade-in-up, .success-ring, .shimmer-bg, .particle {
+                animation: none !important;
+                opacity: 1 !important;
+                stroke-dashoffset: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col relative pb-32">
+<div class="glow-bg"></div>
+<main class="flex-1 flex flex-col items-center px-margin-mobile pt-16 pb-8 max-w-md mx-auto w-full relative z-10">
+<!-- Success Animation & Hero -->
+<div class="flex flex-col items-center text-center mb-stack-lg w-full relative">
+<div id="confetti-container"></div>
+<div class="relative w-24 h-24 mb-6 flex items-center justify-center">
+<svg class="w-24 h-24 absolute inset-0 -rotate-90" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(212,175,55,0.1)" stroke-width="2"></circle>
+<circle class="success-ring" cx="50" cy="50" fill="none" r="45" stroke="#D4AF37" stroke-linecap="round" stroke-width="2"></circle>
+</svg>
+<svg class="w-10 h-10 text-accent-gold" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path class="animate-draw-check" d="M20 6L9 17l-5-5" opacity="0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<!-- Glow effect behind icon -->
+<div class="absolute inset-0 bg-accent-gold/10 rounded-full blur-xl -z-10"></div>
+</div>
+<h1 class="font-headline-lg-mobile text-[28px] leading-[36px] font-semibold text-primary mb-2 opacity-0 animate-[fadeInUp_0.6s_ease-out_0.4s_forwards]">Order Placed Successfully!</h1>
+<p class="font-body-md text-on-surface-variant opacity-0 animate-[fadeInUp_0.6s_ease-out_0.5s_forwards]">Your culinary experience is being prepared.</p>
+<div class="mt-6 px-5 py-2 rounded-full bg-glass-fill border border-border-subtle inline-flex items-center gap-2 opacity-0 animate-fade-in-up stagger-1">
+<span class="font-label-mono text-label-mono text-on-surface-variant">ORDER #</span>
+<span class="font-label-mono text-label-mono text-primary tracking-wider">ELITE-8924</span>
+</div>
+</div>
+<!-- Order Tracking Timeline -->
+<div class="w-full bg-[#0e0e0e]/80 border border-border-subtle rounded-2xl p-6 mb-stack-lg relative overflow-hidden backdrop-blur-xl opacity-0 animate-fade-in-up stagger-2">
+<h2 class="font-label-mono text-[11px] text-on-surface-variant mb-8 uppercase tracking-[0.2em] text-center font-medium">Live Status</h2>
+<div class="relative flex flex-col gap-8">
+<!-- Vertical Line Background -->
+<div class="absolute left-[15px] top-[8px] bottom-[8px] w-[2px] bg-border-subtle z-0"></div>
+<!-- Active Line (Progress) with shimmer -->
+<div class="absolute left-[15px] top-[8px] h-[55%] w-[2px] shimmer-bg animate-shimmer-line z-10" style="box-shadow: 0 0 8px rgba(212,175,55,0.4);"></div>
+<!-- Step 1 -->
+<div class="flex items-start gap-5 relative z-20">
+<div class="mt-1 w-8 h-8 rounded-full bg-[#141313] border border-accent-gold flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.15)]">
+<span class="material-symbols-outlined text-accent-gold text-[16px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+<div>
+<h3 class="font-body-md text-primary font-medium">Order Received</h3>
+<p class="font-label-mono text-[11px] text-on-surface-variant mt-1.5 opacity-70">19:42 PM</p>
+</div>
+</div>
+<!-- Step 2 (Active) -->
+<div class="flex items-start gap-5 relative z-20">
+<div class="mt-1 w-8 h-8 rounded-full bg-accent-gold flex items-center justify-center shrink-0 animate-pulse-glow">
+<span class="material-symbols-outlined text-canvas-black text-[16px]" style="font-variation-settings: 'FILL' 1;">skillet</span>
+</div>
+<div>
+<h3 class="font-body-md text-primary font-medium">Preparing</h3>
+<p class="font-label-mono text-[11px] text-accent-gold mt-1.5 opacity-90 animate-pulse">Chef is plating your selection...</p>
+</div>
+</div>
+<!-- Step 3 (Pending) -->
+<div class="flex items-start gap-5 relative z-20 opacity-30">
+<div class="mt-1 w-8 h-8 rounded-full bg-[#141313] border border-border-subtle flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]" style="font-variation-settings: 'FILL' 0;">local_dining</span>
+</div>
+<div>
+<h3 class="font-body-md text-primary font-medium">On the Way to Table</h3>
+<p class="font-label-mono text-[11px] text-on-surface-variant mt-1.5">Pending</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="w-full bg-[#0e0e0e]/80 border border-border-subtle rounded-2xl p-6 mb-stack-lg backdrop-blur-xl opacity-0 animate-fade-in-up stagger-3">
+<h2 class="font-label-mono text-[11px] text-on-surface-variant mb-6 uppercase tracking-[0.2em] border-b border-border-subtle pb-4 font-medium">Order Summary</h2>
+<div class="space-y-6 mb-6">
+<!-- Item 1 -->
+<div class="flex justify-between items-start group hover:-translate-y-0.5 transition-transform duration-300">
+<div class="flex gap-4">
+<span class="font-label-mono text-label-mono text-on-surface-variant bg-surface-elevated border border-border-subtle px-2.5 py-1 rounded shrink-0 h-fit">1x</span>
+<div>
+<p class="font-body-md text-primary font-medium">Truffle Risotto</p>
+<p class="font-body-md text-[13px] text-on-surface-variant opacity-70 mt-1">Shaved black truffle, parmesan crisp</p>
+</div>
+</div>
+<span class="font-body-md text-primary font-medium">$42.00</span>
+</div>
+<!-- Item 2 -->
+<div class="flex justify-between items-start group hover:-translate-y-0.5 transition-transform duration-300">
+<div class="flex gap-4">
+<span class="font-label-mono text-label-mono text-on-surface-variant bg-surface-elevated border border-border-subtle px-2.5 py-1 rounded shrink-0 h-fit">1x</span>
+<div>
+<p class="font-body-md text-primary font-medium">Wagyu Ribeye (A5)</p>
+<p class="font-body-md text-[13px] text-on-surface-variant opacity-70 mt-1">Medium rare, smoked sea salt</p>
+</div>
+</div>
+<span class="font-body-md text-primary font-medium">$125.00</span>
+</div>
+</div>
+<div class="border-t border-border-subtle pt-5 flex justify-between items-end">
+<span class="font-body-md text-on-surface-variant opacity-80 mb-1">Total</span>
+<span class="font-headline-lg-mobile text-[24px] font-semibold text-primary">$167.00</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-3 opacity-0 animate-fade-in-up stagger-3">
+<button class="w-full py-4 bg-primary text-canvas-black font-body-md font-semibold rounded-xl hover:scale-[0.98] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-[0_4px_20px_rgba(255,255,255,0.1)]">
+                Return to Table Details
+            </button>
+<button class="w-full py-4 bg-transparent border border-border-subtle text-primary font-body-md font-semibold rounded-xl hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                Browse More
+            </button>
+</div>
+</main>
+<script>
+        // Simple elegant confetti burst
+        document.addEventListener('DOMContentLoaded', () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (prefersReducedMotion) return;
+
+            const container = document.getElementById('confetti-container');
+            const particleCount = 24;
+            const colors = ['#D4AF37', '#e5e2e1', '#ffffff'];
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Randomize properties
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 3 + 2;
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 40 + 20;
+                const tx = Math.cos(angle) * velocity;
+                const ty = Math.sin(angle) * velocity - 20; // slight upward bias
+                
+                particle.style.backgroundColor = color;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                container.appendChild(particle);
+
+                // Animate using Web Animations API for better performance
+                particle.animate([
+                    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                    { transform: `translate(${tx}px, ${ty}px) scale(0)`, opacity: 0 }
+                ], {
+                    duration: 800 + Math.random() * 400,
+                    easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+                    delay: 200 // wait for checkmark to start drawing
+                }).onfinish = () => particle.remove();
+            }
+        });
+    </script>
+</body></html>

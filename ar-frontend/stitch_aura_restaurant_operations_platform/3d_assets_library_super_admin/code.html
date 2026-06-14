@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>3D Assets Library - Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "surface-dim": "#141313",
+                        "surface-container": "#201f1f",
+                        "outline-variant": "#444748",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "tertiary": "#ffffff",
+                        "accent-gold": "#D4AF37",
+                        "secondary-container": "#0372e4",
+                        "on-surface-variant": "#c4c7c8",
+                        "surface": "#141313",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-highest": "#353434",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed": "#001b3f",
+                        "tertiary-container": "#e2e2e2",
+                        "error": "#ffb4ab",
+                        "primary-container": "#e2e2e2",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-fixed": "#1a1c1c",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-elevated": "#0A0A0A",
+                        "on-tertiary-container": "#636565",
+                        "on-tertiary": "#2f3131",
+                        "on-primary-fixed-variant": "#454747",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "inverse-primary": "#5d5f5f",
+                        "background": "#141313",
+                        "on-primary-container": "#636565",
+                        "inverse-surface": "#e5e2e1",
+                        "canvas-black": "#050505",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary": "#abc7ff",
+                        "on-secondary": "#002f66",
+                        "surface-tint": "#c6c6c7",
+                        "on-background": "#e5e2e1",
+                        "primary": "#ffffff",
+                        "on-primary": "#2f3131",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-container": "#fefcff",
+                        "error-container": "#93000a",
+                        "inverse-on-surface": "#313030",
+                        "surface-variant": "#353434",
+                        "outline": "#8e9192"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "stack-sm": "8px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "label-mono": ["JetBrains Mono", "monospace"],
+                        "headline-lg-mobile": ["Geist", "sans-serif"],
+                        "headline-lg": ["Geist", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"],
+                        "display-2xl": ["Geist", "sans-serif"]
+                    },
+                    fontSize: {
+                        "label-mono": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "display-2xl": ["72px", { lineHeight: "80px", letterSpacing: "-0.04em", fontWeight: "700" }]
+                    }
+                }
+            }
+        };
+    </script>
+<style>
+        body { background-color: theme('colors.canvas-black'); color: theme('colors.on-background'); }
+        .glass-panel {
+            background: theme('colors.glass-fill');
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid theme('colors.border-subtle');
+        }
+        .asset-card-hover:hover {
+            transform: scale(0.98);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .input-underline {
+            border-bottom: 1px solid theme('colors.border-subtle');
+            transition: border-color 0.3s ease;
+        }
+        .input-underline:focus-within {
+            border-bottom-color: theme('colors.primary');
+        }
+        
+        /* Subtle glow effects */
+        .glow-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .asset-card-hover:hover .glow-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased min-h-screen flex bg-canvas-black text-on-background overflow-x-hidden">
+<!-- SideNavBar -->
+<nav class="w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex flex-col h-full p-stack-md shrink-0 hidden md:flex z-50">
+<div class="mb-stack-lg flex items-center gap-3 px-4">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container border border-border-subtle shrink-0">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFHFKEMNEa_M4NhYmx982n4yR9qWZLG4X9uBqvrZ9S-MYLD0Ho_FnqJLAvKCzB5kLqsrvZZzPXdItTiNNb_HQiIgWFreXSf6gdN2dwMfI8jV0KJ36OsiGxXgoP_kMLfj4EeoBx7DrjOaosAZr1XRrCk0Kqv01XNO23ndO_NWL4_PvkQQZuHwW_tcXMdP0q9kmmhneG9voW0_GtlBRX__PH-YIeprK0MszfcXYP0hQ40yRTHaGGTSVbOrkEbwVtGX9w6yxhTQhy9Aun"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter text-xl leading-tight">Aether AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Super Admin</p>
+</div>
+</div>
+<ul class="flex flex-col gap-2 flex-grow">
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="dashboard">dashboard</span><span>Dashboard</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="storefront">storefront</span><span>Restaurants</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="payments">payments</span><span>Plans</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg active" href="#"><span class="material-symbols-outlined" data-icon="view_in_ar">view_in_ar</span><span>3D Assets</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="insights">insights</span><span>Analytics</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="settings">settings</span><span>Settings</span></a></li>
+</ul>
+<div class="mt-auto border-t border-border-subtle pt-4">
+<ul class="flex flex-col gap-2">
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="help">help</span><span>Support</span></a></li>
+<li><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#"><span class="material-symbols-outlined" data-icon="logout">logout</span><span>Sign Out</span></a></li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col min-w-0">
+<!-- TopAppBar -->
+<header class="h-16 sticky top-0 z-40 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md flex justify-between items-center px-gutter mx-auto w-full">
+<div class="flex items-center gap-4 flex-grow max-w-md">
+<div class="flex items-center gap-2 w-full input-underline pb-1">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none outline-none text-body-md w-full text-primary placeholder:text-on-surface-variant focus:ring-0 p-0" placeholder="Search assets, IDs, or restaurants..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-glass-fill"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-glass-fill"><span class="material-symbols-outlined" data-icon="contrast">contrast</span></button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-subtle md:hidden ml-2 cursor-pointer">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwDliB1B7cox6GGZLhYaqTqFrGHalWHxD2OcdHW-_OI3U2BKkPDBAt_zmIUU67mdK15mdlRhYChKjF3vI8eVTGDtIIiab5-BGMAWk5lXL22bVNvo63EzTEvDxaVrsUF8fuy7o6R--5Vm6UrvqZT0AZ1sI7GYBXPUXAm_jVxnFwbplDHPt3L9Hu6CQO1A1A_RYNNpArSkAwhOd4J-z1Y1QG02ErtHwJZ4OX3Q1uz5uU5vs8yagOQgKzPSpdhENz01VKKRpG2XrWM56I"/>
+</div>
+</div>
+</header>
+<!-- Canvas Content -->
+<div class="p-gutter md:px-stack-lg md:py-stack-lg max-w-container-max mx-auto w-full flex-grow flex flex-col gap-stack-lg">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg md:font-display-2xl md:text-display-2xl font-bold text-primary tracking-tighter mb-2">3D Assets Library</h2>
+<p class="text-on-surface-variant max-w-xl">Manage and preview AR models across all restaurant accounts.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold hover:scale-[0.98] transition-transform duration-300 flex items-center gap-2 whitespace-nowrap self-start md:self-auto">
+<span class="material-symbols-outlined text-sm">upload</span>
+                    Upload New Asset
+                </button>
+</div>
+<!-- Filters & Controls -->
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-border-subtle pb-4">
+<div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 hide-scrollbar">
+<button class="px-4 py-2 rounded-full bg-glass-fill border border-border-subtle text-primary font-label-mono text-label-mono whitespace-nowrap">All Assets</button>
+<button class="px-4 py-2 rounded-full text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-colors font-label-mono text-label-mono whitespace-nowrap">Pending</button>
+<button class="px-4 py-2 rounded-full text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-colors font-label-mono text-label-mono whitespace-nowrap">Active</button>
+<button class="px-4 py-2 rounded-full text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-colors font-label-mono text-label-mono whitespace-nowrap">Needs Revision</button>
+<button class="px-4 py-2 rounded-full text-on-surface-variant hover:bg-glass-fill hover:text-primary transition-colors font-label-mono text-label-mono whitespace-nowrap">Archived</button>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto">
+<div class="relative w-full md:w-48">
+<select class="appearance-none w-full bg-glass-fill border border-border-subtle text-on-surface-variant py-2 px-4 pr-8 rounded-lg outline-none focus:border-primary transition-colors font-label-mono text-label-mono">
+<option value="">Category: All</option>
+<option value="food">Food</option>
+<option value="furniture">Furniture</option>
+<option value="decor">Decor</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Asset Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Asset Card 1 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col asset-card-hover relative group cursor-pointer">
+<div class="h-48 bg-surface-container relative overflow-hidden">
+<img alt="Signature Wagyu Burger 3D Model Render" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="High-fidelity 3D render of a gourmet Wagyu burger, floating against a dark, minimalist studio background. The lighting is dramatic and cinematic, highlighting the textures of the bun and meat. A subtle, bright rim light creates a premium, elite aesthetic typical of high-end culinary photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxQRY86RispCCjM9NWePOhKC4bEIs2kFCQNL9sPjnCxSIX-hqtZHWbEoIldTcnMa_byxZCxfLQRJuC46G72Iivm3MtZgeJM-gfXfTuGHRxvjd9N0wPN795EAxZc4IeBiVnTu3h1A_LJ7k4P_v7J4w4T049bMILDK96gU7j-yjjYoiQakLiwPT2V9nqwcusVvFw-FJ5av7UheGDzwiX0hIA3yG6Lyav3CK5THNQdaLjEL4ee23z3gd2eZtCl7NPUhFAIgQXfyyLtXzr"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-elevated/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<button class="bg-primary/10 border border-primary/20 backdrop-blur-md text-primary px-4 py-2 rounded-full font-label-mono text-label-mono flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-sm">view_in_ar</span> Preview 3D
+                            </button>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-surface-elevated/80 backdrop-blur-md border border-border-subtle text-on-surface-variant px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider">#AR-8821</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-primary/10 text-primary border border-primary/20 px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary inline-block"></span> Optimized
+                            </span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 relative z-10 bg-surface-elevated">
+<div class="glow-overlay"></div>
+<div class="flex justify-between items-start gap-2">
+<div>
+<h3 class="font-bold text-primary truncate" title="Signature Wagyu Burger">Signature Wagyu Burger</h3>
+<p class="text-sm text-on-surface-variant truncate">The Artisan Kitchen</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-border-subtle">
+<div class="flex items-center gap-3 text-xs text-on-surface-variant font-label-mono">
+<span class="flex items-center gap-1" title="File Size"><span class="material-symbols-outlined text-[14px]">sd_storage</span> 4.2 MB</span>
+<span class="flex items-center gap-1" title="Polygon Count"><span class="material-symbols-outlined text-[14px]">category</span> 12k</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Asset Card 2 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col asset-card-hover relative group cursor-pointer">
+<div class="h-48 bg-surface-container relative overflow-hidden flex items-center justify-center">
+<div class="absolute inset-0 bg-surface-container animate-pulse"></div>
+<!-- Placeholder for Processing state -->
+<div class="relative z-10 flex flex-col items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-4xl mb-2 animate-spin">sync</span>
+<span class="font-label-mono text-xs uppercase tracking-wider">Processing Mesh...</span>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-elevated/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-surface-elevated/80 backdrop-blur-md border border-border-subtle text-on-surface-variant px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider">#AR-8822</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-accent-gold/10 text-accent-gold border border-accent-gold/20 px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-gold inline-block animate-pulse"></span> Processing
+                            </span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 relative z-10 bg-surface-elevated">
+<div class="glow-overlay"></div>
+<div class="flex justify-between items-start gap-2">
+<div>
+<h3 class="font-bold text-primary truncate" title="Truffle Pasta">Truffle Pasta</h3>
+<p class="text-sm text-on-surface-variant truncate">Bistro V</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-border-subtle">
+<div class="flex items-center gap-3 text-xs text-on-surface-variant font-label-mono">
+<span class="flex items-center gap-1" title="File Size"><span class="material-symbols-outlined text-[14px]">sd_storage</span> -- MB</span>
+<span class="flex items-center gap-1" title="Polygon Count"><span class="material-symbols-outlined text-[14px]">category</span> --</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">edit</span></button>
+</div>
+</div>
+</div>
+<!-- Asset Card 3 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col asset-card-hover relative group cursor-pointer opacity-75 grayscale-[30%]">
+<div class="h-48 bg-surface-container relative overflow-hidden">
+<img alt="Premium Sushi Platter 3D Model Render" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Sleek, dark-mode 3D render of an elaborate sushi platter set on a polished black slate. The lighting is very controlled, creating soft reflections on the raw fish. The overall aesthetic is highly modern, precise, and belongs in an elite restaurant's digital gallery space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJJVyihDZ9UdTBAnAglRf7GzWITFVIO-LenAZwBvsbchwHbI1-AZOEHNH1RqjXee-nBbo0l8eAiEO6kWnuT-2fYSEy0LU6SO5zSbMrEqHOMeMWnNLSoSI5SZxmzcrhKNIfuA3RckPQloUjkzixb8P-LWQPMKuGkcKTRrfeQwC315JhBicOBjPi43jkC6zRCfV6pn9Ww818_Ad6E8Cbdd2B62aPOUnMEA0Q4lTyaOowC9znSpsHw7tnmv6AzYB5r3FDlkvPr06mWOKq"/>
+<div class="absolute inset-0 bg-surface-elevated/40 backdrop-blur-[2px]"></div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-surface-elevated/80 backdrop-blur-md border border-border-subtle text-on-surface-variant px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider">#AR-8701</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-on-surface-variant/10 text-on-surface-variant border border-on-surface-variant/20 px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider flex items-center gap-1">
+                                Archived
+                            </span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 relative z-10 bg-surface-elevated">
+<div class="flex justify-between items-start gap-2">
+<div>
+<h3 class="font-bold text-on-surface-variant truncate" title="Omakase Selection">Omakase Selection</h3>
+<p class="text-sm text-outline truncate">Zenith Sushi</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</div>
+</div>
+</div>
+<!-- Asset Card 4 -->
+<div class="glass-panel rounded-xl overflow-hidden flex flex-col asset-card-hover relative group cursor-pointer border-error/30 shadow-[0_0_15px_rgba(255,180,171,0.05)]">
+<div class="h-48 bg-surface-container relative overflow-hidden">
+<img alt="Luxury Steak 3D Model Render" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close-up 3D visualization of a premium cut of steak, resting on a stark, dark grey minimalist surface. The lighting is dramatic, emphasizing the marbling and texture, styled specifically for a high-end augmented reality dining menu. Deep shadows and sharp highlights dominate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhhEZiWFgRsmAqX1c4lgfbtij3HWwMFC2KBAdnXoLBrT0HLoi5GAZ87IxB5Tq460xv43bh1lnotDzCwjfwvHHROIeJ2DMFJdet-8kJj6_jWZc8F4JoDaddOt2vnvfHtX8B10mPFR6RuUu3uzVtzcEousdTQ6g8AEnQyuUZ-OM5fsjkL06JMkEYie5uE5KvRQl1efTSnoNWW2wJ4UFsjBr6skFKGgnvTPjAwJ-_cu-eGk-2Oq1tUrw4_wQxVkS9k3UYby4-N_dOwGyB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-elevated/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+<button class="bg-surface-container border border-error/50 backdrop-blur-md text-error px-4 py-2 rounded-full font-label-mono text-label-mono flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+<span class="material-symbols-outlined text-sm">warning</span> View Issues
+                            </button>
+</div>
+<div class="absolute top-3 left-3 flex gap-2">
+<span class="bg-surface-elevated/80 backdrop-blur-md border border-border-subtle text-on-surface-variant px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider">#AR-8905</span>
+</div>
+<div class="absolute top-3 right-3">
+<span class="bg-error/10 text-error border border-error/20 px-2 py-1 rounded text-[10px] font-label-mono uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">flag</span> Flagged
+                            </span>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2 relative z-10 bg-surface-elevated">
+<div class="glow-overlay"></div>
+<div class="flex justify-between items-start gap-2">
+<div>
+<h3 class="font-bold text-primary truncate" title="Tomahawk Ribeye">Tomahawk Ribeye</h3>
+<p class="text-sm text-on-surface-variant truncate">Prime Cut House</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary shrink-0 opacity-0 group-hover:opacity-100 transition-opacity"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</div>
+<div class="flex items-center justify-between mt-2 pt-3 border-t border-border-subtle">
+<div class="flex items-center gap-3 text-xs text-error font-label-mono">
+<span class="flex items-center gap-1" title="File Size"><span class="material-symbols-outlined text-[14px]">sd_storage</span> 28.5 MB</span>
+<span class="flex items-center gap-1" title="Polygon Count"><span class="material-symbols-outlined text-[14px]">category</span> 145k</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">edit</span></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More (Placeholder) -->
+<div class="flex justify-center mt-8">
+<button class="text-on-surface-variant hover:text-primary border border-border-subtle bg-glass-fill px-6 py-2 rounded-full font-label-mono text-label-mono transition-colors hover:bg-surface-container">Load More Assets</button>
+</div>
+</div>
+</main>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

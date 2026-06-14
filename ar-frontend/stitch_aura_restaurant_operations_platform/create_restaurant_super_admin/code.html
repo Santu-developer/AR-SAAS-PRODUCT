@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether AR - Create Restaurant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#c6c6c7",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "outline-variant": "#444748",
+                      "on-primary-fixed-variant": "#454747",
+                      "surface-variant": "#353434",
+                      "surface-container-highest": "#353434",
+                      "surface-container": "#201f1f",
+                      "surface-dim": "#141313",
+                      "primary-fixed": "#e2e2e2",
+                      "on-surface": "#e5e2e1",
+                      "surface-container-high": "#2a2a2a",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "surface-bright": "#3a3939",
+                      "surface": "#141313",
+                      "error-container": "#93000a",
+                      "surface-container-lowest": "#0e0e0e",
+                      "primary-container": "#e2e2e2",
+                      "surface-elevated": "#0A0A0A",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "on-error": "#690005",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "accent-gold": "#D4AF37",
+                      "primary": "#ffffff",
+                      "tertiary-fixed": "#e2e2e2",
+                      "tertiary": "#ffffff",
+                      "on-primary-fixed": "#1a1c1c",
+                      "canvas-black": "#050505",
+                      "on-error-container": "#ffdad6",
+                      "secondary-container": "#0372e4",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-tertiary-container": "#636565",
+                      "tertiary-container": "#e2e2e2",
+                      "on-background": "#e5e2e1",
+                      "secondary-fixed": "#d7e2ff",
+                      "outline": "#8e9192",
+                      "secondary": "#abc7ff",
+                      "inverse-on-surface": "#313030",
+                      "inverse-primary": "#5d5f5f",
+                      "background": "#141313",
+                      "surface-container-low": "#1c1b1b",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "on-secondary-fixed": "#001b3f",
+                      "on-secondary-container": "#fefcff",
+                      "error": "#ffb4ab",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "on-primary-container": "#636565",
+                      "inverse-surface": "#e5e2e1",
+                      "on-primary": "#2f3131",
+                      "on-surface-variant": "#c4c7c8",
+                      "on-secondary": "#002f66",
+                      "on-tertiary": "#2f3131"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "container-max": "1440px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            color: #e5e2e1;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .glow-btn {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glow-btn:hover {
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            transform: scale(0.98);
+        }
+        .form-input-minimal {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0;
+            padding: 8px 0;
+            color: #ffffff;
+            transition: border-color 0.3s ease;
+        }
+        .form-input-minimal:focus {
+            outline: none;
+            border-bottom-color: #ffffff;
+            box-shadow: none;
+        }
+        .form-input-minimal::placeholder {
+            color: #c4c7c8;
+        }
+        /* Custom Checkbox/Radio */
+        .custom-radio {
+            appearance: none;
+            background-color: transparent;
+            margin: 0;
+            font: inherit;
+            color: currentColor;
+            width: 1.15em;
+            height: 1.15em;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+        }
+        .custom-radio::before {
+            content: "";
+            width: 0.65em;
+            height: 0.65em;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--form-control-color, #ffffff);
+        }
+        .custom-radio:checked::before {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-x-hidden flex h-screen w-full">
+<!-- SideNavBar -->
+<aside class="hidden md:flex w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex-col p-stack-md z-40 bg-canvas-black">
+<div class="mb-stack-lg flex items-center gap-3 px-4">
+<span class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Aether AR</span>
+</div>
+<div class="mb-stack-lg px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-border-subtle">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHWWMiGI7xjLVC8o8wAOxe6RiCqDRMKYtc1MGsDyRERgOIhmN_Iip5t7dDJinKyGo1i4P1ZNYDKjGajILqeEggSa0r1MFeD2HmjV5WEM3_ZnO2ldJephAQ34ohei8drkvFFoLz_rIZ2eVmGn71MrMAacwzy3VYKqpvebT-OeiDjeSyECYR_PPnLMyd2suK3ZyaPArz-UOWl-HwqlWfB_ycZyNOuyK9mwPVX6SknBYjXIRye7rM1DllQz8LoiRjOwaxR_us9py6ZGzi"/>
+</div>
+<div>
+<p class="text-primary font-bold text-sm">Super Admin</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" style="font-size: 18px;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg scale-[0.98]" href="#">
+<span class="material-symbols-outlined font-[300]" data-weight="fill" style="font-size: 18px;">storefront</span>
+<span>Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" style="font-size: 18px;">payments</span>
+<span>Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" style="font-size: 18px;">view_in_ar</span>
+<span>3D Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" style="font-size: 18px;">insights</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" style="font-size: 18px;">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" style="font-size: 18px;">help</span>
+<span class="text-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" style="font-size: 18px;">logout</span>
+<span class="text-sm">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-h-screen overflow-y-auto">
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden h-16 sticky top-0 z-50 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md bg-canvas-black flex justify-between items-center px-gutter">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</span>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors">notifications</span>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-border-subtle">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU0k4wSqAq8NSTHWexZ90qR3ApfbtPK4xU4-3gzIPN9XiimcVzgzGR8zPGzCg13Zms6uIHYHqPe3t9laonQ_PLF2-wDsh5dYJC_MYwZdIXvlxZYFXDobN10Impof7f1KL5kEqN-w1uEmxMbcE0nKKx-1In5F0EUDAHa5KPAximWYlgG5AQe6hcpFXpWn3MYXPFp6IjYCIYYSvExtP7D16rqJh0zlgFLja6mDqlHNmzPEtmmys_2G-WHybgRDKWhoedzESCFkldHi0P"/>
+</div>
+</div>
+</header>
+<!-- Form Content -->
+<div class="flex-1 px-gutter py-stack-lg max-w-3xl mx-auto w-full">
+<!-- Back Action -->
+<button class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors mb-stack-lg group text-sm font-label-mono text-label-mono">
+<span class="material-symbols-outlined font-[300] text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                RESTAURANTS LIST
+            </button>
+<div class="mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">Create Restaurant</h1>
+<p class="text-on-surface-variant">Provision a new restaurant account and set up their initial workspace.</p>
+</div>
+<form class="space-y-stack-lg">
+<!-- Basic Information Section -->
+<section class="glass-panel rounded-xl p-stack-md md:p-stack-lg">
+<h2 class="font-label-mono text-label-mono text-primary mb-stack-md border-b border-border-subtle pb-2 uppercase tracking-wider">Basic Information</h2>
+<div class="space-y-stack-md">
+<div>
+<label class="block text-sm text-on-surface-variant mb-1" for="restaurant-name">Restaurant Name</label>
+<input class="form-input-minimal w-full" id="restaurant-name" placeholder="e.g. L'Amourine" type="text"/>
+</div>
+<div>
+<label class="block text-sm text-on-surface-variant mb-1" for="brand-slug">Brand Slug (URL Preview)</label>
+<div class="flex items-center border-b border-border-subtle focus-within:border-primary transition-colors">
+<span class="text-on-surface-variant text-sm py-2">aether.ar/</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-primary py-2 px-1" id="brand-slug" placeholder="lamourine" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm text-on-surface-variant mb-1" for="category">Primary Category</label>
+<select class="form-input-minimal w-full bg-transparent appearance-none" id="category">
+<option disabled="" selected="" value="">Select a category</option>
+<option value="fine-dining">Fine Dining</option>
+<option value="casual">Casual Dining</option>
+<option value="cafe">Cafe / Bakery</option>
+<option value="bar">Bar / Lounge</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Owner Details Section -->
+<section class="glass-panel rounded-xl p-stack-md md:p-stack-lg">
+<h2 class="font-label-mono text-label-mono text-primary mb-stack-md border-b border-border-subtle pb-2 uppercase tracking-wider">Owner Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="md:col-span-2">
+<label class="block text-sm text-on-surface-variant mb-1" for="owner-name">Full Name</label>
+<input class="form-input-minimal w-full" id="owner-name" placeholder="Jane Doe" type="text"/>
+</div>
+<div>
+<label class="block text-sm text-on-surface-variant mb-1" for="owner-email">Email Address</label>
+<input class="form-input-minimal w-full" id="owner-email" placeholder="jane@example.com" type="email"/>
+</div>
+<div>
+<label class="block text-sm text-on-surface-variant mb-1" for="owner-phone">Phone Number</label>
+<input class="form-input-minimal w-full" id="owner-phone" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+</div>
+</section>
+<!-- Operational Setup Section -->
+<section class="glass-panel rounded-xl p-stack-md md:p-stack-lg">
+<h2 class="font-label-mono text-label-mono text-primary mb-stack-md border-b border-border-subtle pb-2 uppercase tracking-wider">Operational Setup</h2>
+<div class="space-y-stack-md">
+<div>
+<label class="block text-sm text-on-surface-variant mb-1" for="address">Physical Address</label>
+<input class="form-input-minimal w-full" id="address" placeholder="123 Culinary Blvd, City, ST 12345" type="text"/>
+</div>
+<div>
+<label class="block text-sm text-on-surface-variant mb-1" for="website">Website <span class="text-xs text-outline">(Optional)</span></label>
+<input class="form-input-minimal w-full" id="website" placeholder="https://www.restaurant.com" type="url"/>
+</div>
+</div>
+</section>
+<!-- Subscription Plan Section -->
+<section class="glass-panel rounded-xl p-stack-md md:p-stack-lg">
+<h2 class="font-label-mono text-label-mono text-primary mb-stack-md border-b border-border-subtle pb-2 uppercase tracking-wider">Subscription Plan</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="relative flex flex-col p-4 cursor-pointer rounded-lg border border-border-subtle hover:bg-glass-fill transition-colors has-[:checked]:border-primary has-[:checked]:bg-glass-fill">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-mono text-label-mono bg-surface-variant text-on-surface-variant px-2 py-1 rounded">BASIC</span>
+<input class="custom-radio" name="plan" type="radio" value="basic"/>
+</div>
+<span class="text-sm text-on-surface-variant">Core menu features.</span>
+</label>
+<label class="relative flex flex-col p-4 cursor-pointer rounded-lg border border-border-subtle hover:bg-glass-fill transition-colors has-[:checked]:border-accent-gold has-[:checked]:bg-[rgba(212,175,55,0.05)]">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-mono text-label-mono bg-[rgba(212,175,55,0.1)] text-accent-gold border border-[rgba(212,175,55,0.2)] px-2 py-1 rounded">PRO</span>
+<input checked="" class="custom-radio" name="plan" style="--form-control-color: #D4AF37;" type="radio" value="pro"/>
+</div>
+<span class="text-sm text-on-surface-variant">Full AR capabilities.</span>
+</label>
+<label class="relative flex flex-col p-4 cursor-pointer rounded-lg border border-border-subtle hover:bg-glass-fill transition-colors has-[:checked]:border-secondary has-[:checked]:bg-[rgba(171,199,255,0.05)]">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-mono text-label-mono bg-[rgba(171,199,255,0.1)] text-secondary border border-[rgba(171,199,255,0.2)] px-2 py-1 rounded">ENTERPRISE</span>
+<input class="custom-radio" name="plan" style="--form-control-color: #abc7ff;" type="radio" value="enterprise"/>
+</div>
+<span class="text-sm text-on-surface-variant">Custom integration.</span>
+</label>
+</div>
+</section>
+<!-- Initial Status Section -->
+<section class="glass-panel rounded-xl p-stack-md md:p-stack-lg flex items-center justify-between">
+<div>
+<h2 class="font-label-mono text-label-mono text-primary uppercase tracking-wider mb-1">Account Status</h2>
+<p class="text-sm text-on-surface-variant">Set the initial activation state.</p>
+</div>
+<label class="inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="relative w-11 h-6 bg-surface-container-high rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+<span class="ms-3 text-sm font-medium text-primary">Active</span>
+</label>
+</section>
+<!-- Action Buttons -->
+<div class="flex items-center justify-end gap-4 pt-stack-md border-t border-border-subtle">
+<button class="px-6 py-2.5 rounded-lg border border-border-subtle text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300" type="button">
+                        Cancel
+                    </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary text-canvas-black font-semibold glow-btn" type="submit">
+                        Create Restaurant
+                    </button>
+</div>
+</form>
+</div>
+</main>
+</body></html>

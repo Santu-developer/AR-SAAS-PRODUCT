@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether AR - Billing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed-dim": "#c6c6c7",
+                      "on-tertiary-container": "#636565",
+                      "inverse-primary": "#5d5f5f",
+                      "on-surface": "#e5e2e1",
+                      "surface-container-highest": "#353434",
+                      "inverse-surface": "#e5e2e1",
+                      "surface-container": "#201f1f",
+                      "surface-container-low": "#1c1b1b",
+                      "accent-gold": "#D4AF37",
+                      "on-primary-container": "#636565",
+                      "outline-variant": "#444748",
+                      "on-tertiary": "#2f3131",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "tertiary-fixed": "#e2e2e2",
+                      "on-error-container": "#ffdad6",
+                      "surface-dim": "#141313",
+                      "primary": "#ffffff",
+                      "on-background": "#e5e2e1",
+                      "outline": "#8e9192",
+                      "error": "#ffb4ab",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "on-primary-fixed-variant": "#454747",
+                      "background": "#141313",
+                      "surface-elevated": "#0A0A0A",
+                      "on-secondary-fixed": "#001b3f",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "secondary": "#abc7ff",
+                      "on-secondary-container": "#fefcff",
+                      "inverse-on-surface": "#313030",
+                      "on-surface-variant": "#c4c7c8",
+                      "tertiary-container": "#e2e2e2",
+                      "secondary-container": "#0372e4",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "surface-tint": "#c6c6c7",
+                      "canvas-black": "#050505",
+                      "primary-container": "#e2e2e2",
+                      "primary-fixed": "#e2e2e2",
+                      "surface-bright": "#3a3939",
+                      "on-secondary": "#002f66",
+                      "surface-variant": "#353434",
+                      "error-container": "#93000a",
+                      "on-primary-fixed": "#1a1c1c",
+                      "on-error": "#690005",
+                      "surface": "#141313",
+                      "secondary-fixed": "#d7e2ff",
+                      "on-primary": "#2f3131",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "tertiary": "#ffffff",
+                      "surface-container-high": "#2a2a2a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.canvas-black');
+            color: theme('colors.primary');
+        }
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(0,0,0,0) 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+      </style>
+</head>
+<body class="min-h-screen flex text-on-surface bg-canvas-black font-body-md text-body-md antialiased selection:bg-accent-gold/30">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-screen w-[240px] border-r border-border-subtle flex flex-col py-stack-lg bg-surface-container-low z-40 hidden md:flex">
+<!-- Header -->
+<div class="px-gutter mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg text-accent-gold">Aether Portal</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-stack-sm">Elite Gastronomy</p>
+</div>
+<!-- Main Nav Tabs -->
+<div class="flex-1 flex flex-col gap-1 px-3">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] font-light group-hover:text-primary transition-colors" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] font-light group-hover:text-primary transition-colors" data-icon="view_in_ar">view_in_ar</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">AR Menu</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] font-light group-hover:text-primary transition-colors" data-icon="insights">insights</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-2 border-accent-gold bg-white/5 group relative overflow-hidden" href="#">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-accent-gold/10 opacity-50"></div>
+<span class="material-symbols-outlined text-[18px] font-light text-accent-gold" data-icon="payments">payments</span>
+<span class="font-body-md text-body-md relative z-10">Billing</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] font-light group-hover:text-primary transition-colors" data-icon="contact_support">contact_support</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Support</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="px-gutter mt-auto mb-stack-lg">
+<button class="w-full bg-primary text-canvas-black font-body-md text-body-md font-semibold py-2 rounded-lg hover:bg-on-surface transition-colors flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Model
+            </button>
+</div>
+<!-- Footer Nav -->
+<div class="flex flex-col gap-1 px-3 mt-auto">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] font-light group-hover:text-primary transition-colors" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] font-light group-hover:text-primary transition-colors" data-icon="logout">logout</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[240px] w-full max-w-[1200px] mx-auto min-h-screen flex flex-col relative">
+<!-- Ambient Glow -->
+<div class="fixed top-[-20%] left-[20%] w-[60%] h-[60%] bg-accent-gold/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+<!-- Top Header for Mobile (Optional if TopAppBar is needed, omitting as per 'Linear' desktop-first vibe, but keeping structural padding) -->
+<header class="w-full pt-stack-lg pb-stack-md px-margin-mobile md:px-gutter flex items-center justify-between sticky top-0 bg-canvas-black/80 backdrop-blur-xl z-30 border-b border-border-subtle md:border-none md:bg-transparent md:backdrop-blur-none">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg font-semibold tracking-tight">Billing &amp; Subscription</h2>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-white/5 transition-colors text-on-surface-variant hover:text-primary border border-border-subtle bg-surface-container-low hidden md:block">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-subtle overflow-hidden relative">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_xQGzdr0G8pVYfvhB3eMKd3qfvKwN0AHpkf3R8Pji9SVPHY30E0E0W3kK3oV6upwQ4UbXubZVTHnRlfc4eIg2g37hhpiI4vKdZL0G4dGHhDiaKsmO9rmbWfkh1hsF0yB1DRjrNgli55NymUf0Pcdrz5jeMV1qubQ2LHtXLFW236t9nc5IwdBGPIqGlJz3jUsHceNur_ZIkMF9QCDQ4_TkFSj6TH_RzwWVtPVtZ0L3vdisrFiklyZ3nObuU9YbngNqXrlQL56z3UYJ"/>
+</div>
+</div>
+</header>
+<div class="px-margin-mobile md:px-gutter py-stack-md flex-1 flex flex-col gap-stack-lg z-10">
+<!-- Top Row: Plan Overview & Payment Method (Bento Grid Style) -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Plan Overview Card -->
+<div class="lg:col-span-2 bg-glass-fill border border-border-subtle rounded-xl p-8 relative overflow-hidden glow-effect flex flex-col justify-between group hover:border-white/20 transition-colors duration-500">
+<div class="absolute top-0 right-0 p-6 opacity-10">
+<span class="material-symbols-outlined text-[120px]">workspace_premium</span>
+</div>
+<div class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+<div>
+<span class="font-label-mono text-label-mono text-accent-gold uppercase tracking-wider mb-2 block">Current Plan</span>
+<h3 class="font-headline-lg text-headline-lg font-bold text-primary flex items-center gap-3">
+                                Elite Tier
+                                <span class="px-2 py-0.5 rounded text-[10px] bg-accent-gold/10 text-accent-gold border border-accent-gold/20 font-label-mono">ACTIVE</span>
+</h3>
+<p class="text-on-surface-variant font-body-md text-body-md mt-1">Spatial Gastronomy Suite</p>
+</div>
+<div class="text-left sm:text-right">
+<div class="flex items-baseline gap-1 sm:justify-end">
+<span class="font-headline-lg text-headline-lg font-bold">$499</span>
+<span class="text-on-surface-variant">/mo</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Renews Oct 15, 2024</p>
+</div>
+</div>
+<div class="relative z-10 flex gap-4 mt-auto">
+<button class="bg-primary text-canvas-black px-6 py-2 rounded-lg font-body-md font-semibold hover:bg-on-surface transition-all active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                            Change Plan
+                        </button>
+<button class="bg-transparent border border-border-subtle text-primary px-6 py-2 rounded-lg font-body-md font-medium hover:bg-white/5 transition-all active:scale-95">
+                            Cancel
+                        </button>
+</div>
+</div>
+<!-- Payment Method Card -->
+<div class="bg-surface-container-low border border-border-subtle rounded-xl p-8 flex flex-col justify-between group hover:border-white/20 transition-colors duration-500">
+<div>
+<div class="flex justify-between items-start mb-6">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Payment Method</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<div class="w-12 h-8 bg-white/10 rounded flex items-center justify-center mb-4">
+<!-- SVG Placeholder for Visa -->
+<span class="material-symbols-outlined text-primary">credit_card</span>
+</div>
+<div class="flex items-center gap-3 mb-2">
+<span class="flex gap-1 text-on-surface-variant text-lg">•••• •••• ••••</span>
+<span class="font-label-mono text-label-mono text-primary font-medium text-lg">4242</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Expires 12/25</p>
+</div>
+<button class="mt-8 w-full border border-border-subtle bg-glass-fill text-primary py-2 rounded-lg font-body-md font-medium hover:bg-white/5 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+                        Edit Payment
+                    </button>
+</div>
+</div>
+<!-- Middle Row: Usage Quotas -->
+<div class="bg-surface-container-low border border-border-subtle rounded-xl p-8">
+<div class="mb-6">
+<h3 class="font-body-md text-body-md font-semibold text-primary">Monthly Usage</h3>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Metrics reset at the beginning of each billing cycle.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<!-- Progress Item 1 -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">view_in_ar</span>
+<span class="font-body-md text-body-md text-on-surface">3D Models Hosted</span>
+</div>
+<span class="font-label-mono text-label-mono"><strong class="text-primary">15</strong> <span class="text-on-surface-variant">/ 25</span></span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-accent-gold rounded-full w-[60%] shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+</div>
+</div>
+<!-- Progress Item 2 -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">qr_code_scanner</span>
+<span class="font-body-md text-body-md text-on-surface">Monthly QR Scans</span>
+</div>
+<span class="font-label-mono text-label-mono"><strong class="text-primary">8.2k</strong> <span class="text-on-surface-variant">/ 10k</span></span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-accent-gold rounded-full w-[82%] shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Billing History -->
+<div class="mb-stack-lg">
+<h3 class="font-body-md text-body-md font-semibold text-primary mb-4 px-1">Billing History</h3>
+<div class="border border-border-subtle rounded-xl overflow-hidden bg-surface-container-low">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-white/[0.02]">
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-normal">Invoice Date</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-normal hidden sm:table-cell">Amount</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-normal">Status</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-normal text-right">Receipt</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<!-- Row 1 -->
+<tr class="border-b border-border-subtle hover:bg-white/[0.02] transition-colors group">
+<td class="py-4 px-6 text-on-surface">Sep 15, 2024</td>
+<td class="py-4 px-6 text-on-surface-variant font-label-mono hidden sm:table-cell">$499.00</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-accent-gold/10 text-accent-gold border border-accent-gold/20 font-label-mono text-[10px] tracking-wide uppercase">
+<div class="w-1.5 h-1.5 rounded-full bg-accent-gold animate-pulse"></div>
+                                        Paid
+                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-md hover:bg-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-border-subtle hover:bg-white/[0.02] transition-colors group">
+<td class="py-4 px-6 text-on-surface">Aug 15, 2024</td>
+<td class="py-4 px-6 text-on-surface-variant font-label-mono hidden sm:table-cell">$499.00</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white/10 text-on-surface border border-white/20 font-label-mono text-[10px] tracking-wide uppercase">
+                                        Paid
+                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-md hover:bg-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-white/[0.02] transition-colors group">
+<td class="py-4 px-6 text-on-surface">Jul 15, 2024</td>
+<td class="py-4 px-6 text-on-surface-variant font-label-mono hidden sm:table-cell">$499.00</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded bg-white/10 text-on-surface border border-white/20 font-label-mono text-[10px] tracking-wide uppercase">
+                                        Paid
+                                    </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-md hover:bg-white/10 opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="w-full mt-auto border-t border-border-subtle bg-transparent">
+<div class="flex justify-between items-center px-gutter py-stack-md max-w-container-max mx-auto">
+<span class="font-label-mono text-label-mono text-on-surface-variant">© 2024 Aether AR. Precision Spatial Gastronomy.</span>
+<div class="flex gap-4">
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-gold transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-gold transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-accent-gold transition-colors opacity-80 hover:opacity-100" href="#">API Status</a>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

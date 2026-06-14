@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Revenue &amp; Payouts - Lumina Control Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-fixed-variant": "#454747",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "background": "#141313",
+                        "surface-elevated": "#0A0A0A",
+                        "on-secondary-fixed": "#001b3f",
+                        "secondary": "#abc7ff",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-on-surface": "#313030",
+                        "on-surface-variant": "#c4c7c8",
+                        "tertiary-container": "#e2e2e2",
+                        "secondary-container": "#0372e4",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "surface-tint": "#c6c6c7",
+                        "canvas-black": "#050505",
+                        "primary-container": "#e2e2e2",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-bright": "#3a3939",
+                        "surface-variant": "#353434",
+                        "on-secondary": "#002f66",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#1a1c1c",
+                        "on-error": "#690005",
+                        "surface": "#141313",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-primary": "#2f3131",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "tertiary": "#ffffff",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-container": "#636565",
+                        "inverse-primary": "#5d5f5f",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-highest": "#353434",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container": "#201f1f",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary-container": "#636565",
+                        "accent-gold": "#D4AF37",
+                        "outline-variant": "#444748",
+                        "on-tertiary": "#2f3131",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#141313",
+                        "primary": "#ffffff",
+                        "on-background": "#e5e2e1",
+                        "outline": "#8e9192",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "container-max": "1440px",
+                        "margin-mobile": "20px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "display-2xl": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-2xl": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #050505; color: #ffffff; }
+        .glow-effect { box-shadow: 0 0 40px -10px rgba(212, 175, 55, 0.15); }
+    </style>
+</head>
+<body class="bg-canvas-black text-primary font-body-md antialiased overflow-x-hidden selection:bg-accent-gold/30">
+<!-- SideNavBar (Shared Component) -->
+<nav class="fixed left-0 top-0 h-full w-60 bg-canvas-black text-primary font-body-md border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex flex-col py-stack-lg z-50">
+<div class="px-gutter mb-stack-lg">
+<h1 class="font-display-2xl text-headline-lg tracking-tighter text-primary">LUMINA AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Super Admin Portal</p>
+</div>
+<div class="flex-1 flex flex-col gap-2 px-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">storefront</span>
+                Restaurants
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">view_in_ar</span>
+                AR Assets
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">receipt_long</span>
+                Order Queue
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-2 border-accent-gold bg-surface-variant/20 scale-[0.98] transition-all duration-300" href="#">
+<span class="material-symbols-outlined text-[18px] font-light" style="font-variation-settings: 'FILL' 1;">payments</span>
+                Revenue
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">settings</span>
+                System Settings
+            </a>
+</div>
+<div class="px-4 mt-auto space-y-2">
+<div class="px-4 py-2 font-label-mono text-label-mono text-accent-gold bg-accent-gold/10 rounded-lg mb-4 text-center">
+                System Health: 100%
+            </div>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant font-medium hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">description</span>
+                Documentation
+            </a>
+<div class="mt-4 pt-4 border-t border-border-subtle px-4 flex items-center gap-3">
+<img alt="Super Admin Profile" class="w-8 h-8 rounded-full border border-border-subtle object-cover" data-alt="A professional headshot of a person, serving as an avatar placeholder, styled in a minimalist, high-contrast dark theme consistent with a premium SaaS dashboard. The lighting is soft and sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN9rPeYz7pagELMbqB7ea0r7H-8bHLGtCVCOdyqIqcBeSViuOPEWeORW1a7bB92o1vLK5Qx_i1JDrs7StZEBxP8IygV7UsTlfndEeqalLj8OdwlbIwA_EQ8xQuJ5icp3p9dFbSCz1MHqXDi_GttQGWPW_jIIhedIpRkNUXZ6UNGvFCfGO3pzsor0AeXTad_7givJskQsIhShpRE-GCLCDY2ZBeacMpKrc_TbecPubwqn7NCpuA3t0ZnVZLY-ynIM9Ual0gRJvWus5o"/>
+<span class="font-label-mono text-label-mono">Super Admin</span>
+</div>
+</div>
+</nav>
+<!-- TopNavBar (Shared Component) -->
+<header class="fixed top-0 right-0 w-[calc(100%-240px)] h-16 bg-background/80 text-primary font-body-md border-b border-border-subtle backdrop-blur-md flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-64 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-accent-gold transition-colors">search</span>
+<input class="w-full bg-transparent border-none border-b border-border-subtle pl-10 pr-4 py-2 text-primary focus:ring-0 focus:border-accent-gold transition-colors placeholder:text-on-surface-variant/50 font-body-md text-body-md" placeholder="Search financials..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-accent-gold transition-colors hover:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-accent-gold transition-colors hover:scale-95">
+<span class="material-symbols-outlined">settings_suggest</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-accent-gold transition-colors hover:scale-95">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="w-px h-6 bg-border-subtle mx-2"></div>
+<span class="font-headline-lg text-headline-lg text-primary text-[18px]">Lumina Control Center</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-60 pt-24 pb-12 px-gutter max-w-container-max mx-auto space-y-stack-lg">
+<!-- Page Header -->
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Revenue &amp; Payouts</h2>
+<p class="text-on-surface-variant mt-2">Financial overview and scheduled disbursements.</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-glass-fill border border-border-subtle text-on-surface-variant font-label-mono text-label-mono cursor-pointer hover:border-accent-gold/50 transition-colors">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                    Last 30 Days
+                    <span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+<button class="px-6 py-2 rounded-lg bg-primary text-canvas-black font-medium hover:scale-[0.98] transition-transform duration-300 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Export Financials
+                </button>
+</div>
+</div>
+<!-- Metric Cards Grid -->
+<div class="grid grid-cols-4 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-glass-fill backdrop-blur-xl border border-border-subtle rounded-xl p-6 relative overflow-hidden group hover:border-accent-gold/30 transition-colors">
+<div class="absolute -right-10 -top-10 w-32 h-32 bg-accent-gold/5 rounded-full blur-2xl group-hover:bg-accent-gold/10 transition-all"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant">Total Platform Revenue</p>
+<span class="material-symbols-outlined text-accent-gold">monitoring</span>
+</div>
+<h3 class="font-headline-lg text-[40px] leading-tight text-primary">$1.2M</h3>
+<div class="mt-2 flex items-center gap-2 text-[#4ade80] font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                    +12% vs last month
+                </div>
+</div>
+<!-- Card 2 -->
+<div class="bg-glass-fill backdrop-blur-xl border border-border-subtle rounded-xl p-6 relative overflow-hidden group hover:border-white/20 transition-colors">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant">Pending Payouts</p>
+<span class="material-symbols-outlined text-on-surface-variant">account_balance_wallet</span>
+</div>
+<h3 class="font-headline-lg text-[40px] leading-tight text-primary">$420k</h3>
+<div class="mt-2 flex items-center gap-2 text-on-surface-variant font-label-mono text-label-mono">
+                    Processing 14 entities
+                </div>
+</div>
+<!-- Card 3 -->
+<div class="bg-glass-fill backdrop-blur-xl border border-border-subtle rounded-xl p-6 relative overflow-hidden group hover:border-white/20 transition-colors">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant">Platform Commission</p>
+<span class="material-symbols-outlined text-on-surface-variant">percent</span>
+</div>
+<h3 class="font-headline-lg text-[40px] leading-tight text-primary">15%</h3>
+<div class="mt-2 flex items-center gap-2 text-on-surface-variant font-label-mono text-label-mono">
+                    Average blended rate
+                </div>
+</div>
+<!-- Card 4 -->
+<div class="bg-glass-fill backdrop-blur-xl border border-border-subtle rounded-xl p-6 relative overflow-hidden group hover:border-white/20 transition-colors">
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant">Active Subscriptions</p>
+<span class="material-symbols-outlined text-on-surface-variant">group</span>
+</div>
+<h3 class="font-headline-lg text-[40px] leading-tight text-primary">1,204</h3>
+<div class="mt-2 flex items-center gap-2 text-[#4ade80] font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                    +48 this week
+                </div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="grid grid-cols-3 gap-gutter h-[400px]">
+<!-- Line Chart (Global Revenue) -->
+<div class="col-span-2 bg-glass-fill backdrop-blur-xl border border-border-subtle rounded-xl p-6 flex flex-col glow-effect">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-body-md font-medium text-primary">Global Revenue vs. Payouts</h3>
+<div class="flex gap-4 font-label-mono text-label-mono">
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-accent-gold"></span> Revenue</div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-outline-variant"></span> Payouts</div>
+</div>
+</div>
+<div class="flex-1 relative border-l border-b border-border-subtle flex items-end pt-4 pr-4">
+<!-- Y-Axis labels -->
+<div class="absolute -left-10 top-0 bottom-0 flex flex-col justify-between text-on-surface-variant font-label-mono text-[10px] py-4">
+<span>$2M</span><span>$1.5M</span><span>$1M</span><span>$0.5M</span><span>$0</span>
+</div>
+<!-- Decorative Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-4 pointer-events-none">
+<div class="border-t border-border-subtle/50 w-full"></div>
+<div class="border-t border-border-subtle/50 w-full"></div>
+<div class="border-t border-border-subtle/50 w-full"></div>
+<div class="border-t border-border-subtle/50 w-full"></div>
+<div class="border-t border-transparent w-full"></div>
+</div>
+<!-- SVG Chart Mock -->
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Payouts Line -->
+<path class="text-outline-variant" d="M0,80 Q20,70 40,75 T80,60 T100,50" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path>
+<!-- Revenue Line -->
+<path class="text-accent-gold" d="M0,60 Q20,40 40,45 T80,20 T100,10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+<!-- Area Fill -->
+<path d="M0,60 Q20,40 40,45 T80,20 T100,10 L100,100 L0,100 Z" fill="url(#goldGradient)" opacity="0.1"></path>
+<defs>
+<lineargradient id="goldGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#D4AF37"></stop>
+<stop offset="100%" stop-color="#050505" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- X-Axis Labels -->
+<div class="absolute -bottom-8 left-0 right-0 flex justify-between text-on-surface-variant font-label-mono text-[10px] px-2">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+</div>
+</div>
+</div>
+<!-- Bar Chart (Top Earning) -->
+<div class="col-span-1 bg-glass-fill backdrop-blur-xl border border-border-subtle rounded-xl p-6 flex flex-col">
+<h3 class="font-body-md font-medium text-primary mb-6">Top Earning Restaurants</h3>
+<div class="flex-1 flex flex-col justify-around">
+<div class="space-y-2">
+<div class="flex justify-between font-label-mono text-label-mono">
+<span class="text-primary">L'Eclat Gastronomy</span>
+<span class="text-accent-gold">$124k</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-accent-gold h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-mono text-label-mono">
+<span class="text-primary">Restaurante Elite</span>
+<span class="text-white/80">$98k</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-white/80 h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-mono text-label-mono">
+<span class="text-primary">Atelier AR</span>
+<span class="text-white/60">$72k</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-white/60 h-full w-[50%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-label-mono text-label-mono">
+<span class="text-primary">Nova Dining</span>
+<span class="text-white/40">$45k</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-white/40 h-full w-[30%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Payouts Management Table -->
+<div class="bg-glass-fill backdrop-blur-xl border border-border-subtle rounded-xl overflow-hidden">
+<div class="p-6 border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-body-md font-medium text-primary">Payouts Management</h3>
+<button class="text-accent-gold font-label-mono text-label-mono hover:text-primary transition-colors flex items-center gap-1">
+                    View All <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-surface-container-lowest/50">
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant font-medium">Restaurant</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant font-medium text-right">Total Revenue</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant font-medium text-right">Platform Fee</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant font-medium text-right">Net Payout</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant font-medium">Next Payout Date</th>
+<th class="py-4 px-6 font-label-mono text-label-mono text-on-surface-variant font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle text-body-md">
+<tr class="hover:bg-white/[0.02] transition-colors group cursor-pointer">
+<td class="py-4 px-6 text-primary font-medium flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant group-hover:text-accent-gold transition-colors">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+</div>
+                                L'Eclat Gastronomy
+                            </td>
+<td class="py-4 px-6 text-right text-on-surface-variant">$45,200.00</td>
+<td class="py-4 px-6 text-right text-on-surface-variant">-$6,780.00</td>
+<td class="py-4 px-6 text-right text-primary font-medium">$38,420.00</td>
+<td class="py-4 px-6 text-on-surface-variant">Oct 15, 2023</td>
+<td class="py-4 px-6 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-mono text-[10px] bg-accent-gold/10 text-accent-gold border border-accent-gold/20">
+                                    Processing
+                                </span>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors group cursor-pointer">
+<td class="py-4 px-6 text-primary font-medium flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+</div>
+                                Restaurante Elite
+                            </td>
+<td class="py-4 px-6 text-right text-on-surface-variant">$32,150.00</td>
+<td class="py-4 px-6 text-right text-on-surface-variant">-$4,822.50</td>
+<td class="py-4 px-6 text-right text-primary font-medium">$27,327.50</td>
+<td class="py-4 px-6 text-on-surface-variant">Oct 16, 2023</td>
+<td class="py-4 px-6 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-mono text-[10px] bg-secondary-container/20 text-secondary border border-secondary-container/30">
+                                    Scheduled
+                                </span>
+</td>
+</tr>
+<tr class="hover:bg-white/[0.02] transition-colors group cursor-pointer">
+<td class="py-4 px-6 text-primary font-medium flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-variant flex items-center justify-center text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+</div>
+                                Atelier AR
+                            </td>
+<td class="py-4 px-6 text-right text-on-surface-variant">$28,900.00</td>
+<td class="py-4 px-6 text-right text-on-surface-variant">-$4,335.00</td>
+<td class="py-4 px-6 text-right text-primary font-medium">$24,565.00</td>
+<td class="py-4 px-6 text-on-surface-variant">Oct 01, 2023</td>
+<td class="py-4 px-6 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full font-label-mono text-[10px] bg-[#4ade80]/10 text-[#4ade80] border border-[#4ade80]/20">
+                                    Completed
+                                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</body></html>

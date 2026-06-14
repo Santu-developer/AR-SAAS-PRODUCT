@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Plans &amp; Subscriptions - Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#454747",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "surface-container-lowest": "#0e0e0e",
+                      "background": "#141313",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "tertiary-container": "#e2e2e2",
+                      "secondary-container": "#0372e4",
+                      "canvas-black": "#050505",
+                      "surface-tint": "#c6c6c7",
+                      "secondary": "#abc7ff",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "surface-elevated": "#0A0A0A",
+                      "on-secondary-fixed": "#001b3f",
+                      "on-surface-variant": "#c4c7c8",
+                      "on-secondary-container": "#fefcff",
+                      "inverse-on-surface": "#313030",
+                      "surface-variant": "#353434",
+                      "on-secondary": "#002f66",
+                      "on-primary-fixed": "#1a1c1c",
+                      "on-error": "#690005",
+                      "error-container": "#93000a",
+                      "primary-fixed": "#e2e2e2",
+                      "primary-container": "#e2e2e2",
+                      "surface-bright": "#3a3939",
+                      "tertiary": "#ffffff",
+                      "surface-container-high": "#2a2a2a",
+                      "surface": "#141313",
+                      "secondary-fixed": "#d7e2ff",
+                      "on-primary": "#2f3131",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-surface": "#e5e2e1",
+                      "inverse-primary": "#5d5f5f",
+                      "surface-container-highest": "#353434",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "on-tertiary-container": "#636565",
+                      "surface-container": "#201f1f",
+                      "surface-container-low": "#1c1b1b",
+                      "inverse-surface": "#e5e2e1",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "tertiary-fixed": "#e2e2e2",
+                      "outline-variant": "#444748",
+                      "on-primary-container": "#636565",
+                      "accent-gold": "#D4AF37",
+                      "on-tertiary": "#2f3131",
+                      "outline": "#8e9192",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#141313",
+                      "primary": "#ffffff",
+                      "on-background": "#e5e2e1",
+                      "on-error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "stack-lg": "32px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.canvas-black');
+            color: theme('colors.on-surface');
+            font-family: 'Geist', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glow-effect {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            top: -50px;
+            right: -50px;
+        }
+
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-body-md font-body-md">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl p-stack-md z-40 bg-canvas-black">
+<div class="mb-stack-lg">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Aether AR</h1>
+<p class="text-on-surface-variant font-label-mono text-label-mono mt-1">Super Admin</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">storefront</span>
+<span>Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300" href="#" style="transform: scale(0.98);">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 500, 'FILL' 1;">payments</span>
+<span>Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">view_in_ar</span>
+<span>3D Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">insights</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2 pt-4 border-t border-border-subtle">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-screen overflow-y-auto bg-canvas-black relative">
+<!-- TopAppBar -->
+<header class="h-16 sticky top-0 z-50 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md px-gutter flex justify-between items-center bg-canvas-black">
+<!-- Mobile Brand (Hidden on md+) -->
+<div class="md:hidden font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">
+                Aether AR
+            </div>
+<!-- Search (Left on Desktop, Hidden on Mobile for this view) -->
+<div class="hidden md:flex items-center w-64 glass-panel rounded-lg px-3 py-2 border-border-subtle focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-2" style="font-variation-settings: 'wght' 300, 'FILL' 0;">search</span>
+<input class="bg-transparent border-none text-body-md font-body-md text-primary placeholder-on-surface-variant focus:ring-0 w-full p-0" placeholder="Search plans, restaurants..." type="text"/>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-95 active:scale-90 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-95 active:scale-90 duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300, 'FILL' 0;">contrast</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-subtle overflow-hidden flex items-center justify-center cursor-pointer hover:border-primary transition-colors">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait of a professional individual in a minimalist studio setting. The lighting is soft and cinematic, casting subtle shadows that emphasize depth. The background is a clean, dark gray tone, perfectly matching a high-end, dark-mode corporate aesthetic. The overall mood is confident, modern, and elite." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVd-HVpLefwhY7YHaakIrOFUdV1wW0TvPbuiN4E0HEOfIdWLCMm3rUs_4KMtWkVZz8FPeV3BDlc3ETAQlKaIn44qpY1V_4Zv2K5TIVMI7QIK0UtucvTXCwrIa4k-1iMo1JdR4Zjeg9Urm-7KYEZP6UG_tKTtR8JqUzr3CDrrHoUNx7PoAYC8YypSwUI9S8nYmK2gr7iECYTfVy9NM3gmLgjUXltQivpIEk16WyKebYV4IRoDWrT6GrCK8zsQLqMZYmXA74Cl6SpFb1"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 p-gutter md:p-stack-lg max-w-container-max mx-auto w-full pb-32">
+<!-- Page Header -->
+<div class="mb-stack-lg">
+<h2 class="font-headline-lg text-headline-lg text-primary md:font-display-2xl md:text-display-2xl md:tracking-tighter mb-2">Plans &amp; Subscriptions</h2>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-2xl">Manage platform pricing tiers and monitor active restaurant subscriptions.</p>
+</div>
+<!-- Pricing Tiers Section -->
+<section class="mb-12 relative">
+<div class="glow-effect" style="top: -20px; left: 10%; background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 60%);"></div>
+<h3 class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest mb-stack-md">Pricing Tiers</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<!-- Basic Plan -->
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden flex flex-col transition-all hover:border-surface-tint hover:bg-[rgba(255,255,255,0.05)] duration-300">
+<div class="mb-4">
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Basic</h4>
+<div class="flex items-baseline mt-2">
+<span class="font-headline-lg text-headline-lg text-primary">$49</span>
+<span class="text-on-surface-variant ml-1 font-body-md text-body-md">/mo</span>
+</div>
+</div>
+<ul class="space-y-3 mb-8 flex-1 text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 300, 'FILL' 0;">check</span>
+<span>10 3D Models</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 300, 'FILL' 0;">check</span>
+<span>Basic Analytics</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 300, 'FILL' 0;">check</span>
+<span>Standard Support</span>
+</li>
+</ul>
+<button class="w-full py-2 px-4 rounded-lg border border-border-subtle text-primary font-label-mono text-label-mono hover:bg-primary hover:text-canvas-black transition-all duration-300 active:scale-95">
+                            Edit Plan
+                        </button>
+</div>
+<!-- Pro Plan (Highlighted) -->
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden flex flex-col border-[rgba(255,255,255,0.2)] bg-[rgba(255,255,255,0.05)] transition-all duration-300">
+<div class="absolute top-0 right-0 bg-primary text-canvas-black font-label-mono text-[10px] px-3 py-1 rounded-bl-lg font-bold">POPULAR</div>
+<div class="mb-4">
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Pro</h4>
+<div class="flex items-baseline mt-2">
+<span class="font-headline-lg text-headline-lg text-primary">$149</span>
+<span class="text-on-surface-variant ml-1 font-body-md text-body-md">/mo</span>
+</div>
+</div>
+<ul class="space-y-3 mb-8 flex-1 text-on-surface">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 400, 'FILL' 0;">check</span>
+<span>50 3D Models</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 400, 'FILL' 0;">check</span>
+<span>Advanced Analytics</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 400, 'FILL' 0;">check</span>
+<span>Priority Support</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 400, 'FILL' 0;">check</span>
+<span>Custom Branding</span>
+</li>
+</ul>
+<button class="w-full py-2 px-4 rounded-lg bg-primary text-canvas-black font-label-mono text-label-mono hover:bg-surface-tint transition-all duration-300 active:scale-95">
+                            Edit Plan
+                        </button>
+</div>
+<!-- Enterprise Plan -->
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden flex flex-col transition-all hover:border-surface-tint hover:bg-[rgba(255,255,255,0.05)] duration-300">
+<div class="mb-4">
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Enterprise</h4>
+<div class="flex items-baseline mt-2">
+<span class="font-headline-lg text-headline-lg text-primary">Custom</span>
+</div>
+</div>
+<ul class="space-y-3 mb-8 flex-1 text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 300, 'FILL' 0;">check</span>
+<span>Unlimited 3D Models</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 300, 'FILL' 0;">check</span>
+<span>API Access</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'wght' 300, 'FILL' 0;">check</span>
+<span>Dedicated Account Manager</span>
+</li>
+</ul>
+<button class="w-full py-2 px-4 rounded-lg border border-border-subtle text-primary font-label-mono text-label-mono hover:bg-primary hover:text-canvas-black transition-all duration-300 active:scale-95">
+                            Edit Plan
+                        </button>
+</div>
+</div>
+</section>
+<!-- Active Subscriptions Data Table -->
+<section>
+<div class="flex justify-between items-end mb-stack-md">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest">Active Subscriptions</h3>
+<!-- Table Actions (Filter/Sort placeholders) -->
+<div class="flex gap-2">
+<button class="flex items-center gap-1 px-3 py-1.5 rounded text-on-surface-variant hover:text-primary hover:bg-glass-fill border border-transparent hover:border-border-subtle transition-all font-label-mono text-[11px]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'wght' 300;">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded text-on-surface-variant hover:text-primary hover:bg-glass-fill border border-transparent hover:border-border-subtle transition-all font-label-mono text-[11px]">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'wght' 300;">sort</span>
+                            Sort
+                        </button>
+</div>
+</div>
+<div class="glass-panel rounded-xl overflow-hidden border border-border-subtle bg-surface-container-lowest">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle text-on-surface-variant font-label-mono text-label-mono">
+<th class="py-3 px-4 font-medium uppercase tracking-wider">Restaurant</th>
+<th class="py-3 px-4 font-medium uppercase tracking-wider">Plan</th>
+<th class="py-3 px-4 font-medium uppercase tracking-wider">Cycle</th>
+<th class="py-3 px-4 font-medium uppercase tracking-wider">Renewal</th>
+<th class="py-3 px-4 font-medium uppercase tracking-wider text-right">MRR</th>
+<th class="py-3 px-4 font-medium uppercase tracking-wider">Status</th>
+<th class="py-3 px-4 font-medium uppercase tracking-wider w-10"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle text-body-md font-body-md">
+<!-- Row 1 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-3 px-4 text-primary font-medium">Noma CPH</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-mono bg-surface-container-highest text-primary border border-border-subtle">
+                                            Enterprise
+                                        </span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Yearly</td>
+<td class="py-3 px-4 text-on-surface-variant">Oct 12, 2024</td>
+<td class="py-3 px-4 text-primary text-right font-label-mono">$500.00</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-label-mono bg-[rgba(171,199,255,0.1)] text-secondary border border-[rgba(171,199,255,0.2)]">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-3 px-4 text-primary font-medium">Eleven Madison</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-mono bg-surface-container-highest text-primary border border-border-subtle">
+                                            Pro
+                                        </span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Monthly</td>
+<td class="py-3 px-4 text-on-surface-variant">Nov 01, 2023</td>
+<td class="py-3 px-4 text-primary text-right font-label-mono">$149.00</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-label-mono bg-[rgba(171,199,255,0.1)] text-secondary border border-[rgba(171,199,255,0.2)]">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-3 px-4 text-primary font-medium">Osteria Francescana</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-mono bg-surface-container-highest text-primary border border-border-subtle">
+                                            Basic
+                                        </span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Monthly</td>
+<td class="py-3 px-4 text-error">Oct 28, 2023</td>
+<td class="py-3 px-4 text-primary text-right font-label-mono">$49.00</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-label-mono bg-[rgba(255,180,171,0.1)] text-error border border-[rgba(255,180,171,0.2)]">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                            Overdue
+                                        </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-glass-fill transition-colors group opacity-60">
+<td class="py-3 px-4 text-primary font-medium">Gaggan</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-label-mono bg-surface-container-highest text-on-surface-variant border border-border-subtle">
+                                            Basic
+                                        </span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant">Monthly</td>
+<td class="py-3 px-4 text-on-surface-variant">-</td>
+<td class="py-3 px-4 text-on-surface-variant text-right font-label-mono">$0.00</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-label-mono bg-surface-container-highest text-on-surface-variant border border-border-subtle">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></span>
+                                            Cancelled
+                                        </span>
+</td>
+<td class="py-3 px-4 text-right">
+<button class="text-on-surface-variant opacity-0 group-hover:opacity-100 hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination Placeholder -->
+<div class="px-4 py-3 border-t border-border-subtle flex justify-between items-center bg-surface-container-low text-on-surface-variant font-label-mono text-[11px]">
+<span>Showing 1-4 of 124 Subscriptions</span>
+<div class="flex gap-2">
+<button class="p-1 hover:text-primary transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="p-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<script>
+        // Micro-interactions and subtle effects
+        document.addEventListener('DOMContentLoaded', () => {
+            // Optional: Add subtle parallax to glow effects based on mouse movement
+            const mainContent = document.querySelector('main');
+            const glows = document.querySelectorAll('.glow-effect');
+            
+            mainContent.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                glows.forEach(glow => {
+                    glow.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+                });
+            });
+        });
+    </script>
+</body></html>

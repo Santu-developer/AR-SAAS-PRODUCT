@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Order Success - Restaurante Elite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/framer-motion/10.16.4/framer-motion.umd.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353434",
+                        "surface-bright": "#3a3939",
+                        "primary-fixed": "#e2e2e2",
+                        "on-primary-fixed": "#1a1c1c",
+                        "secondary-container": "#0372e4",
+                        "surface-container-low": "#1c1b1b",
+                        "canvas-black": "#050505",
+                        "surface-tint": "#c6c6c7",
+                        "secondary": "#abc7ff",
+                        "tertiary-container": "#e2e2e2",
+                        "on-primary": "#2f3131",
+                        "on-surface-variant": "#c4c7c8",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#001b3f",
+                        "inverse-primary": "#5d5f5f",
+                        "on-background": "#e5e2e1",
+                        "primary": "#ffffff",
+                        "inverse-on-surface": "#313030",
+                        "secondary-fixed": "#d7e2ff",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "surface-elevated": "#0A0A0A",
+                        "on-secondary": "#002f66",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "on-primary-container": "#636565",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "background": "#141313",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#2f3131",
+                        "accent-gold": "#D4AF37",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#636565",
+                        "tertiary": "#ffffff",
+                        "primary-container": "#e2e2e2",
+                        "inverse-surface": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "outline": "#8e9192",
+                        "surface-dim": "#141313",
+                        "surface": "#141313",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed": "#e2e2e2",
+                        "outline-variant": "#444748",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "surface-variant": "#353434",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#fefcff",
+                        "on-primary-fixed-variant": "#454747"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "display-2xl": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-2xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+        .glow-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(5,5,5,0) 70%);
+            z-index: -1;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .success-icon-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(212,175,55,0.1);
+            border: 1px solid rgba(212,175,55,0.3);
+            box-shadow: 0 0 30px rgba(212,175,55,0.2);
+            animation: pulse-glow 2s infinite alternate ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 20px rgba(212,175,55,0.1); }
+            100% { box-shadow: 0 0 40px rgba(212,175,55,0.3); }
+        }
+        
+        /* Timeline styling */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            z-index: 0;
+        }
+        .timeline-line-active {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 50%; /* Adjust based on progress */
+            background: #D4AF37;
+            z-index: 1;
+            top: 0;
+        }
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #050505;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+        .timeline-dot.active {
+            border-color: #D4AF37;
+            background: #D4AF37;
+            box-shadow: 0 0 10px rgba(212,175,55,0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col relative pb-32">
+<div class="glow-bg"></div>
+<!-- TopAppBar (Suppressed per instructions for transactional/success screens, but instructions say "hide the shell to prioritize the Canvas", so I am excluding it as per Semantic Shell Mandate) -->
+<main class="flex-1 flex flex-col items-center justify-center px-margin-mobile pt-16 pb-8 max-w-md mx-auto w-full relative z-10">
+<!-- Success Animation & Hero -->
+<div class="flex flex-col items-center text-center mb-stack-lg w-full animate-[fadeIn_0.5s_ease-out]">
+<div class="success-icon-container mb-6">
+<span class="material-symbols-outlined text-accent-gold text-[40px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-2">Order Placed Successfully!</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Your culinary experience is being prepared.</p>
+<div class="mt-4 px-4 py-1 rounded-full bg-glass-fill border border-border-subtle inline-flex items-center gap-2">
+<span class="font-label-mono text-label-mono text-on-surface-variant">ORDER #</span>
+<span class="font-label-mono text-label-mono text-primary tracking-wider">ELITE-8924</span>
+</div>
+</div>
+<!-- Order Tracking Timeline -->
+<div class="w-full bg-glass-fill border border-border-subtle rounded-xl p-6 mb-stack-lg relative overflow-hidden backdrop-blur-xl">
+<h2 class="font-label-mono text-label-mono text-on-surface-variant mb-6 uppercase tracking-widest text-center">Live Status</h2>
+<div class="relative flex flex-col gap-8">
+<!-- Vertical Line -->
+<div class="absolute left-[15px] top-[8px] bottom-[8px] w-[2px] bg-border-subtle z-0"></div>
+<!-- Active Line (Progress) -->
+<div class="absolute left-[15px] top-[8px] h-[50%] w-[2px] bg-accent-gold z-10" style="box-shadow: 0 0 8px rgba(212,175,55,0.4);"></div>
+<!-- Step 1 -->
+<div class="flex items-start gap-4 relative z-20">
+<div class="mt-1 w-[32px] h-[32px] rounded-full bg-surface-elevated border border-accent-gold flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(212,175,55,0.2)]">
+<span class="material-symbols-outlined text-accent-gold text-[16px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+</div>
+<div>
+<h3 class="font-body-md text-body-md text-primary font-semibold">Order Received</h3>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">19:42 PM</p>
+</div>
+</div>
+<!-- Step 2 (Active) -->
+<div class="flex items-start gap-4 relative z-20">
+<div class="mt-1 w-[32px] h-[32px] rounded-full bg-accent-gold flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+<span class="material-symbols-outlined text-canvas-black text-[16px]" style="font-variation-settings: 'FILL' 1;">skillet</span>
+</div>
+<div>
+<h3 class="font-body-md text-body-md text-primary font-semibold">Preparing</h3>
+<p class="font-label-mono text-label-mono text-accent-gold mt-1 animate-pulse">Chef is plating your selection...</p>
+</div>
+</div>
+<!-- Step 3 (Pending) -->
+<div class="flex items-start gap-4 relative z-20 opacity-40">
+<div class="mt-1 w-[32px] h-[32px] rounded-full bg-surface-elevated border border-border-subtle flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]" style="font-variation-settings: 'FILL' 0;">local_dining</span>
+</div>
+<div>
+<h3 class="font-body-md text-body-md text-primary font-semibold">On the Way to Table</h3>
+<p class="font-label-mono text-label-mono text-on-surface-variant mt-1">Pending</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Order Summary -->
+<div class="w-full bg-glass-fill border border-border-subtle rounded-xl p-6 mb-stack-lg backdrop-blur-xl">
+<h2 class="font-label-mono text-label-mono text-on-surface-variant mb-4 uppercase tracking-widest border-b border-border-subtle pb-2">Order Summary</h2>
+<div class="space-y-4 mb-4">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="font-label-mono text-label-mono text-on-surface-variant bg-surface-elevated border border-border-subtle px-2 py-1 rounded">1x</span>
+<div>
+<p class="font-body-md text-body-md text-primary">Truffle Risotto</p>
+<p class="font-label-mono text-label-mono text-on-surface-variant text-[10px]">Shaved black truffle, parmesan crisp</p>
+</div>
+</div>
+<span class="font-body-md text-body-md text-primary">$42.00</span>
+</div>
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<span class="font-label-mono text-label-mono text-on-surface-variant bg-surface-elevated border border-border-subtle px-2 py-1 rounded">1x</span>
+<div>
+<p class="font-body-md text-body-md text-primary">Wagyu Ribeye (A5)</p>
+<p class="font-label-mono text-label-mono text-on-surface-variant text-[10px]">Medium rare, smoked sea salt</p>
+</div>
+</div>
+<span class="font-body-md text-body-md text-primary">$125.00</span>
+</div>
+</div>
+<div class="border-t border-border-subtle pt-4 flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Total</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-primary">$167.00</span>
+</div>
+</div>
+<!-- Actions -->
+<div class="w-full flex flex-col gap-4">
+<button class="w-full py-4 bg-primary text-canvas-black font-body-md font-semibold rounded-lg hover:scale-[0.98] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                Return to Table Details
+            </button>
+<button class="w-full py-4 bg-transparent border border-border-subtle text-primary font-body-md font-semibold rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                Browse More
+            </button>
+</div>
+</main>
+<!-- BottomNavBar is suppressed due to Transactional/Success intent as per instructions -->
+</body></html>

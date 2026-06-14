@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether AR - Order History</title>
+<!-- Google Fonts: Geist & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<!-- Geist font simulation using Inter as fallback if Geist is not available, but declaring Geist -->
+<style>
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/geist-sans/Geist-Medium.woff2') format('woff2');
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/geist-sans/Geist-SemiBold.woff2') format('woff2');
+            font-weight: 600;
+        }
+        @font-face {
+            font-family: 'Geist';
+            src: url('https://cdn.jsdelivr.net/gh/vercel/geist-font/fonts/geist-sans/Geist-Bold.woff2') format('woff2');
+            font-weight: 700;
+        }
+    </style>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#8e9192",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "inverse-on-surface": "#313030",
+                        "tertiary": "#ffffff",
+                        "error": "#ffb4ab",
+                        "on-primary": "#2f3131",
+                        "on-secondary-fixed": "#001b3f",
+                        "inverse-primary": "#5d5f5f",
+                        "secondary-container": "#0372e4",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "primary": "#ffffff",
+                        "on-background": "#e5e2e1",
+                        "primary-container": "#e2e2e2",
+                        "secondary-fixed": "#d7e2ff",
+                        "accent-gold": "#D4AF37",
+                        "canvas-black": "#050505",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "on-secondary": "#002f66",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#141313",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "inverse-surface": "#e5e2e1",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "on-tertiary": "#2f3131",
+                        "surface-variant": "#353434",
+                        "background": "#141313",
+                        "on-primary-fixed-variant": "#454747",
+                        "outline-variant": "#444748",
+                        "surface-container-highest": "#353434",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary": "#abc7ff",
+                        "surface-container-low": "#1c1b1b",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#e2e2e2",
+                        "on-surface": "#e5e2e1",
+                        "surface-elevated": "#0A0A0A",
+                        "on-secondary-container": "#fefcff",
+                        "surface-bright": "#3a3939",
+                        "on-tertiary-container": "#636565",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface": "#141313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-primary-container": "#636565",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "surface-tint": "#c6c6c7",
+                        "on-surface-variant": "#c4c7c8",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-container": "#201f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "body-md": ["Geist"],
+                        "display-2xl": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-2xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for gallery aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Subtle Glow effects */
+        .glow-bg {
+            position: relative;
+        }
+        .glow-bg::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-canvas-black text-on-surface font-body-md text-body-md antialiased overflow-hidden flex h-screen">
+<!-- Shared Component: SideNavBar -->
+<!-- active tab logic: Intent fallback to Dashboard as no exact match for "Order History" -->
+<nav class="hidden md:flex flex-col h-full p-stack-md w-[240px] sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl z-50">
+<div class="mb-stack-lg flex items-center gap-3 px-4 py-2">
+<span class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Aether AR</span>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg" href="#">
+<span class="material-symbols-outlined icon-fill" style="font-size: 18px;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">storefront</span>
+                Restaurants
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">payments</span>
+                Plans
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">view_in_ar</span>
+                3D Assets
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">insights</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">settings</span>
+                Settings
+            </a>
+</div>
+<div class="mt-auto pt-stack-md border-t border-border-subtle flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px;">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Shared Component: TopAppBar -->
+<header class="h-16 sticky top-0 z-40 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md">
+<div class="flex justify-between items-center px-gutter max-w-container-max mx-auto w-full h-full">
+<!-- Search on Left -->
+<div class="flex items-center gap-3 text-on-surface-variant bg-surface-container-highest px-4 py-2 rounded-lg border border-border-subtle w-64 hover:border-outline-variant transition-colors group">
+<span class="material-symbols-outlined" style="font-size: 18px;">search</span>
+<input class="bg-transparent border-none outline-none text-body-md font-body-md text-primary w-full p-0 placeholder-on-surface-variant focus:ring-0" placeholder="Search orders..." type="text"/>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-95 duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-95 duration-200">
+<span class="material-symbols-outlined">contrast</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-border-subtle overflow-hidden cursor-pointer hover:scale-95 transition-all duration-200">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional individual in a well-lit, modern studio setting. The lighting is balanced and crisp, highlighting facial features naturally. The subject is wearing dark, understated clothing that contrasts subtly with a smooth, neutral gray background. The overall aesthetic is clean, premium, and sophisticated, perfectly suited for an elite enterprise software avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnVrmRIB76FJQFihOTxPNgDV0l7yTTMEn_7Gm49wIlTkHh5abSjJfc60Ap4n5gtihfNS1l09Xbq3JccTF9gdo76vnwRTcJFsNAKYI2G8ikYHsI1HnYMx6ioQTYHAgPsEBHlUVNbgiazXiA2dCgFpO0lEMUsvy1emlzKBKyiteiRrLEYMjV95CzcLpN5lQCf3rYr63HmZKhc9JkoCUWsXrXmw9pozBjkqu9qcK9KzKkeyJFLAkklCUtT2MY7cUfghKrD-fJ_1woojUt"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-gutter pb-stack-lg">
+<div class="max-w-container-max mx-auto space-y-stack-lg glow-bg">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg md:text-headline-lg-mobile text-primary tracking-tighter">Order History</h1>
+<p class="text-on-surface-variant mt-1">Manage and track past culinary experiences.</p>
+</div>
+<!-- Date Range Picker -->
+<div class="flex items-center gap-2 bg-glass-fill border border-border-subtle rounded-lg p-1">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-highest text-primary font-label-mono text-label-mono border border-border-subtle">Today</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary font-label-mono text-label-mono transition-colors">7D</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-primary font-label-mono text-label-mono transition-colors">30D</button>
+<div class="w-px h-4 bg-border-subtle mx-1"></div>
+<button class="px-3 py-1.5 flex items-center gap-2 text-on-surface-variant hover:text-primary font-label-mono text-label-mono transition-colors">
+<span class="material-symbols-outlined" style="font-size: 16px;">calendar_today</span>
+                            Custom
+                        </button>
+</div>
+</div>
+<!-- Summary Stats (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-md">
+<!-- Stat Card 1 -->
+<div class="bg-glass-fill backdrop-blur-md border border-border-subtle rounded-xl p-stack-md hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-300 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined" style="font-size: 48px;">receipt_long</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-2 uppercase">Total Orders (Today)</p>
+<p class="font-headline-lg text-headline-lg text-primary tracking-tighter">142</p>
+<p class="text-secondary-fixed-dim text-sm mt-2 flex items-center gap-1 font-label-mono">
+<span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span> +12% vs yesterday
+                        </p>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-glass-fill backdrop-blur-md border border-border-subtle rounded-xl p-stack-md hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-300 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined" style="font-size: 48px;">payments</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-2 uppercase">Average Order Value</p>
+<p class="font-headline-lg text-headline-lg text-primary tracking-tighter">$285.50</p>
+<p class="text-secondary-fixed-dim text-sm mt-2 flex items-center gap-1 font-label-mono">
+<span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span> +5.2% vs last week
+                        </p>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-glass-fill backdrop-blur-md border border-border-subtle rounded-xl p-stack-md hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-300 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined" style="font-size: 48px;">account_balance</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-2 uppercase">Total Revenue (Today)</p>
+<p class="font-headline-lg text-headline-lg text-primary tracking-tighter">$40,541</p>
+<p class="text-on-surface-variant text-sm mt-2 flex items-center gap-1 font-label-mono">
+<span class="material-symbols-outlined" style="font-size: 14px;">trending_flat</span> Steady
+                        </p>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-glass-fill backdrop-blur-md border border-border-subtle rounded-xl p-stack-md hover:bg-[rgba(255,255,255,0.05)] transition-colors duration-300 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined" style="font-size: 48px;">check_circle</span>
+</div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-2 uppercase">Completion Rate</p>
+<p class="font-headline-lg text-headline-lg text-primary tracking-tighter">98.2%</p>
+<p class="text-error text-sm mt-2 flex items-center gap-1 font-label-mono">
+<span class="material-symbols-outlined" style="font-size: 14px;">trending_down</span> -0.5% vs yesterday
+                        </p>
+</div>
+</div>
+<!-- Table Section -->
+<div class="bg-glass-fill backdrop-blur-md border border-border-subtle rounded-xl flex flex-col">
+<!-- Filters and Actions -->
+<div class="p-stack-md border-b border-border-subtle flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-1.5 rounded-full bg-primary text-canvas-black font-label-mono text-label-mono hover:scale-95 transition-transform duration-200">All Orders</button>
+<button class="px-4 py-1.5 rounded-full border border-border-subtle text-on-surface-variant hover:text-primary hover:bg-glass-fill font-label-mono text-label-mono transition-all duration-200">Completed</button>
+<button class="px-4 py-1.5 rounded-full border border-border-subtle text-on-surface-variant hover:text-primary hover:bg-glass-fill font-label-mono text-label-mono transition-all duration-200">Refunded</button>
+<button class="px-4 py-1.5 rounded-full border border-border-subtle text-on-surface-variant hover:text-primary hover:bg-glass-fill font-label-mono text-label-mono transition-all duration-200">Cancelled</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-1.5 rounded border border-border-subtle text-on-surface-variant hover:text-primary hover:bg-glass-fill font-label-mono text-label-mono transition-all duration-200">
+<span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                            Export CSV
+                        </button>
+</div>
+<!-- Data Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle font-label-mono text-label-mono text-on-surface-variant uppercase bg-[rgba(255,255,255,0.01)]">
+<th class="p-4 font-medium whitespace-nowrap">Order ID</th>
+<th class="p-4 font-medium whitespace-nowrap">Date / Time</th>
+<th class="p-4 font-medium whitespace-nowrap">Table</th>
+<th class="p-4 font-medium min-w-[200px]">Items</th>
+<th class="p-4 font-medium text-right whitespace-nowrap">Total Price</th>
+<th class="p-4 font-medium whitespace-nowrap">Status</th>
+<th class="p-4 font-medium text-right whitespace-nowrap">Action</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md text-primary">
+<!-- Row 1 -->
+<tr class="border-b border-border-subtle hover:bg-[rgba(255,255,255,0.02)] transition-colors group">
+<td class="p-4 font-label-mono text-primary">#ORD-089</td>
+<td class="p-4 text-on-surface-variant">Oct 24, 19:30</td>
+<td class="p-4">T-12</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded bg-surface-container-highest border border-border-subtle overflow-hidden">
+<img alt="Steak dish" class="w-full h-full object-cover" data-alt="A top-down view of a beautifully plated Wagyu steak medium rare, garnished with delicate microgreens and a drizzle of rich, dark demi-glace. The plating is minimalist and elegant on a matte black ceramic dish, set against a dark, moody background. High-contrast, cinematic lighting highlights the texture of the meat and the glossy finish of the sauce. The overall style is high-end gastronomic photography suitable for a luxury dining interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-BAVaK-YGesLhZCE-yKBx3d144WaTZAY8v12vYG2eW2NhPWISqk_a8BnZu_VEgQiM25M3OOu8FdT1zvSuL_8UYiuCsEEtipKI1KYYVqa_hjBm7aZOLrY7OOMGEEdlqak73BnzRJAWJXnl6CNFfQ-oSG0KH_ffZPo3UupYR9xKF35k-byroXqaSQiRyOK0BBJY3QUhk6zQ-KaC1fc1484WuhV02I3EWmE62qxAhIP9sO0vXB7JAXrXjR3HsyNIWLfqfQp1DxfDcQUT"/>
+</div>
+<div class="w-6 h-6 rounded bg-surface-container-highest border border-border-subtle overflow-hidden">
+<img alt="Wine glass" class="w-full h-full object-cover" data-alt="A macro shot of a crystal-clear wine glass filled with deep red wine, capturing sharp reflections and subtle caustics on a dark reflective surface. The lighting is dramatic, with a single soft spotlight illuminating the liquid, creating a ruby-red glow. The background is completely black, emphasizing luxury, precision, and the minimalist aesthetic of an elite dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfR39a8Mr1cb0yXFRkQkTW2-oSnVLsFmT1Yw23AVrLvYwj-_OC-iS6W1EugaJp3ZG4sxyFHnlOqpHxOd5PhyoY4ZScTrnrFez1trER4etP0OjBl1UdQOikIfsQcSLgFNieXk8nMOueT3DfeMk0CYZWxOXe6Jstc3kwfz-4qytgQsC-hvk7RmsFpz19f0IDkChO2v-hjcLsRvodpAxGg_79PqtWt4rVbzKhU4tkd9JbetHuF4jMockFlENjcGt8IaLF7RmSUZ2aNGDA"/>
+</div>
+</div>
+<span class="text-sm text-on-surface-variant truncate max-w-[150px]">Wagyu A5, Pinot Noir +1</span>
+</div>
+</td>
+<td class="p-4 text-right font-label-mono">$320.00</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-mono bg-[rgba(171,199,255,0.1)] text-secondary-fixed-dim border border-[rgba(171,199,255,0.2)]">Completed</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-border-subtle hover:bg-[rgba(255,255,255,0.02)] transition-colors group">
+<td class="p-4 font-label-mono text-primary">#ORD-088</td>
+<td class="p-4 text-on-surface-variant">Oct 24, 19:15</td>
+<td class="p-4">T-04</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded bg-surface-container-highest border border-border-subtle overflow-hidden">
+<img alt="Truffle Pasta" class="w-full h-full object-cover" data-alt="An exquisite serving of handmade truffle pasta twirled elegantly in the center of a wide, shallow white bowl. Shaved black truffles are scattered generously over the top, catching a soft, directional light that enhances their earthy texture. The setting is dark and minimalist, allowing the golden hue of the pasta to pop against the subtle shadows. The mood is sophisticated and culinary-focused, fitting for a premium interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Fy6Z8o7yJiAfSzAnhi2upIIYnt0Om72YjLZp41V-Genq7LRB-dWec191qS6Dq-UfRz-gD7Me_s_JILOgqZFgXTA8KCII652tkrcJNgB09ropvXhMUFy8Ftpu_9a4FdMHplnHKqz0Yhq966_DdFW1aAFq3MKrcUV8WEPS-9KXJIEr9s7MfbbEy4ggO-LVqeYBzOIIUHx2fw0SxEdUfuilsE9Ai9wGpNRiwsgjlbxwww1POL3m4dV1yBfQPEqc_QEfAa1g2dnvwye5"/>
+</div>
+</div>
+<span class="text-sm text-on-surface-variant truncate max-w-[150px]">Truffle Tagliatelle</span>
+</div>
+</td>
+<td class="p-4 text-right font-label-mono">$85.00</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-mono bg-[rgba(171,199,255,0.1)] text-secondary-fixed-dim border border-[rgba(171,199,255,0.2)]">Completed</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-border-subtle hover:bg-[rgba(255,255,255,0.02)] transition-colors group">
+<td class="p-4 font-label-mono text-primary">#ORD-087</td>
+<td class="p-4 text-on-surface-variant">Oct 24, 18:50</td>
+<td class="p-4">T-09</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="text-sm text-on-surface-variant truncate max-w-[150px]">Oysters (Dozen)</span>
+</div>
+</td>
+<td class="p-4 text-right font-label-mono">$120.00</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-mono bg-[rgba(255,180,171,0.1)] text-error border border-[rgba(255,180,171,0.2)]">Cancelled</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[rgba(255,255,255,0.02)] transition-colors group">
+<td class="p-4 font-label-mono text-primary">#ORD-086</td>
+<td class="p-4 text-on-surface-variant">Oct 24, 18:20</td>
+<td class="p-4">T-02</td>
+<td class="p-4">
+<div class="flex items-center gap-2">
+<span class="text-sm text-on-surface-variant truncate max-w-[150px]">Tasting Menu x2</span>
+</div>
+</td>
+<td class="p-4 text-right font-label-mono">$450.00</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-mono bg-[rgba(226,226,226,0.1)] text-tertiary-fixed-dim border border-[rgba(226,226,226,0.2)]">Refunded</span>
+</td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination (Simplified) -->
+<div class="p-4 border-t border-border-subtle flex justify-between items-center text-sm font-label-mono text-on-surface-variant">
+<span>Showing 1-4 of 142</span>
+<div class="flex gap-2">
+<button class="px-2 py-1 rounded border border-border-subtle hover:text-primary hover:bg-glass-fill disabled:opacity-50" disabled="">Prev</button>
+<button class="px-2 py-1 rounded border border-border-subtle hover:text-primary hover:bg-glass-fill">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

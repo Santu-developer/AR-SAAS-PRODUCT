@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>3D Requests Queue - Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "secondary-container": "#0372e4",
+                    "secondary": "#abc7ff",
+                    "on-background": "#e5e2e1",
+                    "surface-elevated": "#0A0A0A",
+                    "on-tertiary-fixed-variant": "#454747",
+                    "outline-variant": "#444748",
+                    "border-subtle": "rgba(255, 255, 255, 0.08)",
+                    "surface-bright": "#3a3939",
+                    "primary-container": "#e2e2e2",
+                    "on-tertiary-fixed": "#1a1c1c",
+                    "on-secondary": "#002f66",
+                    "on-primary": "#2f3131",
+                    "error-container": "#93000a",
+                    "background": "#141313",
+                    "surface-tint": "#c6c6c7",
+                    "surface-variant": "#353434",
+                    "primary": "#ffffff",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab",
+                    "canvas-black": "#050505",
+                    "inverse-primary": "#5d5f5f",
+                    "tertiary": "#ffffff",
+                    "surface-dim": "#141313",
+                    "on-primary-fixed": "#1a1c1c",
+                    "surface-container-high": "#2a2a2a",
+                    "outline": "#8e9192",
+                    "on-tertiary-container": "#636565",
+                    "accent-gold": "#D4AF37",
+                    "on-surface-variant": "#c4c7c8",
+                    "on-secondary-fixed-variant": "#00458f",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary": "#2f3131",
+                    "tertiary-fixed-dim": "#c6c6c7",
+                    "on-surface": "#e5e2e1",
+                    "on-secondary-container": "#fefcff",
+                    "tertiary-container": "#e2e2e2",
+                    "secondary-fixed-dim": "#abc7ff",
+                    "on-primary-container": "#636565",
+                    "surface-container": "#201f1f",
+                    "on-secondary-fixed": "#001b3f",
+                    "secondary-fixed": "#d7e2ff",
+                    "on-error-container": "#ffdad6",
+                    "glass-fill": "rgba(255, 255, 255, 0.03)",
+                    "surface-container-highest": "#353434",
+                    "primary-fixed": "#e2e2e2",
+                    "surface": "#141313",
+                    "inverse-surface": "#e5e2e1",
+                    "tertiary-fixed": "#e2e2e2",
+                    "primary-fixed-dim": "#c6c6c7",
+                    "on-primary-fixed-variant": "#454747"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "stack-lg": "32px",
+                    "container-max": "1440px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Geist"
+                    ],
+                    "display-2xl": [
+                            "Geist"
+                    ],
+                    "body-md": [
+                            "Geist"
+                    ],
+                    "label-mono": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-lg": [
+                            "Geist"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-2xl": [
+                            "72px",
+                            {
+                                    "lineHeight": "80px",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-mono": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "600"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            color: #e5e2e1;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen bg-canvas-black text-on-surface font-body-md overflow-x-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full p-stack-md w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl">
+<div class="mb-stack-lg px-4 py-2">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Aether AR</h1>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 mb-stack-md">
+<img alt="Super Admin Avatar" class="w-10 h-10 rounded-full border border-border-subtle object-cover" data-alt="A close-up studio portrait of a professional in a dark, moody setting, embodying the Elite, Precise, and Cinematic aesthetic. The lighting is soft and directional, highlighting the subject's features against a deep, shadow-filled background. The image should feel premium and native to a luxury SaaS platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtfC4Fhb0zN3bMBXESQjXvfu_vMuh8dE3khS8lYEY3H7W_L0bM27glD3TaWzDPZEoWqtQL2fjntn-Yf3XAkW9f74vWgYl6SvMgTZQN68s9nRpy7Ze-baVgJ1UNmKdIcySjgSBP25OV6PslbyPmgY1gosn4aNJlZkTrv8Zdn7be4Aa5V6tI_Qv4BNbiawNWbLRfQw-mPKw59lhbK3DjpyZhFxPBkGVEpdRUvIlQK0agIy5O5Q6xIXU_eW8Mmhqd7O-xmlXrqV4PNprm"/>
+<div>
+<p class="font-body-md text-primary font-medium">Super Admin</p>
+<p class="font-label-mono text-label-mono text-on-surface-variant">System</p>
+</div>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">storefront</span>
+                    Restaurants
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">payments</span>
+                    Plans
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">view_in_ar</span>
+                    3D Assets
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">insights</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="mt-auto border-t border-border-subtle pt-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-weight: 300;">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar -->
+<header class="h-16 sticky top-0 z-50 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md flex justify-between items-center px-gutter max-w-container-max mx-auto w-full">
+<div class="flex items-center gap-4 md:hidden">
+<span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">Aether AR</span>
+</div>
+<!-- Search -->
+<div class="hidden md:flex items-center bg-surface-container-low border border-border-subtle rounded-lg px-3 py-1.5 w-64 focus-within:border-outline transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2">search</span>
+<input class="bg-transparent border-none text-body-md text-primary focus:ring-0 w-full p-0 placeholder:text-on-surface-variant" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-[0.95]">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-[0.95]">contrast</span>
+<img alt="Super Admin Profile" class="w-8 h-8 rounded-full border border-border-subtle object-cover md:hidden" data-alt="A close-up studio portrait of a professional in a dark, moody setting, embodying the Elite, Precise, and Cinematic aesthetic. The lighting is soft and directional, highlighting the subject's features against a deep, shadow-filled background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDA5kbNqU2SXHLG0P-K3Ms32ySy9jIHQwK3CvHyav2cAc5DomFN7fddMzpV8JGtXA-u9FiwXOn3IJxHkmqdoW3esNvdz1F8lrq8kTMOVKKnf7htTG_wCgq-rOT0vMF5P92WtUHkGPg4ad8A0_zFK_xxG5TusIHCYvTVqUNQRKgioIKIlkcYnxMw_lyHMAuzYDIj3SPYb4wayGxhz1qHPWlpy6dcsZ-iKcm77QNbB3Zr2BvmtTN-iqkeiYMJhhpwdvkRj5MIZ2gCUaio"/>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-gutter max-w-container-max mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-stack-lg">
+<div>
+<h2 class="font-display-2xl text-display-2xl text-primary mb-2">3D Asset Requests</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage and track the production pipeline for restaurant AR models.</p>
+</div>
+<button class="bg-primary text-canvas-black font-body-md font-medium px-6 py-2.5 rounded-lg hover:scale-[0.98] transition-transform duration-300 flex items-center gap-2 whitespace-nowrap">
+<span class="material-symbols-outlined text-sm">add</span>
+                    New Request
+                </button>
+</div>
+<!-- Filters & Controls -->
+<div class="flex flex-col md:flex-row gap-4 mb-stack-md">
+<div class="flex-1 flex items-center bg-surface-container-low border border-border-subtle rounded-lg px-4 py-2 focus-within:border-outline transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant mr-3">search</span>
+<input class="bg-transparent border-none text-body-md text-primary focus:ring-0 w-full p-0 placeholder:text-on-surface-variant" placeholder="Search restaurant or item name..." type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+<select class="bg-surface-container-low border border-border-subtle text-on-surface-variant rounded-lg px-4 py-2 font-body-md focus:ring-0 focus:border-outline cursor-pointer appearance-none pr-10 relative">
+<option value="all">Status: All</option>
+<option value="new">New</option>
+<option value="inprogress">In Progress</option>
+<option value="review">Review</option>
+<option value="completed">Completed</option>
+</select>
+<select class="bg-surface-container-low border border-border-subtle text-on-surface-variant rounded-lg px-4 py-2 font-body-md focus:ring-0 focus:border-outline cursor-pointer appearance-none pr-10">
+<option value="all">Priority: All</option>
+<option value="high">High</option>
+<option value="medium">Medium</option>
+<option value="low">Low</option>
+</select>
+</div>
+</div>
+<!-- Data Table / List -->
+<div class="bg-glass-fill border border-border-subtle rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-surface-container-lowest/50 text-on-surface-variant font-label-mono text-label-mono">
+<th class="py-4 px-6 font-medium">Item Name</th>
+<th class="py-4 px-6 font-medium">Restaurant</th>
+<th class="py-4 px-6 font-medium">Priority</th>
+<th class="py-4 px-6 font-medium">Status</th>
+<th class="py-4 px-6 font-medium">Assigned To</th>
+<th class="py-4 px-6 font-medium">Requested</th>
+<th class="py-4 px-6 font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md">
+<!-- Row 1 -->
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-4 px-6 text-primary font-medium">Miso Glazed Salmon</td>
+<td class="py-4 px-6 text-on-surface-variant">Zenith Sushi</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-error/10 text-error font-label-mono text-label-mono">High</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-on-surface">Modeling</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<img alt="Assignee Avatar" class="w-6 h-6 rounded-full border border-border-subtle object-cover" data-alt="A close-up studio portrait of a 3D artist in a dark, moody setting. The lighting is soft and directional, highlighting the subject's features against a deep, shadow-filled background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNzUxU9cfqbriUnxikJnaqGSCdaa2jVdyqCqUiY9xb3xIrO4z5WRUhkv9LP2N9vQrmyh0qs6IgGVsDR8ucHAoSgTi98ehvJSO7TjWe-72fNNC8WJ4qHlBUxAg5s9jPPOnRbY80QP0pDp3-6YAIHcJ2OGLezFuCBQsSaRVYcMgMVDSb072TabtBzqrvj5Bm4OFY6MeknojC9SG6eO20_yspfLN5NKbkRw5zM_e0Or7wWTPKKMi3CjImlU8-t1KSZGrTd2APNZBN8zIo"/>
+<span class="text-on-surface-variant">Elena R.</span>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">2 hours ago</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-md hover:bg-surface-container-high opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-4 px-6 text-primary font-medium">Truffle Risotto</td>
+<td class="py-4 px-6 text-on-surface-variant">Osteria Bianca</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-accent-gold/10 text-accent-gold font-label-mono text-label-mono">Medium</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-on-surface">Pending Review</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-on-surface-variant italic text-sm">Unassigned</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">5 hours ago</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-md hover:bg-surface-container-high opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-4 px-6 text-primary font-medium">Wagyu A5 Striploin</td>
+<td class="py-4 px-6 text-on-surface-variant">The Forge</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-secondary/10 text-secondary font-label-mono text-label-mono">Low</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-on-surface">Texturing</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<img alt="Assignee Avatar" class="w-6 h-6 rounded-full border border-border-subtle object-cover" data-alt="A close-up studio portrait of a male technical artist in a dark, moody setting. The lighting is soft and directional, highlighting the subject's features against a deep, shadow-filled background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX5khX8nQ2Z7Hi7loDRn2gD2dlbfHKXJ8vLGo7x1rJJ3YMicmrzYCUfwWo4K5QmAFMkD1Q0C8oXrUI7atqsfBVonGDUPb_VFpvCqXoCoqLAeXLPHJYdcFQtX5OU-UdXfHZ-isD5cMQCVcZESqFG6AofZ5ctz0lYUt6SVk4lsw3xTCHhOoOvAVOiL3kwg-d2PZlIEBLr_0Z3WxlLkQRvGiWahYWtjKUgJkqHkOAR9VgxnJHATpdiyDW0S0200Kx7bEx4pOFfUTmS1IB"/>
+<span class="text-on-surface-variant">Marcus T.</span>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">1 day ago</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-md hover:bg-surface-container-high opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group cursor-pointer">
+<td class="py-4 px-6 text-primary font-medium">Deconstructed Lemon Tart</td>
+<td class="py-4 px-6 text-on-surface-variant">Lumière</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded-md bg-error/10 text-error font-label-mono text-label-mono">High</span>
+</td>
+<td class="py-4 px-6">
+<span class="text-on-surface">QA</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<img alt="Assignee Avatar" class="w-6 h-6 rounded-full border border-border-subtle object-cover" data-alt="A close-up studio portrait of a female QA specialist in a dark, moody setting. The lighting is soft and directional, highlighting the subject's features against a deep, shadow-filled background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF_LOerYlBSjDtfP2L6ZFlUprF_uoYLeDhK4hH6Li2YAxY60NbbvKBxUz8R0dF1gZcM35KfkzfEyKAXsQN5VSsUqphLmT3M66V6d_9Z5DxeFaYI1ARatZX08XtwnOl5sa2x7k5PsHRfsgQQ9CJX6D1feEZsEVIIpI3PfwOLRiUw0FpNwh37RZQzu1dehpD-OCGUFud8RMI7FiPCZr8u4slidys3jzUyOe1ILvotRyc7haZ81Wkjwa7z6-53rjA8ifOxEZ4zpI4XfqH"/>
+<span class="text-on-surface-variant">Sarah J.</span>
+</div>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">2 days ago</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded-md hover:bg-surface-container-high opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238e9192' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+    </style>
+</body></html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Restaurant Profile - Aura AR Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Subtle glow effect for primary elements */
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-container": "#e2e2e2", "surface-container-high": "#2a2a2a", "on-surface-variant": "#c4c7c8",
+                        "primary": "#ffffff", "on-secondary-container": "#fefcff", "canvas-black": "#050505",
+                        "primary-fixed-dim": "#c6c6c7", "on-tertiary-container": "#636565", "surface-container": "#201f1f",
+                        "on-secondary-fixed-variant": "#00458f", "surface-container-lowest": "#0e0e0e",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)", "tertiary-container": "#e2e2e2", "surface-elevated": "#0A0A0A",
+                        "secondary-fixed-dim": "#abc7ff", "on-error-container": "#ffdad6", "surface-dim": "#141313",
+                        "secondary": "#abc7ff", "surface-container-low": "#1c1b1b", "surface-container-highest": "#353434",
+                        "outline": "#8e9192", "glass-fill": "rgba(255, 255, 255, 0.03)", "tertiary-fixed": "#e2e2e2",
+                        "surface-tint": "#c6c6c7", "inverse-on-surface": "#313030", "surface-variant": "#353434",
+                        "secondary-container": "#0372e4", "on-error": "#690005", "outline-variant": "#444748",
+                        "background": "#141313", "surface-bright": "#3a3939", "on-background": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c6c7", "on-tertiary": "#2f3131", "secondary-fixed": "#d7e2ff",
+                        "tertiary": "#ffffff", "on-secondary": "#002f66", "on-tertiary-fixed": "#1a1c1c",
+                        "on-surface": "#e5e2e1", "on-secondary-fixed": "#001b3f", "primary-fixed": "#e2e2e2",
+                        "on-primary-fixed-variant": "#454747", "error": "#ffb4ab", "inverse-primary": "#5d5f5f",
+                        "inverse-surface": "#e5e2e1", "on-primary": "#2f3131", "error-container": "#93000a",
+                        "on-primary-fixed": "#1a1c1c", "on-primary-container": "#636565", "on-tertiary-fixed-variant": "#454747",
+                        "surface": "#141313", "accent-gold": "#D4AF37"
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                    spacing: { "stack-sm": "8px", "stack-lg": "32px", "gutter": "24px", "margin-mobile": "20px", "stack-md": "16px", "container-max": "1440px" },
+                    fontFamily: { "body-md": ["Geist"], "headline-lg-mobile": ["Geist"], "headline-lg": ["Geist"], "display-2xl": ["Geist"], "label-mono": ["JetBrains Mono"] },
+                    fontSize: {
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "display-2xl": ["72px", { lineHeight: "80px", letterSpacing: "-0.04em", fontWeight: "700" }],
+                        "label-mono": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-canvas-black text-primary font-body-md h-screen overflow-hidden flex antialiased">
+<!-- SideNavBar Component -->
+<nav class="bg-surface-container-low border-r border-border-subtle fixed left-0 h-full w-[240px] flex flex-col h-full py-stack-lg z-40">
+<div class="px-gutter mb-stack-lg flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container border border-border-subtle flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-accent-gold text-xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary leading-none text-[18px]">L'Eclat Gastronomy</h1>
+<p class="font-label-mono text-label-mono text-accent-gold mt-1 uppercase">Elite Tier</p>
+</div>
+</div>
+<ul class="flex flex-col flex-1 px-4 gap-2">
+<!-- Inactive -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">pending_actions</span>
+<span class="font-body-md text-body-md">Active Requests</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+<span class="font-body-md text-body-md">Gallery</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px]">insights</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+</li>
+<!-- Active State: Settings (Profile mapping) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold bg-glass-fill border-r-2 border-accent-gold transition-transform duration-300 scale-95" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</li>
+</ul>
+<div class="px-gutter mt-auto flex flex-col gap-4">
+<button class="w-full bg-glass-fill border border-accent-gold/30 text-accent-gold font-label-mono text-label-mono py-3 rounded-lg uppercase tracking-wider hover:bg-accent-gold/10 transition-colors">
+                Upgrade to Pro
+            </button>
+<ul class="flex flex-col gap-2 pt-4 border-t border-border-subtle">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span class="font-body-md text-body-md">Sign Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-[240px] h-full overflow-y-auto overflow-x-hidden relative">
+<!-- Deep Space Background Effect -->
+<div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-surface-container-high/20 via-canvas-black to-canvas-black pointer-events-none -z-10"></div>
+<div class="max-w-[1200px] mx-auto px-gutter py-stack-lg pb-32">
+<!-- Page Header -->
+<header class="flex justify-between items-end mb-stack-lg pb-stack-sm border-b border-border-subtle relative z-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tighter">Restaurant Profile</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-xl">Configure your brand identity and public details for the AR Menu experience.</p>
+</div>
+<div class="flex gap-4">
+<button class="font-body-md text-body-md px-6 py-2 rounded-lg border border-border-subtle text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300">
+                        Discard Changes
+                    </button>
+<button class="font-body-md text-body-md px-6 py-2 rounded-lg bg-primary text-canvas-black font-medium hover:scale-[0.98] transition-transform duration-300 glow-effect relative">
+                        Save Profile
+                    </button>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter relative z-10">
+<!-- Left Column (Brand & Cuisine) -->
+<div class="col-span-1 lg:col-span-7 flex flex-col gap-gutter">
+<!-- Brand Identity Card -->
+<section class="bg-glass-fill border border-border-subtle rounded-xl p-stack-lg backdrop-blur-md relative overflow-hidden">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">storefront</span> Brand Identity
+                        </h3>
+<div class="flex flex-col gap-stack-lg">
+<div class="relative group">
+<label class="font-label-mono text-label-mono text-on-surface-variant mb-2 block">Restaurant Name</label>
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-headline-lg-mobile text-headline-lg-mobile py-2 outline-none focus:border-accent-gold transition-colors placeholder:text-surface-variant" type="text" value="L'Eclat Gastronomy"/>
+</div>
+<div class="relative group">
+<label class="font-label-mono text-label-mono text-on-surface-variant mb-2 block">Tagline / Short Description</label>
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-body-md py-2 outline-none focus:border-accent-gold transition-colors placeholder:text-surface-variant" type="text" value="Where culinary tradition meets spatial innovation."/>
+</div>
+<!-- Media Uploads -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md pt-4">
+<!-- Logo -->
+<div class="col-span-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant mb-2 block">Brand Logo</label>
+<div class="aspect-square border border-dashed border-border-subtle rounded-lg flex flex-col items-center justify-center p-4 bg-surface-container-low/30 hover:border-primary hover:bg-glass-fill transition-all cursor-pointer group relative">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=400&amp;q=80')] bg-cover bg-center rounded-lg opacity-40 group-hover:opacity-20 transition-opacity" data-alt="A minimalist, high-contrast, premium restaurant logo mark featuring abstract geometric shapes resembling a stylized plate and utensils. The design uses sharp lines and a monochromatic palette with subtle metallic gold accents. It sits perfectly centered within a dark UI container, evoking a sense of modern luxury and precise culinary execution."></div>
+<span class="material-symbols-outlined text-primary text-[32px] mb-2 z-10 group-hover:scale-110 transition-transform">cloud_upload</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant text-center z-10">Replace Logo</span>
+</div>
+</div>
+<!-- Cover -->
+<div class="col-span-1 md:col-span-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant mb-2 block">Cover Photo</label>
+<div class="h-full min-h-[160px] border border-dashed border-border-subtle rounded-lg flex flex-col items-center justify-center p-4 bg-surface-container-low/30 hover:border-primary hover:bg-glass-fill transition-all cursor-pointer group relative overflow-hidden">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&amp;q=80')] bg-cover bg-center rounded-lg opacity-40 group-hover:opacity-20 transition-opacity" data-alt="A high-fidelity, cinematic photograph of a modern fine-dining restaurant interior at dusk. The scene features dark, textured stone walls, minimalist warm pendant lighting reflecting off sleek black tables, and a subtle glowing ambiance. The composition is wide and expansive, perfect for a hero cover photo, capturing the essence of an elite, sophisticated gastronomic experience in a dark-mode aesthetic."></div>
+<span class="material-symbols-outlined text-primary text-[32px] mb-2 z-10 group-hover:scale-110 transition-transform">add_photo_alternate</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant z-10">Upload High-Res Cover (16:9)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Cuisine & Tags Card -->
+<section class="bg-glass-fill border border-border-subtle rounded-xl p-stack-lg backdrop-blur-md">
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">local_dining</span> Cuisine &amp; Attributes
+                            </h3>
+<button class="font-label-mono text-label-mono text-accent-gold hover:text-primary transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">add</span> Add Custom Tag
+                            </button>
+</div>
+<div class="flex flex-wrap gap-3">
+<span class="bg-glass-fill border border-accent-gold/50 text-accent-gold font-label-mono text-label-mono px-4 py-2 rounded-full cursor-pointer hover:bg-accent-gold/10 transition-colors flex items-center gap-2">
+                                French <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<span class="bg-glass-fill border border-accent-gold/50 text-accent-gold font-label-mono text-label-mono px-4 py-2 rounded-full cursor-pointer hover:bg-accent-gold/10 transition-colors flex items-center gap-2">
+                                Modern European <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<span class="bg-surface-container border border-border-subtle text-on-surface-variant font-label-mono text-label-mono px-4 py-2 rounded-full cursor-pointer hover:border-primary transition-colors">
+                                Michelin Star
+                            </span>
+<span class="bg-glass-fill border border-accent-gold/50 text-accent-gold font-label-mono text-label-mono px-4 py-2 rounded-full cursor-pointer hover:bg-accent-gold/10 transition-colors flex items-center gap-2">
+                                Tasting Menu <span class="material-symbols-outlined text-[14px]">close</span>
+</span>
+<span class="bg-surface-container border border-border-subtle text-on-surface-variant font-label-mono text-label-mono px-4 py-2 rounded-full cursor-pointer hover:border-primary transition-colors">
+                                Plant-Based Options
+                            </span>
+<span class="bg-surface-container border border-border-subtle text-on-surface-variant font-label-mono text-label-mono px-4 py-2 rounded-full cursor-pointer hover:border-primary transition-colors">
+                                Extensive Wine List
+                            </span>
+</div>
+</section>
+</div>
+<!-- Right Column (Contact & Social) -->
+<div class="col-span-1 lg:col-span-5 flex flex-col gap-gutter">
+<!-- Contact & Location Card -->
+<section class="bg-glass-fill border border-border-subtle rounded-xl p-stack-lg backdrop-blur-md">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">location_on</span> Contact &amp; Location
+                        </h3>
+<div class="flex flex-col gap-stack-md">
+<div class="relative flex items-end gap-3">
+<span class="material-symbols-outlined text-on-surface-variant mb-2">mail</span>
+<div class="flex-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant mb-1 block">Public Email</label>
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-body-md py-1 outline-none focus:border-accent-gold transition-colors" type="email" value="reservations@leclat.com"/>
+</div>
+</div>
+<div class="relative flex items-end gap-3">
+<span class="material-symbols-outlined text-on-surface-variant mb-2">call</span>
+<div class="flex-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant mb-1 block">Phone Number</label>
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-body-md py-1 outline-none focus:border-accent-gold transition-colors" type="tel" value="+1 (555) 019-2834"/>
+</div>
+</div>
+<div class="relative flex items-end gap-3 mt-2">
+<span class="material-symbols-outlined text-on-surface-variant mb-2">map</span>
+<div class="flex-1">
+<label class="font-label-mono text-label-mono text-on-surface-variant mb-1 block">Street Address</label>
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-body-md py-1 outline-none focus:border-accent-gold transition-colors" type="text" value="1204 Spatial Ave, Suite 300, San Francisco, CA"/>
+</div>
+</div>
+<!-- Map Integration Preview -->
+<div class="mt-4 border border-border-subtle rounded-lg h-48 bg-surface-container relative overflow-hidden group">
+<!-- Abstract map representation since we can't use real maps easily without API -->
+<div class="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&amp;q=80')] bg-cover bg-center grayscale" data-alt="A stylized, top-down dark mode map view of an urban grid system, resembling a high-tech navigational interface. The map features stark black backgrounds with thin, glowing cyan and silver lines representing streets. A single, distinct gold marker pinpoints a location in the center, embodying a precise, minimalist aesthetic typical of premium digital platforms." data-location="San Francisco" style=""></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-elevated/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-primary bg-canvas-black/50 px-2 py-1 rounded backdrop-blur-sm border border-border-subtle">Map Integration Active</span>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">open_in_new</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Presence Card -->
+<section class="bg-glass-fill border border-border-subtle rounded-xl p-stack-lg backdrop-blur-md">
+<h3 class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">share</span> Social Presence
+                        </h3>
+<div class="flex flex-col gap-stack-md">
+<div class="relative flex items-end gap-3">
+<span class="font-label-mono text-label-mono text-on-surface-variant mb-2 w-8 text-center">IG</span>
+<div class="flex-1">
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-body-md py-1 outline-none focus:border-accent-gold transition-colors placeholder:text-surface-variant" placeholder="instagram.com/leclat" type="text" value="instagram.com/leclat_gastro"/>
+</div>
+</div>
+<div class="relative flex items-end gap-3">
+<span class="font-label-mono text-label-mono text-on-surface-variant mb-2 w-8 text-center">X</span>
+<div class="flex-1">
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-body-md py-1 outline-none focus:border-accent-gold transition-colors placeholder:text-surface-variant" placeholder="x.com/username" type="text"/>
+</div>
+</div>
+<div class="relative flex items-end gap-3">
+<span class="font-label-mono text-label-mono text-on-surface-variant mb-2 w-8 text-center">FB</span>
+<div class="flex-1">
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-body-md py-1 outline-none focus:border-accent-gold transition-colors placeholder:text-surface-variant" placeholder="facebook.com/username" type="text"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

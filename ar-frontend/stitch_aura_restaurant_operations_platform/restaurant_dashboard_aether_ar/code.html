@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether AR - Restaurant Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#141313",
+                        "primary": "#ffffff",
+                        "on-background": "#e5e2e1",
+                        "outline": "#8e9192",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#2f3131",
+                        "accent-gold": "#D4AF37",
+                        "on-primary-container": "#636565",
+                        "outline-variant": "#444748",
+                        "tertiary-fixed": "#e2e2e2",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-container": "#636565",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "surface-container-highest": "#353434",
+                        "inverse-primary": "#5d5f5f",
+                        "on-surface": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "surface": "#141313",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-primary": "#2f3131",
+                        "surface-container-high": "#2a2a2a",
+                        "tertiary": "#ffffff",
+                        "surface-bright": "#3a3939",
+                        "primary-container": "#e2e2e2",
+                        "primary-fixed": "#e2e2e2",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#1a1c1c",
+                        "on-error": "#690005",
+                        "on-secondary": "#002f66",
+                        "surface-variant": "#353434",
+                        "on-secondary-container": "#fefcff",
+                        "inverse-on-surface": "#313030",
+                        "on-surface-variant": "#c4c7c8",
+                        "surface-elevated": "#0A0A0A",
+                        "on-secondary-fixed": "#001b3f",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "secondary": "#abc7ff",
+                        "surface-tint": "#c6c6c7",
+                        "canvas-black": "#050505",
+                        "tertiary-container": "#e2e2e2",
+                        "secondary-container": "#0372e4",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "background": "#141313",
+                        "surface-container-lowest": "#0e0e0e",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "on-primary-fixed-variant": "#454747"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "display-2xl": ["Geist"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-2xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #050505; color: #e5e2e1; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(24px); }
+        .glass-panel-hover:hover { background: rgba(255, 255, 255, 0.05); }
+        .glow-effect { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, transparent 70%); pointer-events: none; }
+        
+        /* Sparkline Animation Placeholder */
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        .sparkline-path { stroke-dasharray: 100; stroke-dashoffset: 100; animation: drawLine 2s ease-out forwards; }
+    </style>
+</head>
+<body class="bg-canvas-black text-on-surface antialiased min-h-screen flex selection:bg-primary selection:text-canvas-black">
+<!-- SideNavBar (Shared Component Anchor) -->
+<aside class="w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex flex-col p-stack-md z-40 hidden md:flex shrink-0">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-subtle flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[18px]">view_in_ar</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-[20px] leading-tight font-bold text-primary tracking-tighter">Aether AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Super Admin</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto custom-scrollbar">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300 transform scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">restaurant_menu</span>
+<span class="font-body-md text-body-md">Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">payments</span>
+<span class="font-body-md text-body-md">Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">view_in_ar</span>
+<span class="font-body-md text-body-md">3D Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">insights</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-border-subtle flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span class="font-body-md text-body-md">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col min-w-0 relative">
+<!-- TopAppBar (Shared Component Anchor) -->
+<header class="h-16 sticky top-0 z-30 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md px-gutter flex justify-between items-center max-w-container-max mx-auto shrink-0">
+<!-- Mobile Brand (Hidden on Web) -->
+<div class="md:hidden flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">view_in_ar</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</span>
+</div>
+<!-- Search (Left aligned as per JSON) -->
+<div class="hidden md:flex items-center relative w-64 group">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant group-focus-within:text-primary transition-colors text-[18px]">search</span>
+<input class="w-full bg-transparent border-b border-border-subtle focus:border-primary text-body-md font-body-md text-primary px-9 py-2 outline-none transition-colors placeholder:text-on-surface-variant" placeholder="Search orders, items..." type="text"/>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:scale-95 duration-200 w-8 h-8 flex items-center justify-center rounded-full hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[20px]">contrast</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-subtle ml-2 cursor-pointer hover:border-primary transition-colors">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" data-alt="A close up portrait of a professional individual looking slightly off camera, lit with soft studio lighting against a dark neutral background. The mood is serious and corporate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKN07LY1HYGHAJJmR37cT3DIfQ8MgGgu3cjwixkfKWdRGA9UztIF1MqYm4-eaXnIMWLQ9VxuaVUb0UvH-YxjwtZsmVd1pJc1-J1oeWenpQGxLOUiwSKrJxjPxACX52jakmyizloH7F-HXZNlSkIeLNS1bTirqEnGBWv-CRqHB9znaA7LM1DUYDD2pHMeilpqmgPynG8C7-EtD0siaQyjNVGJo5W6CryZhZTw2Ys7Hdk-kE-wOAdf-uaLhNhRnNgm1HvG6ui0YuRlfh"/>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-gutter max-w-container-max mx-auto w-full space-y-stack-lg pb-24">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pt-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Live performance metrics for The French Laundry AR Menu.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="glass-panel px-4 py-2 rounded-lg font-body-md text-body-md text-primary flex items-center gap-2 hover:bg-surface-container-highest transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                        Today
+                    </button>
+<button class="bg-primary text-canvas-black px-4 py-2 rounded-lg font-body-md text-body-md font-medium flex items-center gap-2 hover:bg-tertiary-fixed transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                        New AR Request
+                    </button>
+</div>
+</div>
+<!-- KPI Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-md">
+<!-- KPI 1: Revenue -->
+<div class="glass-panel rounded-xl p-5 relative overflow-hidden group">
+<div class="glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Revenue Today</p>
+<span class="material-symbols-outlined text-primary opacity-50 text-[18px]">payments</span>
+</div>
+<div class="flex items-end gap-3">
+<h3 class="font-headline-lg text-[32px] text-primary leading-none">$12,450</h3>
+<span class="font-label-mono text-label-mono text-[#4ade80] flex items-center mb-1 bg-[#4ade80]/10 px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px] mr-1">trending_up</span>+14%
+                        </span>
+</div>
+<!-- Sparkline -->
+<div class="mt-4 h-8 w-full">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 30">
+<path class="text-primary sparkline-path" d="M0,25 C20,20 30,28 50,15 C70,2 80,10 100,5" fill="none" stroke="currentColor" stroke-width="2"></path>
+<path d="M0,25 C20,20 30,28 50,15 C70,2 80,10 100,5 L100,30 L0,30 Z" fill="url(#gradient-rev)" opacity="0.1"></path>
+<defs>
+<lineargradient id="gradient-rev" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="currentColor"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+<!-- KPI 2: Orders -->
+<div class="glass-panel rounded-xl p-5 relative overflow-hidden group">
+<div class="glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Orders Today</p>
+<span class="material-symbols-outlined text-primary opacity-50 text-[18px]">receipt_long</span>
+</div>
+<div class="flex items-end gap-3">
+<h3 class="font-headline-lg text-[32px] text-primary leading-none">142</h3>
+<span class="font-label-mono text-label-mono text-on-surface-variant mb-1">Total</span>
+</div>
+<div class="mt-4 flex gap-2">
+<div class="flex-1 bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[70%]"></div>
+</div>
+<div class="flex-1 bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[20%] opacity-60"></div>
+</div>
+<div class="flex-1 bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[10%] opacity-30"></div>
+</div>
+</div>
+<div class="flex justify-between mt-2 font-label-mono text-[10px] text-on-surface-variant">
+<span>70% Dine-in</span>
+<span>30% Takeout</span>
+</div>
+</div>
+<!-- KPI 3: Menu Health -->
+<div class="glass-panel rounded-xl p-5 relative overflow-hidden group">
+<div class="glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">AR Menu Health</p>
+<span class="material-symbols-outlined text-primary opacity-50 text-[18px]">view_in_ar</span>
+</div>
+<div class="flex items-end gap-3">
+<h3 class="font-headline-lg text-[32px] text-primary leading-none">85%</h3>
+<span class="font-label-mono text-label-mono text-on-surface-variant mb-1">Coverage</span>
+</div>
+<div class="mt-4 relative pt-1">
+<div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-surface-container-highest">
+<div class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-primary" style="width:85%"></div>
+</div>
+</div>
+<p class="font-label-mono text-[10px] text-on-surface-variant mt-[-8px]">68/80 Items have 3D Models</p>
+</div>
+<!-- KPI 4: Active Offers -->
+<div class="glass-panel rounded-xl p-5 relative overflow-hidden group flex flex-col justify-between">
+<div class="glow-effect opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex justify-between items-start mb-4">
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Active Offers</p>
+<span class="material-symbols-outlined text-accent-gold opacity-80 text-[18px]">local_offer</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-[32px] text-primary leading-none mb-2">3</h3>
+<div class="flex flex-wrap gap-2">
+<span class="font-label-mono text-[10px] bg-glass-fill border border-border-subtle px-2 py-1 rounded text-primary">Tasting Menu 20%</span>
+<span class="font-label-mono text-[10px] bg-glass-fill border border-border-subtle px-2 py-1 rounded text-primary">Wine Pairing</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Split Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-stack-lg">
+<!-- Left Column (Wider): Live Orders & Popular Items -->
+<div class="lg:col-span-2 flex flex-col gap-stack-lg">
+<!-- Live Orders Feed -->
+<div class="glass-panel rounded-xl flex flex-col">
+<div class="p-5 border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-body-md text-body-md font-medium text-primary">Live Orders</h3>
+<button class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+                                View All <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="flex-1 p-2">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="font-label-mono text-label-mono text-on-surface-variant border-b border-border-subtle">
+<th class="py-3 px-3 font-normal">Order ID</th>
+<th class="py-3 px-3 font-normal">Table/Customer</th>
+<th class="py-3 px-3 font-normal">Items</th>
+<th class="py-3 px-3 font-normal text-right">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="group hover:bg-glass-fill transition-colors border-b border-border-subtle last:border-0 cursor-pointer">
+<td class="py-3 px-3 font-label-mono text-label-mono text-primary">#ORD-089</td>
+<td class="py-3 px-3 font-body-md text-[14px] text-primary">Table 12</td>
+<td class="py-3 px-3 font-body-md text-[14px] text-on-surface-variant">Truffle Risotto, Wagyu A5...</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center gap-1.5 font-label-mono text-[10px] uppercase tracking-wider bg-[#fbbf24]/10 text-[#fbbf24] px-2 py-1 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24] animate-pulse"></span>
+                                                Preparing
+                                            </span>
+</td>
+</tr>
+<tr class="group hover:bg-glass-fill transition-colors border-b border-border-subtle last:border-0 cursor-pointer">
+<td class="py-3 px-3 font-label-mono text-label-mono text-primary">#ORD-088</td>
+<td class="py-3 px-3 font-body-md text-[14px] text-primary">VIP Room A</td>
+<td class="py-3 px-3 font-body-md text-[14px] text-on-surface-variant">Oysters (Dozen), Dom Perignon</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center gap-1.5 font-label-mono text-[10px] uppercase tracking-wider bg-[#4ade80]/10 text-[#4ade80] px-2 py-1 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-[#4ade80]"></span>
+                                                Ready
+                                            </span>
+</td>
+</tr>
+<tr class="group hover:bg-glass-fill transition-colors border-b border-border-subtle last:border-0 cursor-pointer">
+<td class="py-3 px-3 font-label-mono text-label-mono text-primary">#ORD-087</td>
+<td class="py-3 px-3 font-body-md text-[14px] text-primary">Table 04</td>
+<td class="py-3 px-3 font-body-md text-[14px] text-on-surface-variant">Lobster Thermidor</td>
+<td class="py-3 px-3 text-right">
+<span class="inline-flex items-center gap-1.5 font-label-mono text-[10px] uppercase tracking-wider bg-surface-container-highest text-on-surface-variant px-2 py-1 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                                Pending
+                                            </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Popular 3D Items Grid -->
+<div>
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-body-md text-body-md font-medium text-primary">Top Performing AR Items</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Item 1 -->
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer">
+<div class="h-32 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-elevated to-transparent z-10"></div>
+<img alt="Truffle Risotto AR Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="High resolution, cinematic photography of a gourmet truffle risotto dish on a dark ceramic plate. Soft, directional light highlights the texture of the rice and the shaved truffles. Set against a pure black background reflecting a premium, dark mode culinary aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgeZEUrV6JaTcIi7RFYW_AwAlQfhrk7TkFNechoc2AjlFQeCOScEpzjURU_C0kl_ffRQUymZJTPA4A2BGyKYyJJnuLJ-6MBedX9toC1kIkybNcBpRAWh-MybjbcQVE2qA_kbKreHXcCNIO3ozASLP1MyUqsoZBOpoJozQAlVyqa7NuzQdztaHlRNVRZQjSxZi0Wd2Yk1eKgd9PVBUhwrQeeLm7-5s4doorpPiCRtK_EIu46H6oG0n17dy-L24zhjmqtuQnSQP7GVRG"/>
+<span class="absolute top-2 right-2 z-20 bg-canvas-black/80 backdrop-blur-md px-2 py-1 rounded font-label-mono text-[10px] text-primary flex items-center gap-1 border border-border-subtle">
+<span class="material-symbols-outlined text-[12px]">visibility</span> 1.2k
+                                    </span>
+</div>
+<div class="p-4">
+<h4 class="font-body-md text-body-md text-primary truncate">Black Truffle Risotto</h4>
+<div class="flex justify-between items-center mt-2">
+<span class="font-label-mono text-[12px] text-on-surface-variant">42 Orders Today</span>
+<span class="font-label-mono text-[12px] text-[#4ade80]">+8%</span>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer">
+<div class="h-32 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-elevated to-transparent z-10"></div>
+<img alt="Wagyu Steak AR Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A perfectly seared cut of A5 Wagyu beef resting on a minimalist slate board. High contrast, moody lighting illuminates the marbling and glistening surface of the meat. Shot from slightly above against a dark studio background, emphasizing luxury dining." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiGYkDRChQ3ds8iWLZWeF2VoziYlPJV-pHQUXRuEN3TatwcAtMlnUx1kMTiqYe7CWHb8FRpBjSnm6Xb_XdmFh8IwJ5JmxwD1b-SPi1BP72BspR6HR4pwSQ463KJ8bk8eVyAS_Mvs1Kw8ddr2ee5xgez-27X419iH29Avvqu1F0F2r7pr5gFslpMesxI4yZUHKEjar9DYQKKqCtX-NiC3CXYEihgklzdYLoDwqFANh6ONxz5oaIoylcFVbKJxZKRvf7-Phxy2SdmX9Q"/>
+<span class="absolute top-2 right-2 z-20 bg-canvas-black/80 backdrop-blur-md px-2 py-1 rounded font-label-mono text-[10px] text-primary flex items-center gap-1 border border-border-subtle">
+<span class="material-symbols-outlined text-[12px]">visibility</span> 980
+                                    </span>
+</div>
+<div class="p-4">
+<h4 class="font-body-md text-body-md text-primary truncate">A5 Wagyu Striploin</h4>
+<div class="flex justify-between items-center mt-2">
+<span class="font-label-mono text-[12px] text-on-surface-variant">28 Orders Today</span>
+<span class="font-label-mono text-[12px] text-[#4ade80]">+12%</span>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="glass-panel rounded-xl overflow-hidden group cursor-pointer">
+<div class="h-32 bg-surface-container-high relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-elevated to-transparent z-10"></div>
+<img alt="Signature Cocktail AR Model" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A sophisticated, vibrantly colored craft cocktail in a crystal coupe glass, sitting on a polished black marble surface. Subtle reflections and dramatic side lighting create a moody, upscale lounge atmosphere. Background is completely dark." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9cXJdixF9ZSfZVTCgP4_6chThEBPh5MSkhIQOgkBJKvOLX0eObzFJ0Zi1gRDk0zeE8akc2erwQOflGp2dsHHykRimiZBPMIilQXJR5R8QQufBQuCJe-IFBMbzWR2lHN5vT7M3-ND695omq_jPI-TW-rsS2k0rNvPudERlXSNlEDNPE6SelDyq9ijt7SYH5zo1Jxsqaz8lMrhPDBIKYbr_HP1gd_MVM_Jb7qlIUewdERgt7cLe7gTlHhTNdIZ8PS3cV_g3PUEY6DMD"/>
+<span class="absolute top-2 right-2 z-20 bg-canvas-black/80 backdrop-blur-md px-2 py-1 rounded font-label-mono text-[10px] text-primary flex items-center gap-1 border border-border-subtle">
+<span class="material-symbols-outlined text-[12px]">visibility</span> 845
+                                    </span>
+</div>
+<div class="p-4">
+<h4 class="font-body-md text-body-md text-primary truncate">Smoked Old Fashioned</h4>
+<div class="flex justify-between items-center mt-2">
+<span class="font-label-mono text-[12px] text-on-surface-variant">65 Orders Today</span>
+<span class="font-label-mono text-[12px] text-on-surface-variant">-2%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Sidebar content): Requests & Activity -->
+<div class="flex flex-col gap-stack-lg">
+<!-- 3D Request Status -->
+<div class="glass-panel rounded-xl p-5">
+<h3 class="font-body-md text-body-md font-medium text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-accent-gold">model_training</span>
+                            3D Model Pipeline
+                        </h3>
+<div class="space-y-4">
+<!-- Request Item -->
+<div class="group">
+<div class="flex justify-between items-center mb-1">
+<span class="font-body-md text-[14px] text-primary">Seared Scallops</span>
+<span class="font-label-mono text-[10px] text-on-surface-variant">In Review</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[85%] relative">
+<div class="absolute inset-0 bg-white/50 w-1/3 animate-[translateX_2s_infinite]"></div>
+</div>
+</div>
+</div>
+<!-- Request Item -->
+<div class="group">
+<div class="flex justify-between items-center mb-1">
+<span class="font-body-md text-[14px] text-primary">Chocolate Sphere</span>
+<span class="font-label-mono text-[10px] text-on-surface-variant">Scanning</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[40%] opacity-60"></div>
+</div>
+</div>
+<!-- Request Item -->
+<div class="group">
+<div class="flex justify-between items-center mb-1">
+<span class="font-body-md text-[14px] text-primary">Spring Lamb Rack</span>
+<span class="font-label-mono text-[10px] text-on-surface-variant">Scheduled</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[10%] opacity-30"></div>
+</div>
+</div>
+</div>
+<button class="w-full mt-5 py-2 border border-border-subtle rounded-lg font-label-mono text-[12px] text-primary hover:bg-glass-fill transition-colors">View All Requests</button>
+</div>
+<!-- Recent Activity Log -->
+<div class="glass-panel rounded-xl p-5 flex-1">
+<h3 class="font-body-md text-body-md font-medium text-primary mb-4">Activity Log</h3>
+<div class="relative border-l border-border-subtle ml-3 space-y-6">
+<!-- Log Item -->
+<div class="relative pl-6">
+<div class="absolute w-2 h-2 bg-primary rounded-full -left-[4.5px] top-1.5 ring-4 ring-canvas-black"></div>
+<p class="font-body-md text-[14px] text-primary leading-tight">Menu Updated</p>
+<p class="font-label-mono text-[10px] text-on-surface-variant mt-1">Admin added 'Summer Tasting Menu' • 10m ago</p>
+</div>
+<!-- Log Item -->
+<div class="relative pl-6">
+<div class="absolute w-2 h-2 bg-surface-container-highest rounded-full -left-[4.5px] top-1.5 ring-4 ring-canvas-black border border-border-subtle"></div>
+<p class="font-body-md text-[14px] text-primary leading-tight">3D Asset Approved</p>
+<p class="font-label-mono text-[10px] text-on-surface-variant mt-1">Oyster Platter model set to Live • 1h ago</p>
+</div>
+<!-- Log Item -->
+<div class="relative pl-6">
+<div class="absolute w-2 h-2 bg-surface-container-highest rounded-full -left-[4.5px] top-1.5 ring-4 ring-canvas-black border border-border-subtle"></div>
+<p class="font-body-md text-[14px] text-primary leading-tight">Payout Processed</p>
+<p class="font-label-mono text-[10px] text-on-surface-variant mt-1">$4,250.00 transferred to bank • 3h ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Platform Analytics | Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#2f3131",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "error-container": "#93000a",
+                        "secondary-container": "#0372e4",
+                        "tertiary": "#ffffff",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary": "#2f3131",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "accent-gold": "#D4AF37",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#353434",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "outline": "#8e9192",
+                        "on-tertiary-container": "#636565",
+                        "inverse-on-surface": "#313030",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary": "#002f66",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-bright": "#3a3939",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "on-surface-variant": "#c4c7c8",
+                        "surface": "#141313",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "secondary": "#abc7ff",
+                        "on-secondary-container": "#fefcff",
+                        "on-primary-fixed-variant": "#454747",
+                        "primary": "#ffffff",
+                        "tertiary-container": "#e2e2e2",
+                        "outline-variant": "#444748",
+                        "surface-container": "#201f1f",
+                        "on-error": "#690005",
+                        "primary-container": "#e2e2e2",
+                        "secondary-fixed": "#d7e2ff",
+                        "canvas-black": "#050505",
+                        "surface-elevated": "#0A0A0A",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-variant": "#353434",
+                        "on-secondary-fixed": "#001b3f",
+                        "background": "#141313",
+                        "surface-dim": "#141313",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#c6c6c7",
+                        "primary-fixed": "#e2e2e2",
+                        "inverse-primary": "#5d5f5f",
+                        "on-primary-container": "#636565",
+                        "tertiary-fixed": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "container-max": "1440px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist", "sans-serif"],
+                        "label-mono": ["JetBrains Mono", "monospace"],
+                        "display-2xl": ["Geist", "sans-serif"],
+                        "headline-lg-mobile": ["Geist", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-2xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; background-color: #050505; color: #e5e2e1; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+        }
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%; height: 80%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        /* Chart Placeholders - normally done via Chart.js or D3 */
+        .chart-grid {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .chart-line {
+            fill: none; stroke: #ffffff; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round;
+        }
+        .chart-area {
+            fill: url(#fadeGradient);
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-canvas-black text-on-surface antialiased">
+<!-- SideNavBar (from JSON) -->
+<aside class="w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl hidden md:flex flex-col flex-shrink-0 z-40">
+<div class="flex flex-col h-full p-stack-md">
+<!-- Header -->
+<div class="mb-stack-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-border-subtle">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYuCrUUrA0yGruhWffFVU5zujHxdBGe-V-dEbs0hFNsKDRNyPKcREGPKCBoEOZ9JswC-_GIAOYW9b694s2CpX0bC1g1dVzvsL4rfMbVWTDYFzjdEJBI4yZ601HMcZvPNyL3C66QoEEZMh7Xo-CLxU_3vI87-W_mxYFDtG3-2J5PfVgaFQqjoWpv7xh1QuoariVJfgjWWsstJIXPeemQWtNhAWZzKFsXkiEXjH9iy_oDGNahDmtd9Zbfoaaiymw9dUtinERR2VGcjF2"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter text-xl leading-tight">Aether AR</h1>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Super Admin</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-light text-[20px] group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-body-md text-body-md text-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-light text-[20px] group-hover:scale-110 transition-transform">storefront</span>
+<span class="font-body-md text-body-md text-sm">Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-light text-[20px] group-hover:scale-110 transition-transform">payments</span>
+<span class="font-body-md text-body-md text-sm">Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-light text-[20px] group-hover:scale-110 transition-transform">view_in_ar</span>
+<span class="font-body-md text-body-md text-sm">3D Assets</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300 transform scale-[0.98]" href="#">
+<span class="material-symbols-outlined font-normal text-[20px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span class="font-body-md text-body-md text-sm">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-light text-[20px] group-hover:scale-110 transition-transform">settings</span>
+<span class="font-body-md text-body-md text-sm">Settings</span>
+</a>
+</nav>
+<!-- Footer Links -->
+<div class="mt-auto flex flex-col gap-1 border-t border-border-subtle pt-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-light text-[20px] group-hover:scale-110 transition-transform">help</span>
+<span class="font-body-md text-body-md text-sm">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-light text-[20px] group-hover:scale-110 transition-transform">logout</span>
+<span class="font-body-md text-body-md text-sm">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-screen overflow-hidden bg-background">
+<!-- TopAppBar (from JSON) -->
+<header class="h-16 sticky top-0 z-30 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md flex-shrink-0">
+<div class="flex justify-between items-center px-gutter max-w-container-max mx-auto w-full h-full">
+<!-- Search (on_left) -->
+<div class="flex-1 flex items-center">
+<div class="relative w-64 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full bg-transparent border-b border-border-subtle text-primary font-body-md text-sm pl-10 pr-4 py-2 focus:outline-none focus:border-primary transition-colors placeholder-on-surface-variant" placeholder="Search analytics..." type="text"/>
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-surface-container-high active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer p-2 rounded-full hover:bg-surface-container-high active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[20px]">contrast</span>
+</button>
+<!-- Profile Image (Mobile Fallback/Alternative to Sidebar) -->
+<div class="md:hidden w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-border-subtle ml-2">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB76J9XI0RVQwjUs2eg78YAn9aFrF9UZIZIy9NF7DLYa_5pYYF6ODUzU439AZNw7yq0QORFkJfpeKZid9EHwYxqCoYoKGoFLUx1nxCs_YedkrdDulFivrdogRPgvKs11jZgwHPyEiO1Va8js5GBQJMovnjilvGTZLLup7NVZsnw3Q6J4BoKeEdYL445o-6zCXKmGXYvW39daMvZfsz4M1p-pBvGP9xW_y--zFrqUuK-ckFhQWpDaQlHa9lTkf1qazUIOH80_hW9x_HH"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<main class="flex-1 overflow-y-auto p-gutter lg:px-stack-lg max-w-container-max mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Platform Analytics</h2>
+<p class="font-body-md text-on-surface-variant mt-1 text-sm">Comprehensive overview of system performance and growth.</p>
+</div>
+<!-- Date Picker -->
+<button class="glass-panel px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-surface-container-high transition-colors active:scale-98">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">calendar_today</span>
+<span class="font-body-md text-sm text-primary">Last 30 Days</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+</button>
+</div>
+<!-- Key Metric Cards (Row 1) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-stack-md mb-stack-lg">
+<!-- Card 1 -->
+<div class="glass-panel p-5 rounded-xl glow-effect hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="font-body-md text-on-surface-variant text-sm">Total Revenue</span>
+<span class="material-symbols-outlined text-accent-gold text-[20px]">account_balance_wallet</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-primary text-2xl font-semibold">$1.24M</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-[12px] font-label-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-[#4ADE80] text-[14px]">trending_up</span>
+<span class="text-[#4ADE80]">+12.5%</span> vs last period
+                    </div>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel p-5 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="font-body-md text-on-surface-variant text-sm">Active Subscriptions</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">workspace_premium</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-primary text-2xl font-semibold">842</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-[12px] font-label-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-[#4ADE80] text-[14px]">check_circle</span>
+<span>98% Retention</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel p-5 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="font-body-md text-on-surface-variant text-sm">Avg. Order Value</span>
+<span class="material-symbols-outlined text-primary-fixed-dim text-[20px]">receipt_long</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-primary text-2xl font-semibold">$185.00</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-[12px] font-label-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-[#4ADE80] text-[14px]">trending_up</span>
+<span class="text-[#4ADE80]">+4.2%</span> vs last period
+                    </div>
+</div>
+<!-- Card 4 -->
+<div class="glass-panel p-5 rounded-xl hover:-translate-y-1 transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<span class="font-body-md text-on-surface-variant text-sm">3D Conversion Rate</span>
+<span class="material-symbols-outlined text-secondary-container text-[20px]">qr_code_scanner</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-primary text-2xl font-semibold">24.8%</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-[12px] font-label-mono text-on-surface-variant">
+<span>Scans to AR Views</span>
+</div>
+</div>
+</div>
+<!-- Main Chart Section (Row 2) -->
+<div class="glass-panel p-stack-md rounded-xl mb-stack-lg">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h3 class="font-body-md font-semibold text-primary">Revenue vs. Target</h3>
+<p class="font-label-mono text-[12px] text-on-surface-variant mt-1">Monthly recurring revenue (MRR) trajectory</p>
+</div>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 font-label-mono text-[10px] text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-primary"></div> Actual</span>
+<span class="flex items-center gap-1 font-label-mono text-[10px] text-on-surface-variant"><div class="w-2 h-2 rounded-full border border-border-subtle bg-transparent"></div> Target</span>
+</div>
+</div>
+<!-- SVG Chart Placeholder (Stylized for Linear Aesthetic) -->
+<div class="h-64 w-full relative chart-grid border-l border-b border-border-subtle rounded-bl-sm flex items-end px-2">
+<svg class="w-full h-full absolute bottom-0 left-0" preserveaspectratio="none" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="fadeGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop>
+</lineargradient>
+<lineargradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0%" stop-color="#8e9192"></stop>
+<stop offset="100%" stop-color="#ffffff"></stop>
+</lineargradient>
+</defs>
+<!-- Area Fill -->
+<path class="chart-area" d="M0,200 L0,150 Q100,140 200,160 T400,120 T600,80 T800,40 T1000,20 L1000,200 Z"></path>
+<!-- Target Line (Dashed) -->
+<path d="M0,130 L200,120 L400,100 L600,80 L800,60 L1000,40" fill="none" stroke="rgba(255,255,255,0.2)" stroke-dasharray="4 4" stroke-width="2"></path>
+<!-- Actual Line -->
+<path class="chart-line" d="M0,150 Q100,140 200,160 T400,120 T600,80 T800,40 T1000,20" stroke="url(#lineGrad)"></path>
+<!-- Data Points -->
+<circle cx="800" cy="40" fill="#141313" r="4" stroke="#ffffff" stroke-width="2"></circle>
+<circle class="animate-pulse" cx="1000" cy="20" fill="#141313" r="4" stroke="#ffffff" stroke-width="2"></circle>
+</svg>
+<!-- X-Axis Labels -->
+<div class="absolute -bottom-6 w-full flex justify-between font-label-mono text-[10px] text-on-surface-variant pr-4">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+</div>
+</div>
+</div>
+<!-- Secondary Charts (Row 3) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg mb-stack-lg">
+<!-- Bar Chart: Restaurant Growth -->
+<div class="glass-panel p-stack-md rounded-xl">
+<div class="mb-6">
+<h3 class="font-body-md font-semibold text-primary">Restaurant Growth</h3>
+<p class="font-label-mono text-[12px] text-on-surface-variant mt-1">New signups by month</p>
+</div>
+<div class="h-48 flex items-end gap-2 mt-4 px-2">
+<!-- Bars -->
+<div class="flex-1 bg-surface-container-high hover:bg-primary transition-colors rounded-t-sm h-[30%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-mono text-[10px] bg-canvas-black px-1 rounded text-primary transition-opacity">12</div>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary transition-colors rounded-t-sm h-[45%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-mono text-[10px] bg-canvas-black px-1 rounded text-primary transition-opacity">18</div>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary transition-colors rounded-t-sm h-[35%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-mono text-[10px] bg-canvas-black px-1 rounded text-primary transition-opacity">14</div>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary transition-colors rounded-t-sm h-[60%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-mono text-[10px] bg-canvas-black px-1 rounded text-primary transition-opacity">24</div>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary transition-colors rounded-t-sm h-[80%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-mono text-[10px] bg-canvas-black px-1 rounded text-primary transition-opacity">32</div>
+</div>
+<div class="flex-1 bg-primary border border-border-subtle rounded-t-sm h-[100%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 font-label-mono text-[10px] bg-canvas-black px-1 rounded text-primary transition-opacity z-10">40</div>
+</div>
+</div>
+<div class="w-full flex justify-between font-label-mono text-[10px] text-on-surface-variant mt-2 px-2">
+<span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span>
+</div>
+</div>
+<!-- Progress/Volume Chart: 3D Asset Production -->
+<div class="glass-panel p-stack-md rounded-xl">
+<div class="mb-6">
+<h3 class="font-body-md font-semibold text-primary">3D Asset Production Volume</h3>
+<p class="font-label-mono text-[12px] text-on-surface-variant mt-1">Completed vs. Requested models</p>
+</div>
+<div class="space-y-6 mt-4">
+<!-- Category 1 -->
+<div>
+<div class="flex justify-between font-label-mono text-[12px] mb-1">
+<span class="text-on-surface">Fine Dining Scans</span>
+<span class="text-primary">240 / 300</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[80%]"></div>
+</div>
+</div>
+<!-- Category 2 -->
+<div>
+<div class="flex justify-between font-label-mono text-[12px] mb-1">
+<span class="text-on-surface">Cocktail Models</span>
+<span class="text-primary">150 / 180</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[83%] opacity-80"></div>
+</div>
+</div>
+<!-- Category 3 -->
+<div>
+<div class="flex justify-between font-label-mono text-[12px] mb-1">
+<span class="text-on-surface">Ambient Props</span>
+<span class="text-primary">45 / 100</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-[45%] opacity-50"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Table (Bottom) -->
+<div class="glass-panel rounded-xl overflow-hidden mb-stack-lg">
+<div class="p-5 border-b border-border-subtle flex justify-between items-center bg-[rgba(255,255,255,0.01)]">
+<h3 class="font-body-md font-semibold text-primary">Top Performing Restaurants</h3>
+<button class="text-[12px] font-label-mono text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+                        View All <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-[rgba(255,255,255,0.02)]">
+<th class="py-3 px-5 font-label-mono text-[10px] uppercase text-on-surface-variant font-medium">Restaurant</th>
+<th class="py-3 px-5 font-label-mono text-[10px] uppercase text-on-surface-variant font-medium">Tier</th>
+<th class="py-3 px-5 font-label-mono text-[10px] uppercase text-on-surface-variant font-medium text-right">Revenue (YTD)</th>
+<th class="py-3 px-5 font-label-mono text-[10px] uppercase text-on-surface-variant font-medium text-right">3D Engagement</th>
+<th class="py-3 px-5 font-label-mono text-[10px] uppercase text-on-surface-variant font-medium text-center">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-sm">
+<tr class="border-b border-border-subtle hover:bg-[rgba(255,255,255,0.02)] transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-border-subtle flex items-center justify-center font-label-mono text-[10px] text-primary">EL</div>
+<span class="text-primary font-medium">El Bulli Reserve</span>
+</div>
+</td>
+<td class="py-4 px-5 text-on-surface-variant text-[13px]">Enterprise</td>
+<td class="py-4 px-5 text-right font-label-mono text-primary">$142,500</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-[#4ADE80] w-[92%]"></div></div>
+<span class="font-label-mono text-[12px] text-on-surface-variant">92%</span>
+</div>
+</td>
+<td class="py-4 px-5 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-label-mono text-[10px] bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20">Active</span>
+</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-[rgba(255,255,255,0.02)] transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-border-subtle flex items-center justify-center font-label-mono text-[10px] text-primary">NO</div>
+<span class="text-primary font-medium">Noma Experiences</span>
+</div>
+</td>
+<td class="py-4 px-5 text-on-surface-variant text-[13px]">Enterprise</td>
+<td class="py-4 px-5 text-right font-label-mono text-primary">$128,400</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-[#4ADE80] w-[88%]"></div></div>
+<span class="font-label-mono text-[12px] text-on-surface-variant">88%</span>
+</div>
+</td>
+<td class="py-4 px-5 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-label-mono text-[10px] bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20">Active</span>
+</td>
+</tr>
+<tr class="hover:bg-[rgba(255,255,255,0.02)] transition-colors group">
+<td class="py-4 px-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-border-subtle flex items-center justify-center font-label-mono text-[10px] text-primary">AL</div>
+<span class="text-primary font-medium">Alinea Spatial</span>
+</div>
+</td>
+<td class="py-4 px-5 text-on-surface-variant text-[13px]">Professional</td>
+<td class="py-4 px-5 text-right font-label-mono text-primary">$86,200</td>
+<td class="py-4 px-5 text-right">
+<div class="flex items-center justify-end gap-2">
+<div class="w-16 h-1 bg-surface-container-high rounded-full overflow-hidden"><div class="h-full bg-primary w-[75%]"></div></div>
+<span class="font-label-mono text-[12px] text-on-surface-variant">75%</span>
+</div>
+</td>
+<td class="py-4 px-5 text-center">
+<span class="inline-flex items-center px-2 py-0.5 rounded font-label-mono text-[10px] bg-[#4ADE80]/10 text-[#4ADE80] border border-[#4ADE80]/20">Active</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Support &amp; Tickets | Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#1c1b1b",
+                      "surface-container-high": "#2a2a2a",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "tertiary-fixed": "#e2e2e2",
+                      "surface-variant": "#353434",
+                      "surface-container": "#201f1f",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "error-container": "#93000a",
+                      "inverse-surface": "#e5e2e1",
+                      "on-primary-container": "#636565",
+                      "surface-container-highest": "#353434",
+                      "canvas-black": "#050505",
+                      "primary": "#ffffff",
+                      "primary-fixed": "#e2e2e2",
+                      "on-surface-variant": "#c4c7c8",
+                      "on-primary-fixed": "#1a1c1c",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "secondary-fixed": "#d7e2ff",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "secondary-container": "#0372e4",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "surface-elevated": "#0A0A0A",
+                      "tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#454747",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "on-secondary": "#002f66",
+                      "surface": "#141313",
+                      "on-secondary-container": "#fefcff",
+                      "on-error-container": "#ffdad6",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "surface-bright": "#3a3939",
+                      "secondary": "#abc7ff",
+                      "surface-container-lowest": "#0e0e0e",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "primary-container": "#e2e2e2",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#001b3f",
+                      "outline-variant": "#444748",
+                      "surface-dim": "#141313",
+                      "background": "#141313",
+                      "accent-gold": "#D4AF37",
+                      "outline": "#8e9192",
+                      "on-tertiary-container": "#636565",
+                      "on-surface": "#e5e2e1",
+                      "inverse-on-surface": "#313030",
+                      "tertiary-container": "#e2e2e2",
+                      "surface-tint": "#c6c6c7",
+                      "on-background": "#e5e2e1",
+                      "on-primary": "#2f3131",
+                      "inverse-primary": "#5d5f5f",
+                      "on-tertiary": "#2f3131"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "stack-lg": "32px",
+                      "gutter": "24px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "container-max": "1440px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-canvas-black text-primary font-body-md min-h-screen flex selection:bg-primary selection:text-canvas-black">
+<!-- SideNavBar -->
+<aside class="w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex flex-col h-full p-stack-md hidden md:flex z-40">
+<div class="mb-stack-lg flex items-center gap-3 px-4 py-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" data-alt="A cinematic, high-contrast portrait of a professional looking away from the camera, bathed in cool, subtle blue light against a pitch-black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ6zVZ_ZSwveA9SLx4lXKWie9REMp0fBQ7tqIG9eso0cu7ARC2JKEtBW0Flu4Dawb_m3KIULNEeVJcWguIa8MLkQksDEHJbTPMMAoc3c7fMYVG9Yt-mEKdeFZw3ezBGY7vjdroLpSICVchoyN8wO36nOTzNUQCYw_LsADSDwl7RVDVOr0VxE95-KysKJsVyg4xng5K2FwVgYljqhkGzycJqbHF7RmU9sTZer-mKmKkPrijEJY2XhvyfBmFmc1SGXWrw6V25lXvRY9b"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter" style="font-size: 18px; line-height: 24px;">Aether AR</h1>
+<p class="text-on-surface-variant font-label-mono text-label-mono opacity-80">Super Admin</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">storefront</span>
+                Restaurants
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">payments</span>
+                Plans
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">view_in_ar</span>
+                3D Assets
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">insights</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300" href="#" style="transform: scale(0.98);">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 400; font-variation-settings: 'FILL' 1;">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-stack-md border-t border-border-subtle flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-colors hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">logout</span>
+                Sign Out
+            </a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar (Mobile & Global Actions) -->
+<header class="h-16 sticky top-0 z-50 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md flex justify-between items-center px-gutter max-w-container-max mx-auto w-full">
+<div class="flex items-center gap-4 md:hidden">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">menu</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</span>
+</div>
+<div class="flex-1 flex items-center hidden md:flex">
+<div class="relative w-64 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-50 group-focus-within:opacity-100 group-focus-within:text-primary transition-colors" style="font-size: 18px;">search</span>
+<input class="w-full bg-transparent border-0 border-b border-border-subtle pl-10 pr-4 py-2 text-primary font-body-md text-body-md focus:ring-0 focus:border-primary transition-colors placeholder:text-on-surface-variant placeholder:opacity-50" placeholder="Search across Aether..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer w-8 h-8 flex items-center justify-center rounded-full hover:bg-glass-fill hover:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer w-8 h-8 flex items-center justify-center rounded-full hover:bg-glass-fill hover:scale-95 duration-200">
+<span class="material-symbols-outlined" style="font-size: 20px; font-weight: 300;">contrast</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden md:hidden border border-border-subtle">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" data-alt="A cinematic, high-contrast portrait of a professional looking away from the camera, bathed in cool, subtle blue light against a pitch-black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu8ZthlgJq80ZW03GpFWys5Af_99MtDWmqLrO0JTofAmrgbZKR61olUno8asWC3nj_wIqFR0bWwc5ymWwIhBl3AoMPFFRKeEZlQIxdTfc-7zkk7RV46zcBuZm5QjdrsNmU7XXrpgWfQ49xG2HXtudsTB8EVktkNYzxgcyz_FrP6Yxq-Ho95DH5fg9Mzg1gCxBUE-MNSfRUUqXDM-kDJd8nD2R-hU6l9rgHctaqrDLjjGmkbXaaGH5EihlOdF4voavwfgKxZvJL_I2L"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 px-gutter py-stack-lg max-w-[1200px] mx-auto w-full">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-stack-lg">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tighter mb-2">Support &amp; Tickets</h2>
+<p class="text-on-surface-variant font-body-md text-body-md max-w-xl">Manage and resolve restaurant inquiries and platform issues.</p>
+</div>
+<button class="bg-primary text-canvas-black font-body-md font-medium px-6 py-2.5 rounded-lg hover:scale-[0.98] transition-transform duration-300 flex items-center gap-2 w-fit">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    New Ticket
+                </button>
+</div>
+<!-- KPI Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-stack-lg">
+<!-- Card 1 -->
+<div class="bg-glass-fill border border-border-subtle rounded-xl p-5 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-[rgba(255,255,255,0.02)] to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-mono text-label-mono uppercase tracking-wider">Open Tickets</span>
+<span class="material-symbols-outlined text-error" style="font-size: 18px; font-weight: 300;">assignment_late</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="font-headline-lg text-headline-lg text-primary">24</span>
+<span class="text-error text-sm font-medium">Urgent focus</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-glass-fill border border-border-subtle rounded-xl p-5 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-[rgba(255,255,255,0.02)] to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-mono text-label-mono uppercase tracking-wider">Avg. Response Time</span>
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px; font-weight: 300;">timer</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="font-headline-lg text-headline-lg text-primary">1.2 hrs</span>
+<span class="text-secondary text-sm font-medium flex items-center"><span class="material-symbols-outlined" style="font-size: 14px;">arrow_downward</span> Improving</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-glass-fill border border-border-subtle rounded-xl p-5 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-[rgba(255,255,255,0.02)] to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-mono text-label-mono uppercase tracking-wider">Resolution Rate</span>
+<span class="material-symbols-outlined text-primary" style="font-size: 18px; font-weight: 300;">check_circle</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="font-headline-lg text-headline-lg text-primary">94%</span>
+<span class="text-on-surface-variant text-sm font-medium">High</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-glass-fill border border-border-subtle rounded-xl p-5 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-[rgba(255,255,255,0.02)] to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="text-on-surface-variant font-label-mono text-label-mono uppercase tracking-wider">Pending Feedback</span>
+<span class="material-symbols-outlined text-accent-gold" style="font-size: 18px; font-weight: 300;">pending_actions</span>
+</div>
+<div class="flex items-baseline gap-3">
+<span class="font-headline-lg text-headline-lg text-primary">8</span>
+<span class="text-accent-gold text-sm font-medium">Action needed</span>
+</div>
+</div>
+</div>
+<!-- Table Section -->
+<div class="bg-surface-elevated border border-border-subtle rounded-xl overflow-hidden flex flex-col">
+<!-- Table Toolbar -->
+<div class="p-4 border-b border-border-subtle flex flex-col md:flex-row gap-4 justify-between items-center bg-glass-fill">
+<div class="relative w-full md:w-80 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-50 group-focus-within:opacity-100 group-focus-within:text-primary transition-colors" style="font-size: 18px;">search</span>
+<input class="w-full bg-surface-container-low border border-border-subtle rounded-lg pl-10 pr-4 py-2 text-primary font-body-md text-sm focus:ring-1 focus:ring-primary focus:border-primary transition-colors placeholder:text-on-surface-variant placeholder:opacity-50" placeholder="Search tickets..." type="text"/>
+</div>
+<div class="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+<button class="px-3 py-1.5 rounded-lg border border-border-subtle text-on-surface-variant font-label-mono text-xs hover:bg-glass-fill hover:text-primary transition-colors whitespace-nowrap flex items-center gap-1">
+                            Status <span class="material-symbols-outlined" style="font-size: 14px;">expand_more</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg border border-border-subtle text-on-surface-variant font-label-mono text-xs hover:bg-glass-fill hover:text-primary transition-colors whitespace-nowrap flex items-center gap-1">
+                            Priority <span class="material-symbols-outlined" style="font-size: 14px;">expand_more</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg border border-border-subtle text-on-surface-variant font-label-mono text-xs hover:bg-glass-fill hover:text-primary transition-colors whitespace-nowrap flex items-center gap-1">
+                            Category <span class="material-symbols-outlined" style="font-size: 14px;">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-surface-container-low/50 text-on-surface-variant font-label-mono text-xs uppercase tracking-wider">
+<th class="p-4 font-medium">Ticket ID</th>
+<th class="p-4 font-medium">Subject &amp; Restaurant</th>
+<th class="p-4 font-medium hidden md:table-cell">Priority</th>
+<th class="p-4 font-medium hidden sm:table-cell">Status</th>
+<th class="p-4 font-medium hidden lg:table-cell">Assigned To</th>
+<th class="p-4 font-medium hidden xl:table-cell">Last Activity</th>
+<th class="p-4 font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle text-sm">
+<!-- Row 1 -->
+<tr class="hover:bg-glass-fill transition-colors group cursor-pointer">
+<td class="p-4 font-label-mono text-on-surface-variant">#T-8821</td>
+<td class="p-4">
+<div class="text-primary font-medium mb-0.5">AR Model Lighting Issue</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 12px;">store</span> Zenith Sushi
+                                    </div>
+</td>
+<td class="p-4 hidden md:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error/10 text-error font-label-mono text-[10px] uppercase border border-error/20">High</span>
+</td>
+<td class="p-4 hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 text-secondary text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Open
+                                    </span>
+</td>
+<td class="p-4 hidden lg:table-cell">
+<div class="flex items-center gap-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border border-border-subtle object-cover" data-alt="Small circular portrait of a smiling male professional with glasses, soft studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-_LBO2bMuacP6oIuwrYIBkYjhwm6-hRX4OxkKpHuUGuuC3IaoIRxpKFpL2qcOL_WLRSYBCzDVyxdYglRtj1C65cg_tJ1GqB_Vr5ducb-Y7VNm0yh3tjMlsABanGNJSbf4h4RIqQSRY_lS0mZ9mdJi2RAPW3-8r5_ATDshoBtPhiD1vJa36OL3l7TMcvsbkOdhhL0-Jjye-1M0VCWC7B8vl9xtttW_UgTAiHsW7UpZ9cOxEpvp9uefy1Ed73AAXPp3HlrJ01hUjY3c"/>
+<span class="text-on-surface-variant">Alex C.</span>
+</div>
+</td>
+<td class="p-4 hidden xl:table-cell text-on-surface-variant text-xs">
+                                    10 mins ago
+                                </td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 opacity-0 group-hover:opacity-100 focus:opacity-100 rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-glass-fill transition-colors group cursor-pointer">
+<td class="p-4 font-label-mono text-on-surface-variant">#T-8820</td>
+<td class="p-4">
+<div class="text-primary font-medium mb-0.5">Billing Discrepancy Q3</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 12px;">store</span> L'Aura Bistro
+                                    </div>
+</td>
+<td class="p-4 hidden md:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-accent-gold/10 text-accent-gold font-label-mono text-[10px] uppercase border border-accent-gold/20">Medium</span>
+</td>
+<td class="p-4 hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 text-accent-gold text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-gold"></span> Pending
+                                    </span>
+</td>
+<td class="p-4 hidden lg:table-cell">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full border border-border-subtle bg-surface-container flex items-center justify-center text-xs font-medium text-on-surface-variant">S</div>
+<span class="text-on-surface-variant">Sarah M.</span>
+</div>
+</td>
+<td class="p-4 hidden xl:table-cell text-on-surface-variant text-xs">
+                                    2 hours ago
+                                </td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 opacity-0 group-hover:opacity-100 focus:opacity-100 rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-glass-fill transition-colors group cursor-pointer">
+<td class="p-4 font-label-mono text-on-surface-variant">#T-8819</td>
+<td class="p-4">
+<div class="text-primary font-medium mb-0.5">Account Access Locked</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 12px;">store</span> Veloce
+                                    </div>
+</td>
+<td class="p-4 hidden md:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error/10 text-error font-label-mono text-[10px] uppercase border border-error/20">High</span>
+</td>
+<td class="p-4 hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 text-primary text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-primary opacity-50"></span> Closed
+                                    </span>
+</td>
+<td class="p-4 hidden lg:table-cell">
+<div class="flex items-center gap-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border border-border-subtle object-cover" data-alt="Small circular portrait of a professional woman with dark hair, minimal makeup, dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsbXHxt_cbCNP3m1lYpAcvqtSMjoC88jIgOQ7dTotiUVaR2nuvMhJqb80vyaluVo9kzoo8Tv58spwCaRb7FmhyX6PQJ7URp_fgA1fpBTq9sNliBqZSoxBzGYlrw7UBnho2C3OEBV9crhVSx2lzKhbRCy9N2tCOTOMyXwfGN1cHkSM2RgwGZNHxkXaOw-eFjOMFh-CbkspZibM-79EVfVW9VfJaf_HtuamcwRObAO89dRSVBVFIQth_qOKYAUSaZfFuCizRTwLfdV6j"/>
+<span class="text-on-surface-variant">Emma T.</span>
+</div>
+</td>
+<td class="p-4 hidden xl:table-cell text-on-surface-variant text-xs">
+                                    Yesterday
+                                </td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 opacity-0 group-hover:opacity-100 focus:opacity-100 rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-glass-fill transition-colors group cursor-pointer">
+<td class="p-4 font-label-mono text-on-surface-variant">#T-8818</td>
+<td class="p-4">
+<div class="text-primary font-medium mb-0.5">Texture mapping error on dessert</div>
+<div class="text-on-surface-variant text-xs flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 12px;">store</span> The Alchemist
+                                    </div>
+</td>
+<td class="p-4 hidden md:table-cell">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-bright/50 text-on-surface-variant font-label-mono text-[10px] uppercase border border-border-subtle">Low</span>
+</td>
+<td class="p-4 hidden sm:table-cell">
+<span class="inline-flex items-center gap-1.5 text-secondary text-xs font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Open
+                                    </span>
+</td>
+<td class="p-4 hidden lg:table-cell">
+<div class="flex items-center gap-2">
+<img alt="Avatar" class="w-6 h-6 rounded-full border border-border-subtle object-cover" data-alt="Small circular portrait of a professional looking away from the camera, bathed in cool, subtle blue light against a pitch-black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF6nodtXVbAR5mkVcWrmHyflKk_2V_-ybB1yB14ty2eQ9ZxppBaamfNZQia1jsSI1JqRd1czsulY7FaAAennnjt1lnkC69h5id5Ytkc3F54EdoDx1ysptOfLN34eTMwgmdyA71sY1pEK48LExrHJxexuSMbpHcOGmeO_rM-t5_jhLIp9U2qS13y6TIsZXPJXckrtZ8hRTFcfi6zz4ylnguk7k2yN3-aa4XMR_tRQCTcJIH6B1BfYnKCiIziVmhaTngodpmToCypJFt"/>
+<span class="text-on-surface-variant">Admin</span>
+</div>
+</td>
+<td class="p-4 hidden xl:table-cell text-on-surface-variant text-xs">
+                                    Yesterday
+                                </td>
+<td class="p-4 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 opacity-0 group-hover:opacity-100 focus:opacity-100 rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined" style="font-size: 20px;">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-4 border-t border-border-subtle bg-surface-container-low flex justify-between items-center text-sm text-on-surface-variant">
+<span>Showing 1 to 10 of 124 entries</span>
+<div class="flex gap-1">
+<button class="px-2 py-1 rounded hover:bg-glass-fill hover:text-primary transition-colors disabled:opacity-50"><span class="material-symbols-outlined" style="font-size: 18px;">chevron_left</span></button>
+<button class="px-3 py-1 rounded bg-surface-bright text-primary">1</button>
+<button class="px-3 py-1 rounded hover:bg-glass-fill hover:text-primary transition-colors">2</button>
+<button class="px-3 py-1 rounded hover:bg-glass-fill hover:text-primary transition-colors">3</button>
+<span class="px-2 py-1">...</span>
+<button class="px-2 py-1 rounded hover:bg-glass-fill hover:text-primary transition-colors"><span class="material-symbols-outlined" style="font-size: 18px;">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        /* Custom Scrollbar for a more premium feel in dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353434; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444748; 
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>

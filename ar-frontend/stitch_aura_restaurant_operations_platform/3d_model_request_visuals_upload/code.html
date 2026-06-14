@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Upload Reference Visuals - Aura AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "surface-container": "#201f1f",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "error-container": "#93000a",
+                        "tertiary-fixed": "#e2e2e2",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-variant": "#353434",
+                        "secondary-fixed": "#d7e2ff",
+                        "surface-elevated": "#0A0A0A",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "secondary-container": "#0372e4",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "inverse-surface": "#e5e2e1",
+                        "on-primary-container": "#636565",
+                        "surface-container-highest": "#353434",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "canvas-black": "#050505",
+                        "primary": "#ffffff",
+                        "primary-fixed": "#e2e2e2",
+                        "on-surface-variant": "#c4c7c8",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-error-container": "#ffdad6",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "surface-bright": "#3a3939",
+                        "secondary": "#abc7ff",
+                        "primary-container": "#e2e2e2",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#001b3f",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "on-primary-fixed-variant": "#454747",
+                        "tertiary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "on-secondary": "#002f66",
+                        "surface": "#141313",
+                        "on-primary": "#2f3131",
+                        "on-tertiary": "#2f3131",
+                        "inverse-primary": "#5d5f5f",
+                        "background": "#141313",
+                        "accent-gold": "#D4AF37",
+                        "outline": "#8e9192",
+                        "on-tertiary-container": "#636565",
+                        "outline-variant": "#444748",
+                        "surface-dim": "#141313",
+                        "on-background": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-container": "#e2e2e2",
+                        "surface-tint": "#c6c6c7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Geist"],
+                        "display-2xl": ["Geist"],
+                        "body-md": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-2xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Scrollbar for a premium feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Glow Effect Utility */
+        .glow-accent {
+            position: relative;
+        }
+        .glow-accent::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Framer Motion-like interactions */
+        .hover-scale {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-scale:hover {
+            transform: scale(0.98);
+        }
+        .active-scale:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body class="bg-canvas-black text-on-surface font-body-md antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col h-full py-stack-lg bg-surface-container-low border-r border-border-subtle docked fixed left-0 w-[240px] z-40">
+<div class="px-gutter mb-stack-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-glass-fill border border-border-subtle overflow-hidden flex-shrink-0">
+<img alt="Restaurant Logo" class="w-full h-full object-cover" data-alt="A stylized, minimalist logo for a high-end restaurant, featuring a clean, abstract geometric shape resembling a plate or cloche. The logo is monochromatic, set against a dark background, reflecting a luxurious and cinematic aesthetic consistent with the elite Aura AR brand identity. Lighting is subtle, emphasizing precision and elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLu-dLfgF_8A-et-kMuiwyONI14AEsJ44FCuvarB6csOuj3Rup5GWfgw_fzAhzI_xhNHKzjzX30ukrtPJMkzoPPwEsS__dp_OsGu011FuhgldmL0GGyD0xPdyos9pS8TAtlHKdaYU-bm0yVbAFWUmSgKjKMTpAy0r-JIK1Qix2s5wua5-B4Y5P2XUIJFn0vJBBbClOsu2RUjj2FnfNaYV4g9lg5U9I3Ggw2Z1DXicuhG317d367UkBksjjcHxbEvslvGB1Nk2Zd70o"/>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary text-sm font-semibold truncate leading-tight">L'Eclat Gastronomy</h2>
+<p class="font-label-mono text-label-mono text-accent-gold opacity-80 uppercase tracking-widest text-[10px]">Elite Tier</p>
+</div>
+</div>
+<ul class="flex-1 px-3 space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity">dashboard</span>
+<span class="font-body-md text-sm">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary font-bold bg-glass-fill border-r-2 border-accent-gold group hover-scale" href="#">
+<span class="material-symbols-outlined text-[18px] text-accent-gold" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+<span class="font-body-md text-sm">Active Requests</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity">view_in_ar</span>
+<span class="font-body-md text-sm">Gallery</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity">insights</span>
+<span class="font-body-md text-sm">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity">settings</span>
+<span class="font-body-md text-sm">Settings</span>
+</a>
+</li>
+</ul>
+<div class="px-gutter mt-auto pt-stack-lg border-t border-border-subtle">
+<button class="w-full py-2 px-4 rounded-lg bg-glass-fill border border-border-subtle text-primary font-label-mono text-label-mono hover:bg-surface-container-highest transition-colors mb-4 hover-scale">Upgrade to Pro</button>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70">support_agent</span>
+<span class="font-body-md text-sm">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70">logout</span>
+<span class="font-body-md text-sm">Sign Out</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-[240px] h-screen overflow-hidden relative">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 md:left-[240px] right-0 w-auto z-50 flex justify-between items-center px-gutter h-16 bg-glass-fill backdrop-blur-xl border-b border-border-subtle">
+<div class="flex items-center gap-6">
+<!-- Mobile Menu Trigger (hidden on desktop) -->
+<button class="md:hidden text-primary hover:text-accent-gold transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter text-xl">Aura AR</div>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex items-center gap-6 ml-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 text-sm" href="#">Models</a>
+<a class="text-primary font-bold border-b-2 border-accent-gold pb-1 text-sm hover:text-primary transition-colors duration-200" href="#">Requests</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 text-sm" href="#">Studio</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 text-sm" href="#">Vault</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden sm:flex items-center gap-2 bg-primary text-canvas-black px-4 py-2 rounded-full font-label-mono text-label-mono font-bold hover-scale active-scale">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                    New Request
+                </button>
+<div class="flex items-center gap-2 border-l border-border-subtle pl-4 ml-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-full text-on-surface-variant hover:text-primary hover:bg-glass-fill transition-all">
+<span class="material-symbols-outlined text-[20px]">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full ml-2 border border-border-subtle overflow-hidden cursor-pointer hover:border-accent-gold transition-colors">
+<img alt="Chef de Cuisine Profile" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional chef in a high-end culinary environment. The lighting is cinematic, casting subtle shadows that highlight their focus and expertise. The aesthetic is dark and sophisticated, aligning perfectly with the Aura AR platform's elite, premium visual style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9LlSSRo3m95LoivqUI1DYi5mLzxPSXXcPQJJ_baiZCbgiKjlRsPOaoZYLMV31lttRe1PVVLxbdfxrJ8O1Sai7ONT36LCmFzqXd_zTobBg_dH_VCc6V-56_he8K8lmpjivoSnWleArLUlvXvUKxpEs6jpay9zOtCI7VuIGYgkw4l_voOP39lUqmR_xLLLO8Tanpdd7n36Rk5Y9uPnyPXQp1OKgvwRImVtd2g6ER4ebF1JfJ1kXwC6vIPWLMMZ1rgo6fkuFE7wvh7aP"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<main class="flex-1 overflow-y-auto pt-24 pb-32 px-margin-mobile md:px-gutter lg:px-[10vw] xl:px-[15vw]">
+<div class="max-w-[1000px] mx-auto w-full relative">
+<!-- Background Glow -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-64 bg-accent-gold/5 blur-[120px] rounded-full pointer-events-none -z-10"></div>
+<!-- Progress Stepper -->
+<div class="mb-stack-lg">
+<div class="flex items-center justify-between relative">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[1px] bg-border-subtle -z-10"></div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1/2 h-[1px] bg-accent-gold -z-10 transition-all duration-500"></div>
+<!-- Step 1 (Completed) -->
+<div class="flex flex-col items-center gap-2 bg-canvas-black px-2">
+<div class="w-8 h-8 rounded-full bg-glass-fill border border-accent-gold flex items-center justify-center text-accent-gold">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-mono text-label-mono text-accent-gold opacity-80">Details</span>
+</div>
+<!-- Step 2 (Active) -->
+<div class="flex flex-col items-center gap-2 bg-canvas-black px-2 glow-accent">
+<div class="w-8 h-8 rounded-full bg-accent-gold text-canvas-black flex items-center justify-center font-bold text-sm shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                                2
+                            </div>
+<span class="font-label-mono text-label-mono text-primary font-bold">Visuals</span>
+</div>
+<!-- Step 3 (Pending) -->
+<div class="flex flex-col items-center gap-2 bg-canvas-black px-2">
+<div class="w-8 h-8 rounded-full bg-glass-fill border border-border-subtle flex items-center justify-center text-on-surface-variant">
+<span class="font-label-mono text-sm">3</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface-variant opacity-60">Specs</span>
+</div>
+</div>
+</div>
+<!-- Header -->
+<div class="mb-stack-lg">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-2">Upload Reference Visuals</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Provide high-resolution imagery from multiple angles to ensure photorealistic AR reconstruction of your culinary masterpiece.</p>
+</div>
+<!-- Main Layout Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-stack-md lg:gap-gutter">
+<!-- Left Column: Upload Areas -->
+<div class="lg:col-span-2 space-y-stack-md">
+<!-- Image Upload Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-stack-sm">
+<!-- Top View -->
+<div class="relative group bg-glass-fill border border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center min-h-[200px] hover:border-accent-gold/50 transition-colors cursor-pointer overflow-hidden hover-scale">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-elevated opacity-50"></div>
+<div class="relative z-10 flex flex-col items-center text-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-low border border-border-subtle flex items-center justify-center text-on-surface-variant group-hover:text-primary group-hover:border-accent-gold/30 transition-all">
+<span class="material-symbols-outlined">vertical_align_bottom</span>
+</div>
+<div>
+<h3 class="font-label-mono text-label-mono text-primary mb-1">Top View</h3>
+<p class="font-body-md text-xs text-on-surface-variant">Drag &amp; Drop or <span class="text-accent-gold underline decoration-accent-gold/30 underline-offset-2">Browse</span></p>
+</div>
+</div>
+</div>
+<!-- Side View -->
+<div class="relative group bg-glass-fill border border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center min-h-[200px] hover:border-accent-gold/50 transition-colors cursor-pointer overflow-hidden hover-scale">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-elevated opacity-50"></div>
+<div class="relative z-10 flex flex-col items-center text-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-low border border-border-subtle flex items-center justify-center text-on-surface-variant group-hover:text-primary group-hover:border-accent-gold/30 transition-all">
+<span class="material-symbols-outlined">splitscreen_right</span>
+</div>
+<div>
+<h3 class="font-label-mono text-label-mono text-primary mb-1">Side View</h3>
+<p class="font-body-md text-xs text-on-surface-variant">Drag &amp; Drop or <span class="text-accent-gold underline decoration-accent-gold/30 underline-offset-2">Browse</span></p>
+</div>
+</div>
+</div>
+<!-- 45° Angle -->
+<div class="relative group bg-glass-fill border border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center min-h-[200px] hover:border-accent-gold/50 transition-colors cursor-pointer overflow-hidden hover-scale">
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-surface-elevated opacity-50"></div>
+<div class="relative z-10 flex flex-col items-center text-center gap-3">
+<div class="w-12 h-12 rounded-full bg-surface-container-low border border-border-subtle flex items-center justify-center text-on-surface-variant group-hover:text-primary group-hover:border-accent-gold/30 transition-all">
+<span class="material-symbols-outlined">rotate_90_degrees_ccw</span>
+</div>
+<div>
+<h3 class="font-label-mono text-label-mono text-primary mb-1">45° Angle</h3>
+<p class="font-body-md text-xs text-on-surface-variant">Drag &amp; Drop or <span class="text-accent-gold underline decoration-accent-gold/30 underline-offset-2">Browse</span></p>
+</div>
+</div>
+</div>
+</div>
+<!-- 360 Video Section -->
+<div class="bg-surface-container-low border border-border-subtle rounded-xl p-6 relative overflow-hidden">
+<!-- Subtle decorative gradient -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-secondary-fixed/5 blur-3xl rounded-full pointer-events-none"></div>
+<div class="flex items-start justify-between mb-4 relative z-10">
+<div>
+<h3 class="font-body-md text-primary font-medium flex items-center gap-2">
+                                        360° Video Reference
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-label-mono text-accent-gold bg-accent-gold/10 border border-accent-gold/20 uppercase tracking-wider">Recommended</span>
+</h3>
+<p class="font-body-md text-sm text-on-surface-variant mt-1">A slow, smooth rotation around the dish drastically improves texture mapping quality.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-50">videocam</span>
+</div>
+<div class="border-2 border-dashed border-border-subtle rounded-lg p-8 flex flex-col items-center justify-center text-center hover:border-primary/30 transition-colors cursor-pointer group hover-scale bg-glass-fill">
+<div class="w-14 h-14 rounded-full bg-surface-elevated flex items-center justify-center text-primary shadow-[0_0_20px_rgba(255,255,255,0.05)] mb-3 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">cloud_upload</span>
+</div>
+<p class="font-body-md text-primary mb-1">Upload Video File</p>
+<p class="font-label-mono text-label-mono text-on-surface-variant opacity-60">MP4, MOV up to 500MB</p>
+</div>
+</div>
+</div>
+<!-- Right Column: Guidelines sidebar -->
+<div class="space-y-stack-md">
+<div class="bg-surface-elevated border border-border-subtle rounded-xl p-6 backdrop-blur-md relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent-gold/20 via-accent-gold/50 to-accent-gold/20"></div>
+<h3 class="font-label-mono text-label-mono text-primary uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-accent-gold">lightbulb</span>
+                                Technical Guidelines
+                            </h3>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-[18px] text-primary opacity-70 mt-0.5">brightness_6</span>
+<div>
+<p class="font-body-md text-sm text-primary font-medium">Soft, Even Lighting</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-0.5">Avoid harsh directional lights that cast hard, black shadows.</p>
+</div>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-[18px] text-primary opacity-70 mt-0.5">texture</span>
+<div>
+<p class="font-body-md text-sm text-primary font-medium">Neutral Background</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-0.5">Use a matte gray or white surface to prevent color bounce.</p>
+</div>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-[18px] text-primary opacity-70 mt-0.5">center_focus_strong</span>
+<div>
+<p class="font-body-md text-sm text-primary font-medium">Deep Depth of Field</p>
+<p class="font-body-md text-xs text-on-surface-variant mt-0.5">Ensure the entire dish is in sharp focus (f/8 or higher).</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Sticky Footer Actions -->
+<footer class="absolute bottom-0 left-0 right-0 p-4 border-t border-border-subtle bg-surface/80 backdrop-blur-xl z-30">
+<div class="max-w-[1000px] mx-auto w-full flex items-center justify-between">
+<button class="px-6 py-2.5 rounded-lg border border-border-subtle text-primary font-body-md text-sm hover:bg-glass-fill transition-colors hover-scale active-scale">
+                    Back to Details
+                </button>
+<button class="px-6 py-2.5 rounded-lg bg-primary text-canvas-black font-body-md text-sm font-semibold hover:bg-white/90 shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all hover-scale active-scale flex items-center gap-2">
+                    Continue to Specs
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</footer>
+</div>
+</body></html>

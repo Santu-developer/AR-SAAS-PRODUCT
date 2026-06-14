@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Security &amp; Team Access - Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#e2e2e2",
+                      "on-secondary-container": "#fefcff",
+                      "tertiary-container": "#e2e2e2",
+                      "on-secondary": "#002f66",
+                      "on-surface": "#e5e2e1",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface": "#141313",
+                      "inverse-on-surface": "#313030",
+                      "secondary": "#abc7ff",
+                      "on-error-container": "#ffdad6",
+                      "canvas-black": "#050505",
+                      "surface-container": "#201f1f",
+                      "primary-container": "#e2e2e2",
+                      "outline-variant": "#444748",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "on-tertiary": "#2f3131",
+                      "primary": "#ffffff",
+                      "on-primary-fixed": "#1a1c1c",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "background": "#141313",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "secondary-container": "#0372e4",
+                      "on-background": "#e5e2e1",
+                      "error": "#ffb4ab",
+                      "surface-container-low": "#1c1b1b",
+                      "primary-fixed": "#e2e2e2",
+                      "surface-container-highest": "#353434",
+                      "error-container": "#93000a",
+                      "inverse-surface": "#e5e2e1",
+                      "surface-bright": "#3a3939",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#001b3f",
+                      "outline": "#8e9192",
+                      "surface-tint": "#c6c6c7",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "accent-gold": "#D4AF37",
+                      "on-primary": "#2f3131",
+                      "on-primary-fixed-variant": "#454747",
+                      "surface-variant": "#353434",
+                      "surface-elevated": "#0A0A0A",
+                      "inverse-primary": "#5d5f5f",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "surface-dim": "#141313",
+                      "secondary-fixed": "#d7e2ff",
+                      "on-surface-variant": "#c4c7c8",
+                      "on-primary-container": "#636565",
+                      "tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "on-tertiary-container": "#636565",
+                      "surface-container-high": "#2a2a2a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-md": "16px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "stack-sm": "8px",
+                      "container-max": "1440px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Geist"
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Geist"
+                      ],
+                      "display-2xl": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.canvas-black');
+            color: theme('colors.on-surface');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .glass-panel {
+            background: theme('colors.glass-fill');
+            border: 1px solid theme('colors.border-subtle');
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .input-ghost {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid theme('colors.outline-variant');
+            transition: all 0.3s ease;
+        }
+
+        .input-ghost:focus {
+            outline: none;
+            border-bottom-color: theme('colors.accent-gold');
+            box-shadow: 0 1px 0 0 theme('colors.accent-gold');
+        }
+
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: theme('colors.accent-gold');
+        }
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: theme('colors.accent-gold');
+        }
+        
+        /* Smooth interactions */
+        .btn-hover-scale {
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .btn-hover-scale:hover {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen bg-canvas-black font-body-md text-body-md text-on-surface overflow-x-hidden selection:bg-accent-gold/30">
+<!-- SideNavBar (Admin) -->
+<nav class="hidden md:flex flex-col h-screen w-[240px] bg-surface-container-lowest border-r border-border-subtle fixed left-0 top-0 py-stack-lg z-40">
+<!-- Header -->
+<div class="px-gutter mb-stack-lg">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-glass-fill border border-border-subtle flex items-center justify-center overflow-hidden">
+<img alt="Aether Logo" class="w-full h-full object-cover" data-alt="A sleek, minimalist abstract geometric shape resembling an 'A', glowing softly in a dark environment. The shape is constructed from thin, precise lines, emitting a subtle, elegant light that hints at high-end technology and precision. The background is a deep, true black, creating a high-contrast, premium aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvUxp718Yms8PnCG_HwcZb3Edf96K_uyhlUWmoislTy5xu3ZLVtr9x6h-4L3-qKnK3avlPPl0Afvi58xM101vn-7XGa8uItg67-lIHynh-8Vil8QzjMReMhah9zBl_f79lg8z9vAmzZHcmJI5KDiJe6YuvWx14k160-9kQHvEVbrumeXw0FPxfoqRjlUsBxg5G0o4UgAyOfJIkB_MDCzsIC9CaqsMmnDa6CntcVAg1gCx0tvlIYqijRznsYAwF9WuGpkmvE-OFIwWR"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary text-[20px] leading-[24px]">Aether Admin</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant opacity-70 uppercase tracking-widest text-[10px]">Super Admin Portal</p>
+</div>
+</div>
+</div>
+<!-- Main Nav Links -->
+<div class="flex-1 flex flex-col gap-1 px-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-300 btn-hover-scale" href="#">
+<span class="material-symbols-outlined text-[20px] font-light">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-300 btn-hover-scale" href="#">
+<span class="material-symbols-outlined text-[20px] font-light">queue_play_next</span>
+<span class="font-medium">Demo Queue</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-300 btn-hover-scale" href="#">
+<span class="material-symbols-outlined text-[20px] font-light">restaurant</span>
+<span class="font-medium">Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-300 btn-hover-scale" href="#">
+<span class="material-symbols-outlined text-[20px] font-light">view_in_ar</span>
+<span class="font-medium">AR Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-300 btn-hover-scale" href="#">
+<span class="material-symbols-outlined text-[20px] font-light">insights</span>
+<span class="font-medium">Analytics</span>
+</a>
+<!-- Active State -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-semibold border-r-2 border-primary bg-glass-fill transition-all duration-300 btn-hover-scale" href="#" style="transform: scale(0.98);">
+<span class="material-symbols-outlined text-[20px] font-light" style="font-variation-settings: 'FILL' 1;">settings_suggest</span>
+<span>System Settings</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="px-4 mt-auto mb-stack-md">
+<button class="w-full bg-primary text-canvas-black font-semibold py-3 px-4 rounded-lg btn-hover-scale flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Demo Request
+            </button>
+</div>
+<!-- Footer Nav -->
+<div class="flex flex-col gap-1 px-4 border-t border-border-subtle pt-stack-md">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-glass-fill transition-all duration-300 text-sm" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">support_agent</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-error hover:bg-error/10 transition-all duration-300 text-sm" href="#">
+<span class="material-symbols-outlined text-[18px] font-light">logout</span>
+<span>Log Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[240px] flex flex-col min-h-screen relative">
+<!-- Subtle Background Glow for Depth -->
+<div class="absolute top-0 right-0 w-full h-[500px] bg-gradient-to-b from-accent-gold/5 to-transparent pointer-events-none -z-10 blur-3xl"></div>
+<!-- TopAppBar (Mobile & Utility) -->
+<header class="w-full sticky top-0 z-30 border-b border-border-subtle bg-canvas-black/80 backdrop-blur-xl flex justify-between items-center px-gutter py-4">
+<div class="flex items-center gap-4">
+<!-- Mobile Menu Toggle (Hidden on Desktop) -->
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter hidden md:block">Security &amp; Access</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined font-light">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200 hidden sm:block">
+<span class="material-symbols-outlined font-light">help</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200 hidden sm:block">
+<span class="material-symbols-outlined font-light">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-border-subtle cursor-pointer ml-2">
+<img alt="Super Admin Profile Avatar" class="w-full h-full object-cover" data-alt="A sophisticated, high-contrast portrait of a male professional. The lighting is cinematic, with a dark background and subtle rim lighting highlighting the subject's features. The overall aesthetic feels premium, serious, and secure, fitting for a super admin profile picture in a luxury software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAo2H531pbFAv7UiWzejQcxjcitcl5nAWg8GQUqunrpNxq568cV8VA1Y6Ru7_z3hNi79nwSIRn6ubAGhbUs79Y_NEDhMrNYw2gRYJzbTIqEtUD4xTiRLqjiJFKoiJEg6Hgkx_EgyNjXa_BCdplCnsB8oJkNrcoVRg_qSr6E-CFBBo880GU1p22buVwnvfaCC6htx7dI_jzQ5F27_g5FBls06pyVMRWGYTgOIxXnMG2R_jDgs_QN0JvunKBimdt_VliDs-f5flZTxkAK"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-margin-mobile md:p-gutter max-w-container-max mx-auto w-full flex flex-col gap-stack-lg pb-24">
+<!-- Header (Mobile Visible) -->
+<div class="md:hidden mb-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Security &amp; Access</h2>
+<p class="text-on-surface-variant mt-1">Manage team permissions and authentication.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Security Settings (Takes up 4 cols on lg screens) -->
+<div class="lg:col-span-4 flex flex-col gap-stack-lg">
+<!-- Password Management Card -->
+<section class="glass-panel rounded-xl p-6">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-accent-gold font-light">lock</span>
+<h3 class="text-lg font-semibold text-primary">Password</h3>
+</div>
+<form class="flex flex-col gap-5">
+<div class="flex flex-col gap-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Current Password</label>
+<input class="input-ghost text-primary w-full py-2 placeholder:text-outline-variant" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">New Password</label>
+<input class="input-ghost text-primary w-full py-2 placeholder:text-outline-variant" placeholder="Enter new password" type="password"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-mono text-label-mono text-on-surface-variant uppercase">Confirm Password</label>
+<input class="input-ghost text-primary w-full py-2 placeholder:text-outline-variant" placeholder="Confirm new password" type="password"/>
+</div>
+<button class="mt-4 w-full bg-surface-container text-primary border border-border-subtle font-medium py-2 px-4 rounded-lg btn-hover-scale hover:bg-surface-elevated transition-colors text-sm" type="button">
+                                Update Password
+                            </button>
+</form>
+</section>
+<!-- Two-Factor Authentication Card -->
+<section class="glass-panel rounded-xl p-6 relative overflow-hidden">
+<!-- Subtle background effect -->
+<div class="absolute -right-10 -bottom-10 w-32 h-32 bg-accent-gold/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-light">shield_person</span>
+<h3 class="text-lg font-semibold text-primary">Two-Factor Auth</h3>
+</div>
+<!-- Toggle Switch -->
+<div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+<input checked="" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer z-10 transition-transform duration-300 ease-in-out" id="toggle2fa" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-surface-container cursor-pointer transition-colors duration-300 ease-in-out border border-border-subtle" for="toggle2fa"></label>
+</div>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+                            Add an extra layer of security to your account. We recommend leaving this enabled to protect sensitive operational data.
+                        </p>
+<div class="flex items-center gap-2 text-accent-gold bg-accent-gold/10 w-max px-3 py-1.5 rounded-full mt-2">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+<span class="font-label-mono text-label-mono font-bold">ACTIVE</span>
+</div>
+</section>
+</div>
+<!-- Right Column: Team & Logs (Takes up 8 cols on lg screens) -->
+<div class="lg:col-span-8 flex flex-col gap-stack-lg">
+<!-- Team Access Section -->
+<section class="glass-panel rounded-xl flex flex-col h-full min-h-[400px]">
+<div class="p-6 border-b border-border-subtle flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h3 class="text-lg font-semibold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined font-light text-on-surface-variant">group</span>
+                                    Team Access
+                                </h3>
+<p class="text-sm text-on-surface-variant mt-1">Manage portal users and role-based permissions.</p>
+</div>
+<button class="bg-primary text-canvas-black font-semibold py-2 px-4 rounded-lg btn-hover-scale flex items-center gap-2 text-sm whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                                Invite Member
+                            </button>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-black/20">
+<th class="py-3 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium">User</th>
+<th class="py-3 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium">Role</th>
+<th class="py-3 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium">Status</th>
+<th class="py-3 px-6 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-border-subtle flex-shrink-0">
+<img alt="Sarah Chen" class="w-full h-full object-cover" data-alt="A professional headshot of an elegant woman with a neutral, focused expression. The lighting is soft and studio-quality, set against a dark, moody background that complements a premium dark-mode interface. Her appearance suggests competence and authority, suitable for a lead operations manager role." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAINReCAFYLJE83b6B1uritPsx-tkGtc01DBBC7WiTLzu-xp2PYk6RIJ9UqeQzEu-yLgHMKND3Jj2RVkxjxDP3lm0a7GYy2VNNiy42T1d1LbvjTIy0U8xsALa2HgJewnVfdFFFRoDn22GcXUUEaWDwmYg_-53oTtAluvri8UQSQxvuDYO9CfCHW9RknNHfHW-fEyhXLKzVyaCi_KoYPFQvzlU1263JK1Tgr03vvgAKSaHax7KsMyG4h84RisA0Sc2kNTg3Hpq3HkyKe"/>
+</div>
+<div>
+<p class="font-medium text-primary text-sm">Sarah Chen</p>
+<p class="text-xs text-on-surface-variant font-label-mono">sarah@aether.ar</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-on-surface">Manager</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-label-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[20px] font-light">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-border-subtle flex items-center justify-center text-xs font-medium text-on-surface-variant flex-shrink-0">
+                                                    MJ
+                                                </div>
+<div>
+<p class="font-medium text-primary text-sm">Marcus Johnson</p>
+<p class="text-xs text-on-surface-variant font-label-mono">marcus@aether.ar</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-on-surface">Staff</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-label-mono font-medium bg-accent-gold/10 text-accent-gold border border-accent-gold/20">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-gold animate-pulse"></span>
+                                                Pending
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[20px] font-light">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-border-subtle flex-shrink-0">
+<img alt="David Kim" class="w-full h-full object-cover" data-alt="A clean, modern headshot of a man looking directly at the camera. He is slightly smiling, exuding a friendly yet professional demeanor. The image is styled with high contrast and a deep black background, perfectly matching a luxurious, minimal tech interface designed for high-end restaurant staff." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhz0ScBThNXFrxCTnlyq9gLE2GHaqfv7nI5Xk4Mec8pPrTuj-v2t36QB-JqW64gGctom6LYmlvH-FBQeZa_a3i25FdQQ93o3p-fthhhVPhd43Kb3ECGUJua0CSHrQ0fEwOchCoizymhvWoKSMcDmg5YGeeIjNAxCCiY-IpoH6VVNQYbHi-6abV_5Ux4rQsXM9a-kh8fuPwo_rJDxs-hKpDNIcusmglZZBX5iFGzZ91qbEixKhQIZBuUNg3QJeY8eY-1gYFjPua6XkR"/>
+</div>
+<div>
+<p class="font-medium text-primary text-sm">David Kim</p>
+<p class="text-xs text-on-surface-variant font-label-mono">dkim@external.com</p>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-on-surface opacity-70">Viewer</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-label-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                                Active
+                                            </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[20px] font-light">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Audit Logs (Bento Style Sub-section) -->
+<section class="flex flex-col gap-4 mt-2">
+<div class="flex items-center justify-between px-1">
+<h3 class="text-sm font-semibold text-on-surface-variant uppercase tracking-widest font-label-mono">Recent Security Events</h3>
+<button class="text-xs text-primary hover:text-accent-gold transition-colors font-label-mono">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Log Item 1 -->
+<div class="glass-panel p-4 rounded-lg flex gap-4 items-start hover:bg-glass-fill/50 transition-colors">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0 text-on-surface-variant border border-border-subtle">
+<span class="material-symbols-outlined text-[16px] font-light">login</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<p class="text-sm font-medium text-primary truncate">Successful Login</p>
+<span class="text-[10px] text-on-surface-variant font-label-mono whitespace-nowrap ml-2">10:42 AM</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">IP: 192.168.1.104 (San Francisco, CA)</p>
+<p class="text-[10px] text-on-surface-variant opacity-60 mt-1 font-label-mono">User: Super Admin Profile Avatar</p>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="glass-panel p-4 rounded-lg flex gap-4 items-start hover:bg-glass-fill/50 transition-colors">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0 text-accent-gold border border-accent-gold/20">
+<span class="material-symbols-outlined text-[16px] font-light">person_add</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<p class="text-sm font-medium text-primary truncate">Member Invited</p>
+<span class="text-[10px] text-on-surface-variant font-label-mono whitespace-nowrap ml-2">Yesterday</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Invited: marcus@aether.ar (Role: Staff)</p>
+<p class="text-[10px] text-on-surface-variant opacity-60 mt-1 font-label-mono">Action by: Sarah Chen</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

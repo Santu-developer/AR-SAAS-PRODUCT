@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Menu Management - Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#3a3939",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "tertiary": "#ffffff",
+                        "surface-elevated": "#0A0A0A",
+                        "outline-variant": "#444748",
+                        "on-secondary": "#002f66",
+                        "error": "#ffb4ab",
+                        "surface-tint": "#c6c6c7",
+                        "surface-dim": "#141313",
+                        "outline": "#8e9192",
+                        "inverse-on-surface": "#313030",
+                        "on-primary": "#2f3131",
+                        "canvas-black": "#050505",
+                        "on-error": "#690005",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "on-tertiary": "#2f3131",
+                        "surface-container-high": "#2a2a2a",
+                        "primary": "#ffffff",
+                        "primary-container": "#e2e2e2",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-variant": "#353434",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container": "#201f1f",
+                        "on-primary-fixed": "#1a1c1c",
+                        "surface-container-highest": "#353434",
+                        "on-surface": "#e5e2e1",
+                        "on-primary-container": "#636565",
+                        "on-error-container": "#ffdad6",
+                        "inverse-primary": "#5d5f5f",
+                        "surface": "#141313",
+                        "on-primary-fixed-variant": "#454747",
+                        "background": "#141313",
+                        "on-surface-variant": "#c4c7c8",
+                        "secondary-container": "#0372e4",
+                        "secondary-fixed": "#d7e2ff",
+                        "on-tertiary-container": "#636565",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "on-background": "#e5e2e1",
+                        "secondary": "#abc7ff",
+                        "primary-fixed": "#e2e2e2",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "on-secondary-fixed": "#001b3f",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "inverse-surface": "#e5e2e1",
+                        "error-container": "#93000a",
+                        "accent-gold": "#D4AF37",
+                        "tertiary-fixed": "#e2e2e2",
+                        "tertiary-container": "#e2e2e2",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-container": "#fefcff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "stack-md": "16px",
+                        "margin-mobile": "20px",
+                        "container-max": "1440px",
+                        "stack-lg": "32px",
+                        "gutter": "24px",
+                        "stack-sm": "8px"
+                    },
+                    fontFamily: {
+                        "headline-lg": ["Geist", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"],
+                        "headline-lg-mobile": ["Geist", "sans-serif"],
+                        "display-2xl": ["Geist", "sans-serif"],
+                        "label-mono": ["JetBrains Mono", "monospace"]
+                    },
+                    fontSize: {
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "display-2xl": ["72px", { lineHeight: "80px", letterSpacing: "-0.04em", fontWeight: "700" }],
+                        "label-mono": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #050505; color: #e5e2e1; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            pointer-events: none; z-index: 0;
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden bg-canvas-black font-body-md text-body-md text-on-surface antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl flex-col p-stack-md z-40">
+<div class="mb-stack-lg flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-border-subtle shrink-0">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnAzr2xXPoGXXCaq4zQJJYHsIxpFZ742gMm7ux4bolh6SjjkKu5WtCWDRVSAOHPVwGJMlpbh44XwJkDDO8rFBR9qBHN1_w6VStDm4X4EkIDgWVXl7uqjvi3YKF9qLRHq2K6DbXmKott46CAULplIvzCEBFBp83Em9MG0nEa6me_wg3JIp_AkYkmLCUpstMwhejAoSnHBl5Jxwz3dYLdmv44R31Eh9YxBMJTw8esW3q_HdMCONewxuEZFrqsFclywEbUws-iPMw2An2"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter text-[20px] leading-tight">Aether AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant">Super Admin</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300 scale-[0.98]" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="storefront" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span>Restaurants</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="payments">payments</span>
+<span>Plans</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="view_in_ar">view_in_ar</span>
+<span>3D Assets</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="insights">insights</span>
+<span>Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg group" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-2 pt-stack-md border-t border-border-subtle">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="help">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined font-[300]" data-icon="logout">logout</span>
+<span>Sign Out</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden relative">
+<div class="glow-overlay"></div>
+<!-- TopAppBar -->
+<header class="h-16 sticky top-0 z-50 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md flex justify-between items-center px-gutter max-w-container-max mx-auto shrink-0 relative">
+<div class="md:hidden flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:text-primary transition-colors" data-icon="menu">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</h1>
+</div>
+<div class="hidden md:flex items-center gap-2 bg-surface-container-low border border-border-subtle rounded-full px-4 py-2 w-96 group focus-within:border-primary focus-within:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-on-surface-variant group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none text-body-md text-primary w-full placeholder:text-on-surface-variant focus:ring-0 p-0" placeholder="Search menu items, categories..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-[0.95] active:scale-95 p-2 rounded-full hover:bg-glass-fill flex items-center justify-center relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-canvas-black"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-[0.95] active:scale-95 p-2 rounded-full hover:bg-glass-fill flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+<div class="md:hidden w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-border-subtle cursor-pointer ml-2">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBmGsEVsmhbuaZv2hHw-PAr02wYLlUTtXWym-v8YDW-UndM7cM688wY-SIE4O0T8W6sDvARnhP59v65jLcYeO-AdP9H8MAbSEZjt6TB3JLEINxRzZan2wPLh6j8GApZnmGZTf6oDeOE_syvlMnr8-HcbdN5MZfMifQDRuSUGyvUMfwVMQcVCJdGb1LQtBE_HEzC7B0xWs6Q40DyNsX3Io4Mc7Ta9YSYPZgNemOMCC8GXXGmhouI75M-CtiPxsef1KPTN5alEW_8NHB"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas -->
+<div class="flex-1 overflow-y-auto p-gutter lg:p-stack-lg relative z-10">
+<div class="max-w-container-max mx-auto flex flex-col gap-stack-lg pb-24">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Menu Management</h2>
+<p class="text-on-surface-variant">Manage your digital menu and oversee 3D asset generation.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label-mono text-label-mono uppercase tracking-wider hover:scale-[0.98] transition-transform duration-300 flex items-center gap-2 w-fit">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                        Add New Item
+                    </button>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group hover:border-primary/30 transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-2">TOTAL ITEMS</p>
+<p class="font-headline-lg text-headline-lg text-primary">142</p>
+<div class="flex items-center gap-2 mt-4 text-[13px] text-on-surface-variant">
+<span class="material-symbols-outlined text-green-400 text-[16px]" data-icon="trending_up">trending_up</span>
+<span>+12 this month</span>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group hover:border-secondary/30 transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/5 rounded-full blur-2xl group-hover:bg-secondary/10 transition-colors"></div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-2">3D COVERAGE</p>
+<p class="font-headline-lg text-headline-lg text-primary">84%</p>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 84%"></div>
+</div>
+</div>
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group hover:border-accent-gold/30 transition-colors">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-accent-gold/5 rounded-full blur-2xl group-hover:bg-accent-gold/10 transition-colors"></div>
+<p class="font-label-mono text-label-mono text-on-surface-variant mb-2">TOP SELLER</p>
+<p class="font-body-md text-primary font-semibold truncate">Wagyu A5 Tomahawk</p>
+<div class="flex items-center gap-2 mt-4 text-[13px] text-accent-gold">
+<span class="material-symbols-outlined text-[16px]" data-icon="star">star</span>
+<span>Most viewed in AR</span>
+</div>
+</div>
+</div>
+<!-- Table Controls -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-surface-container-low/50 p-4 rounded-xl border border-border-subtle">
+<div class="flex gap-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 hide-scrollbar">
+<button class="px-4 py-1.5 bg-surface-container-highest text-primary rounded-full font-label-mono text-label-mono border border-border-subtle whitespace-nowrap">All Items</button>
+<button class="px-4 py-1.5 hover:bg-glass-fill text-on-surface-variant rounded-full font-label-mono text-label-mono border border-transparent whitespace-nowrap transition-colors">Active</button>
+<button class="px-4 py-1.5 hover:bg-glass-fill text-on-surface-variant rounded-full font-label-mono text-label-mono border border-transparent whitespace-nowrap transition-colors">Out of Stock</button>
+<button class="px-4 py-1.5 hover:bg-glass-fill text-on-surface-variant rounded-full font-label-mono text-label-mono border border-transparent whitespace-nowrap transition-colors">Pending 3D (18)</button>
+</div>
+<div class="flex gap-3 w-full lg:w-auto">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-glass-fill border border-border-subtle rounded-lg text-[13px] text-on-surface hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+</div>
+</div>
+<!-- High Density Data Table -->
+<div class="glass-panel rounded-xl overflow-x-auto border border-border-subtle">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead>
+<tr class="border-b border-border-subtle text-[11px] font-label-mono text-on-surface-variant uppercase tracking-wider bg-surface-container-lowest/50">
+<th class="py-4 px-6 font-medium w-12"></th>
+<th class="py-4 px-6 font-medium">Item Name</th>
+<th class="py-4 px-6 font-medium">Category</th>
+<th class="py-4 px-6 font-medium text-right">Price</th>
+<th class="py-4 px-6 font-medium">3D Status</th>
+<th class="py-4 px-6 font-medium text-center">Available</th>
+<th class="py-4 px-6 font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-4 px-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden border border-border-subtle">
+<img alt="A high-end, perfectly seared wagyu tomahawk steak presented on a minimalist black slate slab. Dark, moody cinematic lighting highlights the texture and juices. Shot macro, food photography style." class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" data-alt="A high-end, perfectly seared wagyu tomahawk steak presented on a minimalist black slate slab. Dark, moody cinematic lighting highlights the texture and juices. Shot macro, food photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgFpNGXn9-LqAFFwk4Y_zm5_sV194bYTomRotPhfr3CGtEKT5yXoajK36cn81CK2mgca5cHmoNGERXFiVILWCzqKS0OrQnt8Xe1TKBW5ftNFkInkaiKy9dDf-zbC_JHZ6ayvtahJxADfBlV7VZuFqKbf68GWUD43CmiApmHxl0wkd-Z8HEQwQTYxAh862Yu_oYd_eB_AcxQty3v--8y3BH2JNGQeZzC1jU9jdS70KPL2W71KcrVBtFiCmenBg0DbqfxN3geHtFAYyk"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<p class="font-medium text-primary mb-1">Wagyu A5 Tomahawk</p>
+<p class="text-[13px] text-on-surface-variant max-w-[250px] truncate">40oz bone-in ribeye, black truffle butter, smoked sea salt</p>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container-high border border-border-subtle text-[11px] font-label-mono text-on-surface">Mains</span>
+</td>
+<td class="py-4 px-6 text-right font-label-mono text-primary">
+                                    $245.00
+                                </td>
+<td class="py-4 px-6">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 border border-green-500/20 text-[12px] font-medium text-green-400">
+<span class="material-symbols-outlined text-[14px]" data-icon="view_in_ar">view_in_ar</span>
+                                        Live
+                                    </div>
+</td>
+<td class="py-4 px-6">
+<div class="flex justify-center">
+<div class="w-9 h-5 bg-primary rounded-full relative cursor-pointer border border-transparent">
+<div class="w-4 h-4 bg-canvas-black rounded-full absolute right-0.5 top-0.5 shadow-sm"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1.5 rounded-md hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-1.5 rounded-md hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="py-4 px-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden border border-border-subtle flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="image">image</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<p class="font-medium text-primary mb-1">Truffle Risotto</p>
+<p class="text-[13px] text-on-surface-variant max-w-[250px] truncate">Acquerello rice, aged parmesan, shaved white truffle</p>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container-high border border-border-subtle text-[11px] font-label-mono text-on-surface">Mains</span>
+</td>
+<td class="py-4 px-6 text-right font-label-mono text-primary">
+                                    $48.00
+                                </td>
+<td class="py-4 px-6">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-[12px] font-medium text-secondary">
+<span class="material-symbols-outlined text-[14px] animate-spin" data-icon="sync">sync</span>
+                                        Scanning
+                                    </div>
+</td>
+<td class="py-4 px-6">
+<div class="flex justify-center">
+<div class="w-9 h-5 bg-primary rounded-full relative cursor-pointer border border-transparent">
+<div class="w-4 h-4 bg-canvas-black rounded-full absolute right-0.5 top-0.5 shadow-sm"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1.5 rounded-md hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-1.5 rounded-md hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-glass-fill transition-colors group opacity-60">
+<td class="py-4 px-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container overflow-hidden border border-border-subtle">
+<img alt="A delicate, modern dessert presentation featuring a spherical chocolate mousse with gold leaf accents on a matte dark grey plate. Studio lighting, highly detailed." class="w-full h-full object-cover grayscale" data-alt="A delicate, modern dessert presentation featuring a spherical chocolate mousse with gold leaf accents on a matte dark grey plate. Studio lighting, highly detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBcLMOijn2f7TzugXZmdLZ43MbIzPwZiItYn040gJqQ3nYZWKiIagIcjE1orUCdG6UEnxnIeAPrachygk4jA7pGofBvGZd59WtyIzD-9wC3-nM4OYbfNl-CGBu--0SG7lB6LaSmn4lR3-i772VT_y9QhR3UIWVT9YD-MKB7LO6yh9wcdDSS0j9fvA3lDqWxfQc0VJ36dYfj99lJoBhoA0d95grCoC021aZuXhb4fAOM6psuH10xTUIMNzPvsSSCuGJC9zw6ICvt7yp"/>
+</div>
+</td>
+<td class="py-4 px-6">
+<p class="font-medium text-primary mb-1">Golden Sphere</p>
+<p class="text-[13px] text-on-surface-variant max-w-[250px] truncate">Valrhona chocolate, passionfruit center, edible gold</p>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container-high border border-border-subtle text-[11px] font-label-mono text-on-surface">Desserts</span>
+</td>
+<td class="py-4 px-6 text-right font-label-mono text-primary">
+                                    $28.00
+                                </td>
+<td class="py-4 px-6">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high border border-border-subtle text-[12px] font-medium text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="hourglass_empty">hourglass_empty</span>
+                                        Requested
+                                    </div>
+</td>
+<td class="py-4 px-6">
+<div class="flex justify-center">
+<div class="w-9 h-5 bg-surface-container-high rounded-full relative cursor-pointer border border-border-subtle">
+<div class="w-4 h-4 bg-on-surface-variant rounded-full absolute left-0.5 top-0.5 shadow-sm"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1.5 rounded-md hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit">edit</span>
+</button>
+<button class="text-on-surface-variant hover:text-error p-1.5 rounded-md hover:bg-surface-container transition-colors opacity-0 group-hover:opacity-100 focus:opacity-100">
+<span class="material-symbols-outlined text-[18px]" data-icon="delete">delete</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>

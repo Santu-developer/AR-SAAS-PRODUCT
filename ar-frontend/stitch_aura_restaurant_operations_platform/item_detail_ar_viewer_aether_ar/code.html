@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wagyu A5 Tomahawk - Elite AR Menu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#353434",
+                        "surface-bright": "#3a3939",
+                        "primary-fixed": "#e2e2e2",
+                        "on-primary-fixed": "#1a1c1c",
+                        "secondary-container": "#0372e4",
+                        "surface-container-low": "#1c1b1b",
+                        "canvas-black": "#050505",
+                        "surface-tint": "#c6c6c7",
+                        "secondary": "#abc7ff",
+                        "tertiary-container": "#e2e2e2",
+                        "on-primary": "#2f3131",
+                        "on-surface-variant": "#c4c7c8",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#001b3f",
+                        "inverse-primary": "#5d5f5f",
+                        "on-background": "#e5e2e1",
+                        "primary": "#ffffff",
+                        "inverse-on-surface": "#313030",
+                        "secondary-fixed": "#d7e2ff",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "secondary-fixed-dim": "#abc7ff",
+                        "surface-elevated": "#0A0A0A",
+                        "on-secondary": "#002f66",
+                        "border-subtle": "rgba(255, 255, 255, 0.08)",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed-variant": "#00458f",
+                        "on-primary-container": "#636565",
+                        "on-error-container": "#ffdad6",
+                        "error": "#ffb4ab",
+                        "background": "#141313",
+                        "error-container": "#93000a",
+                        "on-tertiary": "#2f3131",
+                        "accent-gold": "#D4AF37",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-tertiary-container": "#636565",
+                        "tertiary": "#ffffff",
+                        "primary-container": "#e2e2e2",
+                        "inverse-surface": "#e5e2e1",
+                        "on-surface": "#e5e2e1",
+                        "surface-container-high": "#2a2a2a",
+                        "outline": "#8e9192",
+                        "surface-dim": "#141313",
+                        "surface": "#141313",
+                        "surface-container": "#201f1f",
+                        "tertiary-fixed": "#e2e2e2",
+                        "outline-variant": "#444748",
+                        "glass-fill": "rgba(255, 255, 255, 0.03)",
+                        "surface-variant": "#353434",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "on-secondary-container": "#fefcff",
+                        "on-primary-fixed-variant": "#454747"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "margin-mobile": "20px",
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Geist"],
+                        "body-md": ["Geist"],
+                        "headline-lg-mobile": ["Geist"],
+                        "label-mono": ["JetBrains Mono"],
+                        "display-2xl": ["Geist"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-2xl": ["72px", { "lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #050505; color: #e5e2e1; }
+        .glass-panel { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px); }
+        .glow-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, rgba(5,5,5,0) 70%); pointer-events: none; z-index: 0; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full backdrop-blur-xl border-b border-border-subtle bg-glass-fill dark:bg-glass-fill flex justify-between items-center px-margin-mobile h-16 z-50 transition-opacity">
+<button aria-label="Back" class="text-primary dark:text-primary hover:opacity-80 transition-opacity scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tighter">Restaurante Elite</h1>
+<button class="text-primary dark:text-primary hover:opacity-80 transition-opacity scale-95 duration-200 ease-in-out">
+<span class="font-label-mono text-label-mono">Table 04</span>
+</button>
+</header>
+<main class="flex-1 pt-16 flex flex-col relative z-10 pb-32">
+<!-- AR 3D Viewer Area -->
+<section class="relative w-full h-[397px] bg-surface-elevated overflow-hidden flex items-center justify-center border-b border-border-subtle">
+<div class="glow-overlay"></div>
+<!-- Mock 3D Canvas -->
+<div class="w-full h-full relative z-10 bg-cover bg-center" data-alt="A highly detailed, cinematic 3D render of a massive Wagyu A5 Tomahawk steak resting on a minimalist slate plate. The lighting is dramatic, spotlighting the rich marbling of the meat and the stark bone, with subtle gold leaf garnishes catching the light against a deep, dark space background typical of elite AR gallery aesthetics." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBFdxYHg6-8dH4gb5qDqloQSeKkqtmMyXnwCRT-zHaZnz9hgSL4pUzSzoMFhSn--QCtr_E-AN5vJzNqAXwjrihkk-wsb2zKz7A_VPz0avyk4Wl2PzeoX1bfjVbYADG7geQYV1eeCBT3Hxxz_UXkMFN0J9xZSgROD3U-iDkDteFaNGCjYPOzy7IqB0pS6_YeV7UrlE2W8RhUyVgLd7b2s1a6-Hz7-GoZe6NeP6UyTkaD2A0TiVB_HW8Az25nbzDCJfFjFLOqDeA08BpV');">
+<div class="absolute inset-0 bg-gradient-to-t from-canvas-black to-transparent opacity-80"></div>
+</div>
+<!-- Controls Overlay -->
+<div class="absolute bottom-stack-md right-margin-mobile flex gap-stack-sm z-20">
+<button class="glass-panel w-12 h-12 rounded-full flex items-center justify-center text-primary hover:scale-95 transition-transform duration-300">
+<span class="material-symbols-outlined">360</span>
+</button>
+<button class="bg-primary text-on-primary-fixed font-label-mono text-label-mono px-6 h-12 rounded-full flex items-center gap-2 hover:scale-95 transition-transform duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+                    VIEW IN AR
+                </button>
+</div>
+</section>
+<!-- Product Details Canvas -->
+<section class="px-margin-mobile pt-stack-lg flex-1">
+<div class="max-w-container-max mx-auto md:grid md:grid-cols-12 md:gap-gutter">
+<div class="md:col-span-8 md:col-start-3">
+<div class="flex justify-between items-start mb-stack-sm">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary md:font-headline-lg md:text-headline-lg">Wagyu A5 Tomahawk</h2>
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-accent-gold">$245.00</span>
+</div>
+<div class="flex flex-wrap gap-2 mb-stack-lg">
+<span class="font-label-mono text-label-mono bg-[rgba(212,175,55,0.1)] text-accent-gold px-3 py-1 border border-[rgba(212,175,55,0.2)] rounded-full">CHEF'S CHOICE</span>
+<span class="font-label-mono text-label-mono glass-panel text-on-surface-variant px-3 py-1 rounded-full">GLUTEN FREE</span>
+</div>
+<p class="text-on-surface-variant mb-stack-lg leading-relaxed">
+                        An unparalleled gastronomic experience. Our 40oz bone-in ribeye is sourced directly from Kagoshima, Japan, offering the highest marbling grade available. Butter-basted to a perfect medium-rare, finished with a generous dollop of black truffle butter, and elegantly garnished with edible 24k gold leaf. Designed to be shared, or savored by the truly devoted.
+                    </p>
+<!-- Add to Cart / Quantity Area -->
+<div class="fixed bottom-0 left-0 w-full p-margin-mobile bg-canvas-black border-t border-border-subtle z-40 md:relative md:border-none md:p-0 md:bg-transparent">
+<div class="flex items-center gap-stack-md max-w-container-max mx-auto">
+<!-- Quantity Selector -->
+<div class="glass-panel flex items-center rounded-full h-14 px-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="font-label-mono text-label-mono text-primary w-8 text-center">1</span>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<!-- Add to Cart Button -->
+<button class="flex-1 bg-primary text-on-primary-fixed font-label-mono text-label-mono h-14 rounded-full flex items-center justify-center gap-2 hover:scale-[0.98] transition-transform duration-300">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+                                ADD TO CART
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<script>
+        // Micro-interaction for quantity buttons
+        document.querySelectorAll('.glass-panel button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+    </script>
+</body></html>

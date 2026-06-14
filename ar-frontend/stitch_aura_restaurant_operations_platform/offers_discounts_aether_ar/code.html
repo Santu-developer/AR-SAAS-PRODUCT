@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Offers &amp; Discounts - Aether AR</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#2f3131",
+                      "border-subtle": "rgba(255, 255, 255, 0.08)",
+                      "error-container": "#93000a",
+                      "secondary-container": "#0372e4",
+                      "tertiary": "#ffffff",
+                      "surface-container-high": "#2a2a2a",
+                      "on-tertiary": "#2f3131",
+                      "on-surface": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "on-background": "#e5e2e1",
+                      "surface-container-low": "#1c1b1b",
+                      "accent-gold": "#D4AF37",
+                      "on-tertiary-fixed": "#1a1c1c",
+                      "surface-container-highest": "#353434",
+                      "secondary-fixed-dim": "#abc7ff",
+                      "outline": "#8e9192",
+                      "on-tertiary-container": "#636565",
+                      "inverse-on-surface": "#313030",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "on-tertiary-fixed-variant": "#454747",
+                      "on-secondary": "#002f66",
+                      "on-primary-fixed": "#1a1c1c",
+                      "surface-bright": "#3a3939",
+                      "glass-fill": "rgba(255, 255, 255, 0.03)",
+                      "on-surface-variant": "#c4c7c8",
+                      "surface": "#141313",
+                      "inverse-surface": "#e5e2e1",
+                      "tertiary-fixed-dim": "#c6c6c7",
+                      "on-secondary-fixed-variant": "#00458f",
+                      "secondary": "#abc7ff",
+                      "on-secondary-container": "#fefcff",
+                      "on-primary-fixed-variant": "#454747",
+                      "primary": "#ffffff",
+                      "tertiary-container": "#e2e2e2",
+                      "outline-variant": "#444748",
+                      "surface-container": "#201f1f",
+                      "on-error": "#690005",
+                      "primary-container": "#e2e2e2",
+                      "secondary-fixed": "#d7e2ff",
+                      "canvas-black": "#050505",
+                      "surface-elevated": "#0A0A0A",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface-variant": "#353434",
+                      "on-secondary-fixed": "#001b3f",
+                      "background": "#141313",
+                      "surface-dim": "#141313",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#c6c6c7",
+                      "primary-fixed": "#e2e2e2",
+                      "inverse-primary": "#5d5f5f",
+                      "on-primary-container": "#636565",
+                      "tertiary-fixed": "#e2e2e2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "container-max": "1440px",
+                      "margin-mobile": "20px",
+                      "gutter": "24px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "label-mono": [
+                              "JetBrains Mono", "monospace"
+                      ],
+                      "headline-lg-mobile": [
+                              "Geist", "sans-serif"
+                      ],
+                      "body-md": [
+                              "Geist", "sans-serif"
+                      ],
+                      "display-2xl": [
+                              "Geist", "sans-serif"
+                      ],
+                      "headline-lg": [
+                              "Geist", "sans-serif"
+                      ]
+              },
+              "fontSize": {
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-2xl": [
+                              "72px",
+                              {
+                                      "lineHeight": "80px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #050505;
+            color: #e5e2e1;
+            font-family: 'Geist', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body class="bg-canvas-black text-on-surface font-body-md text-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Web Only) -->
+<aside class="hidden md:flex flex-col w-[240px] h-screen sticky top-0 left-0 border-r border-border-subtle bg-glass-fill backdrop-blur-xl p-stack-md shrink-0 z-40">
+<div class="mb-stack-lg flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-subtle overflow-hidden shrink-0 flex items-center justify-center">
+<img alt="Super Admin Avatar" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark metallic cube rotating slowly in a void, illuminated by a single spotlight. The aesthetic is extremely minimalist and futuristic, using a deep black background and sharp white highlights to emphasize geometric precision and luxury technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfjtr2cjTNWlIeYmm9lwI7t8I8V3oM6qhI9JYaFn-b1D29-qqZ_FUfPiFz7AMkHGgZ7VxPSmOPkAeJM-fYNxIJRr3aT9uc8XWrfN_BYAtVE3Yeoz1zFXMEEWEtZ_-tAKw91OkOPbeveVO7WVx_QkRY-uHt9320-8TsJUntg5X6Hcx6plK4cEb5TGQ3TsNZ6e4ohWsGD6QIa9Jgamtp18mBO2aCI0sXZPvVubaWGrcB_PLC14mzf-pcA9KyYBf5Zy9JGVCtyMzPo039"/>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter text-glow">Aether AR</h1>
+<p class="font-label-mono text-label-mono text-on-surface-variant uppercase mt-1">Super Admin</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">storefront</span>
+                Restaurants
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">payments</span>
+                Plans
+            </a>
+<!-- Active State: Assumed 'Analytics' mapping for Offers & Discounts as it's a management/performance screen, or create a new logical parent. Since none perfectly match, using generic or closest fit. Assuming it falls under Analytics for tracking performance. -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container-highest rounded-lg transition-all duration-300" href="#" style="transform: scale(0.98);">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1, 'wght' 400;">insights</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">view_in_ar</span>
+                3D Assets
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto space-y-2 pt-stack-md border-t border-border-subtle">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-glass-fill hover:scale-[0.98] transition-all duration-300 rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">logout</span>
+                Sign Out
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar -->
+<header class="h-16 sticky top-0 z-30 w-full border-b border-border-subtle bg-glass-fill backdrop-blur-md hidden md:block">
+<div class="flex justify-between items-center px-gutter max-w-container-max mx-auto w-full h-full">
+<!-- Search Bar Placeholder -->
+<div class="flex-1 flex items-center">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-variation-settings: 'FILL' 0, 'wght' 300;">search</span>
+<input class="w-full bg-transparent border-none border-b border-border-subtle focus:border-primary focus:ring-0 text-body-md pl-10 py-2 text-primary transition-colors placeholder-on-surface-variant" placeholder="Search offers..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-[0.95] duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer hover:scale-[0.95] duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0, 'wght' 300;">contrast</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-subtle overflow-hidden shrink-0 ml-2">
+<img alt="Super Admin Profile" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, dark metallic cube rotating slowly in a void, illuminated by a single spotlight. The aesthetic is extremely minimalist and futuristic, using a deep black background and sharp white highlights to emphasize geometric precision and luxury technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNDFQ-r6rZID9AyYKizhELr8KXKMH1A4ApQBLGuTLNMsKWHFNbIck_8dKjTl6Eva_N7wGDc4NHoViQ1qQgYVZ5oxm3V7fJLMPaHllima0ymcFxeWexAP3tSD5ifXXvYMumS9CdA5ISPQOMZqrh3Rt6fdFPuBQO_mweLfx9YMBJup5GCq_wia3Egt2YuSbvP5msXc5Pe-ospWKrMj425Cch_Yg7tt2jsClzW4MGzIgt76mjpcv1q2uO8cZ8sN6eIDdeXdCAqMot1yjv"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Mobile Top Nav Fallback -->
+<header class="md:hidden flex items-center justify-between p-margin-mobile border-b border-border-subtle bg-canvas-black sticky top-0 z-30">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary tracking-tighter">Aether AR</h1>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<div class="p-margin-mobile md:p-gutter max-w-container-max mx-auto w-full flex-1 space-y-stack-lg">
+<!-- Page Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tighter mb-1">Offers &amp; Discounts</h2>
+<p class="text-on-surface-variant font-body-md text-body-md">Manage promotional campaigns and track 3D asset conversion rates.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-body-md font-medium hover:scale-[0.98] transition-transform duration-300 flex items-center justify-center gap-2 shrink-0 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Create New Offer
+                </button>
+</div>
+<!-- KPI Cards Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary-container/10 rounded-full blur-2xl group-hover:bg-secondary-container/20 transition-all duration-500"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Active Offers</span>
+<span class="material-symbols-outlined text-secondary-fixed-dim" style="font-variation-settings: 'wght' 300;">sell</span>
+</div>
+<div class="font-display-2xl text-display-2xl text-primary relative z-10">12</div>
+<div class="mt-2 text-sm text-on-surface-variant flex items-center gap-1">
+<span class="text-secondary-fixed-dim">+2</span> this month
+                    </div>
+</div>
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-accent-gold/10 rounded-full blur-2xl group-hover:bg-accent-gold/20 transition-all duration-500"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Discount Revenue</span>
+<span class="material-symbols-outlined text-accent-gold" style="font-variation-settings: 'wght' 300;">account_balance_wallet</span>
+</div>
+<div class="font-display-2xl text-display-2xl text-primary relative z-10">$8.4k</div>
+<div class="mt-2 text-sm text-on-surface-variant flex items-center gap-1">
+<span class="text-accent-gold">+15%</span> vs last period
+                    </div>
+</div>
+<div class="glass-panel rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">3D Conversion Uplift</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'wght' 300;">view_in_ar</span>
+</div>
+<div class="font-display-2xl text-display-2xl text-primary relative z-10">4.2x</div>
+<div class="mt-2 text-sm text-on-surface-variant flex items-center gap-1">
+                        Average lift on AR items
+                    </div>
+</div>
+</div>
+<!-- Filters & Actions Bar -->
+<div class="flex flex-col sm:flex-row justify-between items-center gap-4 bg-surface-container-lowest p-2 rounded-lg border border-border-subtle">
+<div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto no-scrollbar">
+<button class="px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-label-mono text-label-mono border border-border-subtle shrink-0">All Offers</button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant hover:text-primary font-label-mono text-label-mono border border-transparent hover:border-border-subtle shrink-0 transition-colors">Active</button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant hover:text-primary font-label-mono text-label-mono border border-transparent hover:border-border-subtle shrink-0 transition-colors">Scheduled</button>
+<button class="px-4 py-1.5 rounded-full bg-transparent text-on-surface-variant hover:text-primary font-label-mono text-label-mono border border-transparent hover:border-border-subtle shrink-0 transition-colors">Expired</button>
+</div>
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">filter_list</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">sort</span>
+</button>
+</div>
+</div>
+<!-- Active Offers List (Table/Grid Hybrid) -->
+<div class="glass-panel rounded-xl border border-border-subtle overflow-hidden">
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-surface-container-lowest">
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium">Offer Details</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium">Type</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium">Schedule</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium">Status</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium text-right">Performance</th>
+<th class="p-4 font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-medium text-primary">Summer Tasting Series</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+                                            3 Items <span class="material-symbols-outlined text-[14px] text-accent-gold" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+</span>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-surface-container-high border border-border-subtle rounded text-sm text-primary">20% Off</span>
+</td>
+<td class="p-4 text-sm text-on-surface-variant">
+                                    Jun 1 - Aug 31
+                                </td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-mono font-label-mono bg-secondary-container/10 text-secondary-fixed-dim border border-secondary-container/20">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed-dim"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex flex-col items-end">
+<span class="text-primary font-medium">428 Uses</span>
+<span class="text-sm text-accent-gold">+$3.2k</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 300;">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Pause">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 300;">pause</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-medium text-primary">Signature Cocktail BOGO</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+                                            All Cocktails
+                                        </span>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-surface-container-high border border-border-subtle rounded text-sm text-primary">BOGO 50%</span>
+</td>
+<td class="p-4 text-sm text-on-surface-variant">
+                                    Fridays Only
+                                </td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-mono font-label-mono bg-secondary-container/10 text-secondary-fixed-dim border border-secondary-container/20">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed-dim"></span>
+                                        Active
+                                    </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex flex-col items-end">
+<span class="text-primary font-medium">156 Uses</span>
+<span class="text-sm text-accent-gold">+$840</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 300;">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Pause">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 300;">pause</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-glass-fill transition-colors group">
+<td class="p-4">
+<div class="flex flex-col">
+<span class="font-medium text-primary">Fall Pre-fixe Early Bird</span>
+<span class="text-sm text-on-surface-variant flex items-center gap-1 mt-1">
+                                            Full Menu <span class="material-symbols-outlined text-[14px] text-accent-gold" style="font-variation-settings: 'FILL' 1;">view_in_ar</span>
+</span>
+</div>
+</td>
+<td class="p-4">
+<span class="px-2 py-1 bg-surface-container-high border border-border-subtle rounded text-sm text-primary">-$15 Fixed</span>
+</td>
+<td class="p-4 text-sm text-on-surface-variant">
+                                    Sep 1 - Nov 30
+                                </td>
+<td class="p-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-mono font-label-mono bg-surface-container-high text-on-surface-variant border border-border-subtle">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                                        Scheduled
+                                    </span>
+</td>
+<td class="p-4 text-right">
+<div class="flex flex-col items-end">
+<span class="text-on-surface-variant font-medium">-</span>
+<span class="text-sm text-on-surface-variant">-</span>
+</div>
+</td>
+<td class="p-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Edit">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 300;">edit</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Delete">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'wght' 300;">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</body></html>
